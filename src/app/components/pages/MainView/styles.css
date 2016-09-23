@@ -1,0 +1,194 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.main-menu-icon-one,
+.main-menu-icon-two {
+  position: absolute;
+  border-radius: 3px;
+  background: #fff;
+  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 400ms all ease-out;
+  transition: 400ms all ease-out;
+}
+
+.main-menu-icon-one {
+    top: 32.5px;
+    left: 10px;
+    right: 10px;
+    height: 3px;
+}
+
+.main-menu-icon-two {
+    top: 32.5px;
+    left: 10px;
+    right: 10px;
+    height: 3px;
+}
+
+.main-menu-icon {
+    position: relative;
+    width: 39px;
+    height: 70px;
+    background: #000;
+  &:hover {
+    cursor: pointer;
+    .main-menu-icon-two {
+      -webkit-transform: rotate(90deg);
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.main-view-logo {
+}
+
+.main-view-logo > .logo-image { 
+	height: 11.8vh;
+}
+
+.logo-image:hover {
+	height: 9vh;
+	-webkit-transition-property: height;
+	-moz-transition-property: height;
+	-o-transition-property: height;
+	transition-property: height;
+	-webkit-transition-duration: .2s;
+	-moz-transition-duration: .2s;
+	-o-transition-duration: .2s;
+	transition-duration: .2s;
+	-webkit-transition-timing-function: linear;
+	-moz-transition-timing-function: linear;
+	-o-transition-timing-function: linear;
+	transition-timing-function: linear;
+}
+
+.logo-image:hover:after {
+	height: 9vh;
+}
+
+.view {
+	position: absolute;
+    top: 10%;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: black;
+    margin: 0;
+}
+
+.menu-root-container { 
+	width: 25vw;
+}
+
+.main-menu-button { 
+	font-size: 6vh;
+	text-decoration: none;
+    color: white;
+    padding: 8px;
+    margin: 2vh;
+    margin-top: .5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-menu-button:hover {
+	font-size: 8vh;
+	-webkit-transition-property: font-size;
+	-moz-transition-property: font-size;
+	-o-transition-property: font-size;
+	transition-property: font-size;
+	-webkit-transition-duration: .2s;
+	-moz-transition-duration: .2s;
+	-o-transition-duration: .2s;
+	transition-duration: .2s;
+	-webkit-transition-timing-function: linear;
+	-moz-transition-timing-function: linear;
+	-o-transition-timing-function: linear;
+	transition-timing-function: linear;
+}
+
+.main-menu-button:hover:after {
+	font-size: 8vh;
+}
+
+.menu-button-link { 
+	font-size: 3vh;
+}
+
+.menu-button-link:hover {
+	font-size: 4vh;
+	-webkit-transition-property: font-size;
+	-moz-transition-property: font-size;
+	-o-transition-property: font-size;
+	transition-property: font-size;
+	-webkit-transition-duration: .2s;
+	-moz-transition-duration: .2s;
+	-o-transition-duration: .2s;
+	transition-duration: .2s;
+	-webkit-transition-timing-function: linear;
+	-moz-transition-timing-function: linear;
+	-o-transition-timing-function: linear;
+	transition-timing-function: linear;
+}
+
+.menu-button-link:hover:after { 
+	font-size: 4vh;
+}
+
+
+.menu-button-link { 
+	font-size: 3vh;
+}
+
+.menu-button-link:hover {
+	font-size: 4vh;
+	-webkit-transition-property: font-size;
+	-moz-transition-property: font-size;
+	-o-transition-property: font-size;
+	transition-property: font-size;
+	-webkit-transition-duration: .2s;
+	-moz-transition-duration: .2s;
+	-o-transition-duration: .2s;
+	transition-duration: .2s;
+	-webkit-transition-timing-function: linear;
+	-moz-transition-timing-function: linear;
+	-o-transition-timing-function: linear;
+	transition-timing-function: linear;
+}
+
+.menu-button-link:hover:after { 
+	font-size: 4vh;
+}
+
+/** 
+ * iPad with portrait orientation.
+ */
+@media all and (max-device-width: 768px) and (max-device-height: 1024px) and (orientation:portrait){
+	.menu-root-container { 
+		width: 40vw;
+	}
+}
+
+/** 
+ * iPad with landscape orientation.
+ */
+@media all and (max-device-width: 768px) and (max-device-height: 1024px) and (orientation:landscape){
+	.menu-root-container { 
+		width: 40vw;
+	}
+}
+
+/**
+ * iPhone 5
+ * You can also target devices with aspect ratio.
+ */
+@media screen and (max-device-width: 415px) {
+	.menu-root-container { 
+		width: 60vw;
+	}
+}

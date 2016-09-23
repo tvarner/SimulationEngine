@@ -1,0 +1,304 @@
+.alt-header {
+  color: green;
+}
+
+.contact-page { 
+	width: 100%;
+    height: 100%;
+    background-color: yellow;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    will-change: transform, opacity;
+    -webkit-animation: mast-bg-in-out 20s ease both infinite;
+    animation: mast-bg-in-out 20s ease both infinite;
+    z-index: 1;
+    background-image: url(./galaxy-background.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.contact-page > .page-header { 
+	height: 10%;
+	width: 100%;
+    font-size: 6vh;
+    /* color: black; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.contact-page > .page-content { 
+    height: 90%;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-page > .page-content > .left-content { 
+	height: 100%;
+    width: 30%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-page > .page-content > .left-content > .image-container { 
+    width: 80%;
+    height: 50%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-page > .page-content > .middle-content { 
+	height: 100%;
+    width: 30%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-page > .page-content > .middle-content > .text-container { 
+    width: 80%;
+    height: 50%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-page-email-link {
+    font-size: 5vh;
+    text-decoration: none;
+    color: white;
+}
+
+.contact-page-email-link:hover {
+	font-size: 4vh;
+	-webkit-transition-property: font-size;
+	-moz-transition-property: font-size;
+	-o-transition-property: font-size;
+	transition-property: font-size;
+	-webkit-transition-duration: .2s;
+	-moz-transition-duration: .2s;
+	-o-transition-duration: .2s;
+	transition-duration: .2s;
+	-webkit-transition-timing-function: linear;
+	-moz-transition-timing-function: linear;
+	-o-transition-timing-function: linear;
+	transition-timing-function: linear;
+}
+
+.contact-page-email-link:hover:after { 
+	font-size: 4vh;
+}
+
+.contact-page-logo { 
+    max-height: 100%;
+    height: 100%;
+}
+
+.contact-page-logo:hover {
+	height: 80%;
+	-webkit-transition-property: height;
+	-moz-transition-property: height;
+	-o-transition-property: height;
+	transition-property: height;
+	-webkit-transition-duration: .2s;
+	-moz-transition-duration: .2s;
+	-o-transition-duration: .2s;
+	transition-duration: .2s;
+	-webkit-transition-timing-function: linear;
+	-moz-transition-timing-function: linear;
+	-o-transition-timing-function: linear;
+	transition-timing-function: linear;
+}
+
+.contact-page-logo:hover:after { 
+	height: 80%;
+}
+
+.contact-page > .page-content > .right-content { 
+	height: 100%;
+    width: 30%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-page > .page-content > .right-content > .text-container { 
+    width: 80%;
+    height: 50%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-page-instagram-icon { 
+	background-color: transparent;
+    width: 25vh;
+}
+
+.contact-page-instagram-icon:hover {
+	width: 20vh;
+	-webkit-transition-property: width;
+	-moz-transition-property: width;
+	-o-transition-property: width;
+	transition-property: width;
+	-webkit-transition-duration: .2s;
+	-moz-transition-duration: .2s;
+	-o-transition-duration: .2s;
+	transition-duration: .2s;
+	-webkit-transition-timing-function: linear;
+	-moz-transition-timing-function: linear;
+	-o-transition-timing-function: linear;
+	transition-timing-function: linear;
+}
+
+.contact-page-instagram-icon:hover:after { 
+	width: 20vh;
+}
+
+/** 
+ * iPad with portrait orientation.
+ */
+@media all and (max-device-width: 769px) and (max-device-height: 1024px) and (orientation:portrait){
+	.contact-page > .page-content { 
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.contact-page > .page-content > .left-content { 
+		height: 33.333333%;
+		width: 100%;
+		background-color: transparent;
+	}
+
+	.contact-page > .page-content > .middle-content { 
+		height: 33.333333%;
+	    width: 100%;
+	    background-color: transparent;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	}
+
+	.contact-page > .page-content > .right-content { 
+	    height: 33.333333%;
+	    width: 100%;
+	    background-color: transparent;
+	    justify-content: center;
+	}
+
+	.contact-page > .page-content > .right-content > .text-container { 
+	    width: 80%;
+	    height: 80%;
+	    background-color: transparent;
+	}
+
+	.contact-page > .page-content > .left-content > .image-container { 
+		width: 100%;
+	    height: 100%;
+	}
+}
+
+/** 
+ * iPad with landscape orientation.
+ */
+@media all and (max-device-width: 769px) and (max-device-height: 1024px) and (orientation:landscape){
+	.contact-page > .page-content { 
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.contact-page > .page-content > .left-content { 
+		height: 33.333333%;
+		width: 100%;
+		background-color: transparent;
+	}
+
+	.contact-page > .page-content > .middle-content { 
+		height: 33.333333%;
+	    width: 100%;
+	    background-color: transparent;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	}
+
+	.contact-page > .page-content > .right-content { 
+	    height: 33.333333%;
+	    width: 100%;
+	    background-color: transparent;
+	    justify-content: center;
+	}
+
+	.contact-page > .page-content > .right-content > .text-container { 
+	    width: 80%;
+	    height: 80%;
+	    background-color: transparent;
+	}
+
+	.contact-page > .page-content > .left-content > .image-container { 
+		width: 100%;
+	    height: 100%;
+	}
+}
+
+/**
+ * iPhone 5
+ * You can also target devices with aspect ratio.
+ */
+@media screen and (max-device-width: 415px) {
+	.contact-page > .page-content { 
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.contact-page > .page-content > .left-content { 
+		height: 33.333333%;
+		width: 100%;
+		background-color: transparent;
+	}
+
+	.contact-page > .page-content > .middle-content { 
+		height: 33.333333%;
+	    width: 100%;
+	    background-color: transparent;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	}
+
+	.contact-page > .page-content > .right-content { 
+	    height: 33.333333%;
+	    width: 100%;
+	    background-color: transparent;
+	    justify-content: center;
+	}
+
+	.contact-page > .page-content > .right-content > .text-container { 
+	    width: 80%;
+	    height: 80%;
+	    background-color: transparent;
+	}
+
+	.contact-page > .page-content > .left-content > .image-container { 
+		width: 100%;
+	    height: 100%;
+	}
+}

@@ -1,0 +1,148 @@
+.collection-header-slide-container { 
+    width: 30vh;
+    height: 30vh;
+    background-color: black;
+    overflow: hidden;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    color: white;
+}
+
+.collection-header-slide { 
+	width: 200%;
+}
+
+.collection-header-collection-info {
+    width: 41.5vw;
+    height: 30vh;
+    margin-left: 30vh;
+    /* margin-top: 2vh; */
+    
+    line-height: 1!important;
+    text-indent: 0!important;
+    padding: 2vh;
+    color: white;
+}
+
+.collection-header-collection-title {
+	line-height: 1!important;
+	font-size: 3vh;
+	font-weight: bold;
+}
+
+.collection-header-collection-authors { 
+	font-size: 2.5vh;
+}
+
+.collection-header-collection-description {
+	font-family: Helvetica Neue;
+    line-height: 1;
+    font-size: 2.5vh;
+    margin-top: 2vh;
+}
+
+/** 
+ * iPad with landscape orientation.
+ */
+@media all and (max-device-width: 769px) and (max-device-height: 1024px) and (orientation:landscape) {
+	.collection-header-collection-info {
+		width: 41.5vw;
+	    height: 30vh;
+	    margin-left: 30vh;
+	    /* margin-top: 2vh; */
+	    
+		line-height: 1!important;
+		text-indent: 0!important;
+	}
+	.collection-header-collection-title { 
+		font-size: 4vh;
+	}
+	.collection-header-collection-authors { 
+		font-size: 2.5vh;
+	}
+	.collection-header-collection-description { 
+	    line-height: 1;
+	    font-size: 2.5vh;
+	}
+}
+
+/** 
+ * iPad with portrait orientation.
+ */
+@media all and (max-device-width: 769px) and (max-device-height: 1024px) and (orientation:portrait) {
+	.collection-header-collection-info {
+		width: 41.5vw;
+	    height: 30vh;
+	    margin-left: 28vh;
+	    /* margin-top: 2vh; */
+	    
+		line-height: 1!important;
+		text-indent: 0!important;
+	}
+	.collection-header-collection-title { 
+		font-size: 2vh;
+	}	
+	.collection-header-collection-authors { 
+		font-size: 1.5vh;
+		margin-top: 1vh;
+	}
+	.collection-header-collection-description { 
+	    line-height: 1;
+	    font-size: 1.5vh;
+	}
+}
+
+/**
+ * iPhone 5
+ * You can also target devices with aspect ratio.
+ */
+@media screen and (max-device-width: 415px) and (orientation:portrait) {
+	.collection-header-collection-info {
+		width: 41.5vw;
+	    height: 30vh;
+	    margin-left: 28vh;
+	    /* margin-top: 2vh; */
+	    
+		line-height: 1!important;
+		text-indent: 0!important;
+	}
+	.collection-header-collection-title { 
+		font-size: 2vh;
+	}	
+	.collection-header-collection-authors { 
+		font-size: 1.5vh;
+		margin-top: 1vh;
+	}
+	.collection-header-collection-description { 
+	    line-height: 1;
+	    font-size: 1.5vh;
+	}
+}
+
+/**
+ * iPhone 5
+ * You can also target devices with aspect ratio.
+ */
+@media screen and (max-device-width: 737px) and (orientation:landscape) {
+	.collection-header-collection-info {
+	    width: 41.5vw;
+	    height: 30vh;
+	    margin-left: 30vh;
+	    /* margin-top: 2vh; */
+	    
+		line-height: 1!important;
+		text-indent: 0!important;
+	}
+	.collection-header-collection-title { 
+		font-size: 4vh;
+	}
+	.collection-header-collection-authors { 
+		font-size: 2.5vh;
+	}
+	.collection-header-collection-description { 
+	    line-height: 1;
+	    font-size: 2.5vh;
+	}
+}

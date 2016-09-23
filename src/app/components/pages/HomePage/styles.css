@@ -1,0 +1,177 @@
+.alt-header {
+	color: green;
+}
+
+.home-page { 
+	width: 100%;
+	height: 90%;
+	display: flex;
+}
+
+.left-home-icons { 
+	width: 50%;
+}
+
+.right-home-icons { 
+	width: 50%;
+}
+
+.home-gif-container { 
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.footer { 
+	height: 10%;
+    width: 100%;
+    background-color: black;
+    position: absolute;
+    font-size: 3.5vh;
+    color: white;
+
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	flex-direction: row;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+}
+
+.home-page-icon-container { 
+	width: 100%;
+    height: 33.33%;
+    color: white;
+    font-size: 4.5vh;
+    background: black;
+    margin-left: 0;
+    margin-right: 0;
+    margin: top;
+    margin-top: 0;
+    margin-bottom: 0%;
+    /* margin: 2vh; */
+    float: left;
+    /* padding: 10%; */
+
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: row;
+	flex-direction: row;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+}
+
+.home-page-icon-container:hover {
+	font-size: 3.5vh;
+	-webkit-transition-property: font-size;
+	-moz-transition-property: font-size;
+	-o-transition-property: font-size;
+	transition-property: font-size;
+	-webkit-transition-duration: .2s;
+	-moz-transition-duration: .2s;
+	-o-transition-duration: .2s;
+	transition-duration: .2s;
+	-webkit-transition-timing-function: linear;
+	-moz-transition-timing-function: linear;
+	-o-transition-timing-function: linear;
+	transition-timing-function: linear;
+}
+
+.home-page-icon-container:hover:after { 
+	font-size: 3.5vh;
+}
+
+.home-page-icon { 
+
+}
+
+.mobile-hover-cover { 
+	position: absolute;
+}
+
+.home-page-icon-container  > .hover-button { 
+	width: 100%;
+	height: 100%;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer > .hover-button { 
+	width: 100%;
+	height: 100%;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer { 
+	font-size: 3.5vh;
+}
+
+.footer:hover {
+	font-size: 4vh;
+	-webkit-transition-property: font-size;
+	-moz-transition-property: font-size;
+	-o-transition-property: font-size;
+	transition-property: font-size;
+	-webkit-transition-duration: .2s;
+	-moz-transition-duration: .2s;
+	-o-transition-duration: .2s;
+	transition-duration: .2s;
+	-webkit-transition-timing-function: linear;
+	-moz-transition-timing-function: linear;
+	-o-transition-timing-function: linear;
+	transition-timing-function: linear;
+}
+
+.footer:hover:after { 
+	font-size: 4vh;
+}
+
+/** 
+ * iPad with portrait orientation.
+ */
+@media all and (max-device-width: 768px) and (max-device-height: 1024px) and (orientation:portrait){
+	.home-page-icon-container {
+		font-size: 3.5vh;
+	}
+
+	.footer {
+		font-size: 2.5vh;
+	}
+}
+
+/** 
+ * iPad with landscape orientation.
+ */
+@media all and (max-device-width: 768px) and (max-device-height: 1024px) and (orientation:landscape){
+	.home-page-icon-container {
+		font-size: 3.5vh;
+	}
+
+	.footer {
+		font-size: 2.5vh;
+	}
+}
+
+/**
+ * iPhone 5
+ * You can also target devices with aspect ratio.
+ */
+@media screen and (max-device-width: 768px) {
+	.home-page-icon-container {
+		font-size: 3.5vh;
+	}
+
+	.footer {
+		font-size: 2.5vh;
+	}
+}

@@ -1,0 +1,9 @@
+notifications:
+  email:
+    recipients:
+      - UITeam@vinsolutions.com
+language: node_js
+node_js:
+  - "6"
+  - "5"
+  - "4"

@@ -1,0 +1,13 @@
+.simulator { 
+	background-color: #FF69B4;
+	position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 0;
+}
+
+.alt-header {
+	color: green;
+}
