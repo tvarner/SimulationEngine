@@ -1,25 +1,19 @@
 import React from 'react';
 
 import MaterialTitlePanel from './MaterialTitlePanel';
-// import LoadSimulationModel from '../../modals/LoadSimulationModal/LoadSimulationModal'
-// import SaveSimulationModel from '../../modals/SaveSimulationModal/SaveSimulationModal'
-
-// import SimulatorViewSidebarContentContainer from '../SimulatorView/SimulatorViewSidebarContentContainer'
-
-import { toggleSidebar } from './MainViewActions'
 
 const styles = {
 	sidebar: {
 		height: '100%',
 	},
 	sidebarLink: {
-	    display: 'flex',
-	    padding: '3vh',
-	    color: '#757575',
-	    textDecoration: 'none',
-	    backgroundColor: 'white',
-	    alignItems: 'center',
-	    justifyContent: 'center'
+		display: 'flex',
+		padding: '3vh',
+		color: '#757575',
+		textDecoration: 'none',
+		backgroundColor: 'white',
+		alignItems: 'center',
+		justifyContent: 'center'
 	},
 
 	divider: {
@@ -28,13 +22,14 @@ const styles = {
 		backgroundColor: '#757575',
 	},
 	content: {
-	    paddingTop: '10vh',
-	    height: '100%',
-	    backgroundColor: 'white',
-	    fontSize: '3vh'
+		paddingTop: '10vh',
+		height: '100%',
+		backgroundColor: 'white',
+		fontSize: '3vh'
 	},
 };
 
+/*
 const customStyles = {
 	content : {
 		top                   : '50%',
@@ -45,25 +40,24 @@ const customStyles = {
 		transform             : 'translate(-50%, -50%)'
 	}
 };
-
+*/
 
 const menuButtonHeaderStyles = { 
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-}
+	width: '100%',
+	height: '100%',
+	display: 'flex',
+	alignItems: 'center',
+	justifyContent: 'center'
+};
 
 const getMenuButtonHeader = function() { 
 	return (
 		<div className={'menu-button-header'} style={menuButtonHeaderStyles}>Menu</div>
-	)
-}
+	);
+};
 
 
-var SidebarContent = React.createClass({
-
+const SidebarContent = React.createClass({
 	renderPageSidebarContent() {
 		if (this.props.view === "SIMULATOR_VIEW") {
 			/*
@@ -92,7 +86,7 @@ var SidebarContent = React.createClass({
 					</div>
 				</MaterialTitlePanel>
 			</div>
-		)
+		);
 	}
 });
 
@@ -101,15 +95,3 @@ SidebarContent.propTypes = {
 };
 
 export default SidebarContent;
-
-
-/*
-By default the modal is anchored to document.body. All of the following overrides are available.
-
-* element
-Modal.setAppElement(appElement);
-
-* query selector - uses the first element found if you pass in a class.
-Modal.setAppElement('#your-app-element');
-
-*/

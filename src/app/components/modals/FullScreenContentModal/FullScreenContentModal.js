@@ -1,46 +1,46 @@
 import React from 'react';
 
 import contentFileIndex from './../../../../content/_contentFileIndex';
-import Modal from '../../utilComponents/react-modal/lib/index'
+import Modal from '../../utilComponents/react-modal/lib/index';
 
-import './styles.css'
+import './styles.css';
 
-var FullScreenContentModal = React.createClass({
+const FullScreenContentModal = React.createClass({
 	getInitialState() {
 		return { 
 			infoIsOpen: false
-		}
-	},
-
-	handleInfoToggle() {
-		let infoIsOpen = !this.state.infoIsOpen
-		this.setState({
-			infoIsOpen: infoIsOpen
-		})
+		};
 	},
 
 	componentDidMount() {
 		// window.addEventListener('mousedown', this.pageClick, false);
 	},
 
+	handleInfoToggle() {
+		const infoIsOpen = !this.state.infoIsOpen;
+		this.setState({
+			infoIsOpen: infoIsOpen
+		});
+	},
+
 	getAuthors(authors) { 
-		return authors.map(function(author) { 
+		return authors.map(function(author, i) { 
 			return (
-				<span>{author}<span>{" "}</span></span>
-			)
-		})
+				<span key={i}>{author}<span>{" "}</span></span>
+			);
+		});
 	},
 
 	getDescription(description) { 
 		return (
 			<span className={'full-screen-content-image-info-description'}>{description}</span>
-		)
+		);
 	},
 
 	getDate(date) { 
 		return (
 			<span>{date}</span>
-		)
+		);
 	},
 
 	getContentInfo() { 
@@ -54,13 +54,13 @@ var FullScreenContentModal = React.createClass({
 						<div style={{ margin: '1vh' }}>{this.getDescription(this.props.data.description)}</div>
 					</div>
 				</div>
-			)
+			);
 		}
 	},
 
 	getContent() {
 		if (this.props.data.type === 'image') {
-			const src = contentFileIndex[this.props.data.url]
+			const src = contentFileIndex[this.props.data.url];
 			return (
 				<div>
 					<div className={'full-screen-content-image-info-container'}>
@@ -73,11 +73,12 @@ var FullScreenContentModal = React.createClass({
 						</div>
 						{this.getContentInfo()}
 					</div>
-					<img className={'full-screen-content-image'} src={src} onClick={this.props.clearActiveModal} />
+					<img role={"presentation"} className={'full-screen-content-image'} src={src} onClick={this.props.clearActiveModal} />
 				</div>
-			)
+			);
 		} else if (this.props.data.type === 'video') {
-
+			// TODO:
+			return null;
 		} else { 
 			throw new Error('Invalid content type passed to FullScreenContentModal');
 		}
@@ -97,6 +98,6 @@ var FullScreenContentModal = React.createClass({
 			</Modal>
 		);
 	}
-})
+});
 
 export default FullScreenContentModal;

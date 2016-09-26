@@ -1,10 +1,9 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import {
 	setActiveModal,
-	clearActiveModal,
 	toggleSidebar,
 	setView
-} from '../MainView/MainViewActions'
+} from '../MainView/MainViewActions';
 import {
 	_initializeSimulation,
 	_runSimulation,
@@ -14,17 +13,9 @@ import {
 	_destroySimulationGUI,
 	_setSimulationViewControls,
 	_setSceneElement
-} from './SimulatorViewActions'
-import SimulatorViewSidebarContent from './SimulatorViewSidebarContent'
+} from './SimulatorViewActions';
+import SimulatorViewSidebarContent from './SimulatorViewSidebarContent';
 
-const mapStateToProps = (state) => { 
-	return {
-		// TODO
-	}
-}
-
-/* UI Interactions */
-// TODO: add remainder of 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onOpenLoadSimulationModal: (ev) => {
@@ -90,7 +81,7 @@ const mapDispatchToProps = (dispatch) => {
 			}
 			dispatch(_destroySimulationGUI());
 			dispatch(_stopSimulation("TEMP_EXAMPLE"));
-			dispatch(toggleSidebar(false))
+			dispatch(toggleSidebar(false));
 		},
 
 		onSetSimulationViewControls: (ev) => {
@@ -106,12 +97,11 @@ const mapDispatchToProps = (dispatch) => {
 			} 
 			dispatch(_setSceneElement());
 		}
-	}
-}
+	};
+};
 
 const SimulatorViewSidebarContentContainer = connect(
-	mapStateToProps,
 	mapDispatchToProps
-)(SimulatorViewSidebarContent)
+)(SimulatorViewSidebarContent);
 
-export default SimulatorViewSidebarContentContainer
+export default SimulatorViewSidebarContentContainer;

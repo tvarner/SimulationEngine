@@ -1,6 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router';
-import * as THREE from 'three';
 import './styles.css';
 
 const SimulatorView = React.createClass({
@@ -20,9 +18,9 @@ const SimulatorView = React.createClass({
 
 	render() {
 		return(
-			<div id="simulator" className={this.props.simulator.sceneElement}></div>
-		)
+			<div id="simulator" className={this.props.simulator.sceneElement} />
+		);
 	}
-})
+});
 
 export default SimulatorView;

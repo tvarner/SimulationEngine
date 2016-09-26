@@ -1,115 +1,119 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var ExecutionEnvironment = require('exenv');
-var ModalPortal = React.createFactory(require('./ModalPortal'));
-var ariaAppHider = require('../helpers/ariaAppHider');
-var elementClass = require('element-class');
-var renderSubtreeIntoContainer = require("react-dom").unstable_renderSubtreeIntoContainer;
-var Assign = require('lodash.assign');
+const React = require('react');
+const ReactDOM = require('react-dom');
+const ExecutionEnvironment = require('exenv');
+const ModalPortal = React.createFactory(require('./ModalPortal'));
+const ariaAppHider = require('../helpers/ariaAppHider');
+const elementClass = require('element-class');
+const renderSubtreeIntoContainer = require("react-dom").unstable_renderSubtreeIntoContainer;
+const Assign = require('lodash.assign');
 
-var SafeHTMLElement = ExecutionEnvironment.canUseDOM ? window.HTMLElement : {};
-var AppElement = ExecutionEnvironment.canUseDOM ? document.body : {appendChild: function() {}};
+const SafeHTMLElement = ExecutionEnvironment.canUseDOM ? window.HTMLElement : {};
 
-var Modal = React.createClass({
+// let AppElement = ExecutionEnvironment.canUseDOM ? document.body : {appendChild: function() {}};
 
-  displayName: 'Modal',
-  statics: {
-    setAppElement: function(element) {
-        AppElement = ariaAppHider.setElement(element);
-    },
-    injectCSS: function() {
-      "production" !== process.env.NODE_ENV
-        && console.warn('React-Modal: injectCSS has been deprecated ' +
-                        'and no longer has any effect. It will be removed in a later version');
-    }
-  },
+const Modal = React.createClass({
 
-  propTypes: {
-    isOpen: React.PropTypes.bool.isRequired,
-    style: React.PropTypes.shape({
-      content: React.PropTypes.object,
-      overlay: React.PropTypes.object
-    }),
-    portalClassName: React.PropTypes.string,
-    appElement: React.PropTypes.instanceOf(SafeHTMLElement),
-    onAfterOpen: React.PropTypes.func,
-    onRequestClose: React.PropTypes.func,
-    closeTimeoutMS: React.PropTypes.number,
-    ariaHideApp: React.PropTypes.bool,
-    shouldCloseOnOverlayClick: React.PropTypes.bool
-  },
+	displayName: 'Modal',
 
-  getDefaultProps: function () {
-    return {
-      isOpen: false,
-      portalClassName: 'ReactModalPortal',
-      ariaHideApp: true,
-      closeTimeoutMS: 0,
-      shouldCloseOnOverlayClick: true
-    };
-  },
+	propTypes: {
+		isOpen: React.PropTypes.bool.isRequired,
+		style: React.PropTypes.shape({
+			content: React.PropTypes.object,
+			overlay: React.PropTypes.object
+		}),
+		portalClassName: React.PropTypes.string,
+		appElement: React.PropTypes.instanceOf(SafeHTMLElement),
+		onAfterOpen: React.PropTypes.func,
+		onRequestClose: React.PropTypes.func,
+		closeTimeoutMS: React.PropTypes.number,
+		ariaHideApp: React.PropTypes.bool,
+		shouldCloseOnOverlayClick: React.PropTypes.bool
+	},
 
-  componentDidMount: function() {
-    this.node = document.createElement('div');
-    this.node.className = this.props.portalClassName;
-    document.body.appendChild(this.node);
-    this.renderPortal(this.props);
-  },
+	statics: {
+		setAppElement: function(/* element */) {
+			// weird hack
+			// AppElement = this.appElement;
+		},
+		injectCSS: function() {
+			return "production" !== process.env.NODE_ENV;
+			// && console.warn('React-Modal: injectCSS has been deprecated ' + 'and no longer has any effect. It will be removed in a later version');
+		}
+	},
 
-  componentWillReceiveProps: function(newProps) {
-    this.renderPortal(newProps);
-  },
+	getDefaultProps: function () {
+		return {
+			isOpen: false,
+			portalClassName: 'ReactModalPortal',
+			ariaHideApp: true,
+			closeTimeoutMS: 0,
+			shouldCloseOnOverlayClick: true
+		};
+	},
 
-  componentWillUnmount: function() {
-    ReactDOM.unmountComponentAtNode(this.node);
-    document.body.removeChild(this.node);
-    elementClass(document.body).remove('ReactModal__Body--open');
-  },
+	componentDidMount: function() {
+		this.node = document.createElement('div');
+		this.node.className = this.props.portalClassName;
+		document.body.appendChild(this.node);
+		this.renderPortal(this.props);
+	},
 
-  renderPortal: function(props) {
-    if (this.props.isOpen !== props.isOpen) {
-      if (props.isOpen) {
-        elementClass(document.body).add('ReactModal__Body--open');
-      } else {
-        elementClass(document.body).remove('ReactModal__Body--open');
-      }
+	componentWillReceiveProps: function(newProps) {
+		this.renderPortal(newProps);
+	},
 
-      if (props.ariaHideApp) {
-        ariaAppHider.toggle(props.isOpen, props.appElement);
-      }
-    }
+	componentWillUnmount: function() {
+		ReactDOM.unmountComponentAtNode(this.node);
+		document.body.removeChild(this.node);
+		elementClass(document.body).remove('ReactModal__Body--open');
+	},
 
-    this.portal = renderSubtreeIntoContainer(this, ModalPortal(Assign({}, props, {defaultStyles: Modal.defaultStyles})), this.node);
-  },
+	appElement: ExecutionEnvironment.canUseDOM ? document.body : {appendChild: function() {}},
 
-  render: function () {
-    return React.DOM.noscript();
-  }
+	renderPortal: function(props) {
+		if (this.props.isOpen !== props.isOpen) {
+			if (props.isOpen) {
+				elementClass(document.body).add('ReactModal__Body--open');
+			} else {
+				elementClass(document.body).remove('ReactModal__Body--open');
+			}
+
+			if (props.ariaHideApp) {
+				ariaAppHider.toggle(props.isOpen, props.appElement);
+			}
+		}
+
+		this.portal = renderSubtreeIntoContainer(this, ModalPortal(Assign({}, props, {defaultStyles: Modal.defaultStyles})), this.node);
+	},
+
+	render: function () {
+		return React.DOM.noscript();
+	}
 });
 
 Modal.defaultStyles = {
-  overlay: {
-    position        : 'fixed',
-    top             : 0,
-    left            : 0,
-    right           : 0,
-    bottom          : 0,
-    backgroundColor : 'rgba(255, 255, 255, 0.75)'
-  },
-  content: {
-    position                : 'absolute',
-    top                     : '40px',
-    left                    : '40px',
-    right                   : '40px',
-    bottom                  : '40px',
-    border                  : '1px solid #ccc',
-    background              : '#fff',
-    overflow                : 'auto',
-    WebkitOverflowScrolling : 'touch',
-    borderRadius            : '4px',
-    outline                 : 'none',
-    padding                 : '20px'
-  }
-}
+	overlay: {
+		position        : 'fixed',
+		top             : 0,
+		left            : 0,
+		right           : 0,
+		bottom          : 0,
+		backgroundColor : 'rgba(255, 255, 255, 0.75)'
+	},
+	content: {
+		position                : 'absolute',
+		top                     : '40px',
+		left                    : '40px',
+		right                   : '40px',
+		bottom                  : '40px',
+		border                  : '1px solid #ccc',
+		background              : '#fff',
+		overflow                : 'auto',
+		WebkitOverflowScrolling : 'touch',
+		borderRadius            : '4px',
+		outline                 : 'none',
+		padding                 : '20px'
+	}
+};
 
-module.exports = Modal
+module.exports = Modal;

@@ -1,11 +1,7 @@
-import React from 'react'
-import Modal from '../../utilComponents/react-modal/lib/index'
+import React from 'react';
+import Modal from '../../utilComponents/react-modal/lib/index';
 
 export default class LoadSimulationModel extends React.Component {
-	constructor () {
-		super();
-	}
-
 	render () {
 		const _onRequestClose = this.props.clearActiveModal;
 

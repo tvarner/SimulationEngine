@@ -1,32 +1,31 @@
-import React, { Component, PropTypes } from 'react'
-import {Link} from 'react-router';
+import React, { Component } from 'react';
 import './styles.css';
 
-import HoverButton from '../../utilComponents/HoverButton/HoverButton'
+import HoverButton from '../../utilComponents/HoverButton/HoverButton';
 
 // Since this component is simple and static, there's no parent container for it.
 export default class HomePage extends Component {
 
 	getGifComponent(url) {
-		var attr = 'url(' + url + ') no-repeat center';
+		const attr = 'url(' + url + ') no-repeat center';
 
 		return (
 			<div style={{width: '100%', height: '100%'}}>
-				<div 
-					className={'home-gif-container'}
-					style={
-						{
-							background: attr, 
-							backgroundSize: 'cover'
-						}
-					}>
-				</div>
+				<div className={'home-gif-container'} style={{background: attr, backgroundSize: 'cover'}} />
 			</div>
-		)
+		);
 	}
 
 	render() {
-		const { openHomePage, openAboutPage, openContactPage, openFilmPage, openPhotographyPage, openReelPage, openFeaturePage } = this.props;
+		const { openAboutPage, openContactPage, openFilmPage, openPhotographyPage, openReelPage, openFeaturePage } = this.props;
+		
+		const contentMonolith = require('./../../../../content/_content.json');
+		const gif1 = contentMonolith.homePage.gif1;
+		const gif2 = contentMonolith.homePage.gif2;
+		const gif3 = contentMonolith.homePage.gif3;
+		const gif4 = contentMonolith.homePage.gif4;
+		const gif5 = contentMonolith.homePage.gif5;
+		const gif6 = contentMonolith.homePage.gif6;
 
 		return (
 			<div style={{ width: '100%', height: '100%'}}>
@@ -34,29 +33,29 @@ export default class HomePage extends Component {
 					<div className={'left-home-icons'}>
 						<div className={"home-page-icon-container"} onClick={openAboutPage}>
 							<div className={'mobile-hover-cover'}>Theory</div>
-							<HoverButton hoverContent={'Theory'} defaultContent={this.getGifComponent("https://media.giphy.com/media/dtbB41relo3N6/giphy.gif")} />						
+							<HoverButton hoverContent={'Theory'} defaultContent={this.getGifComponent(gif1)} />						
 						</div>
 						<div className={"home-page-icon-container"} onClick={openPhotographyPage}>
 							<div className={'mobile-hover-cover'}>Photography</div>
-							<HoverButton hoverContent={'Photography'} defaultContent={this.getGifComponent("https://media.giphy.com/media/tarn31SCK2v1S/giphy.gif")} />	
+							<HoverButton hoverContent={'Photography'} defaultContent={this.getGifComponent(gif2)} />	
 						</div>
 						<div className={"home-page-icon-container"} onClick={openFilmPage}>
 							<div className={'mobile-hover-cover'}>Film</div>
-							<HoverButton hoverContent={'Film'} defaultContent={this.getGifComponent("https://media.giphy.com/media/10W46ufXb3PzZS/giphy.gif")} />	
+							<HoverButton hoverContent={'Film'} defaultContent={this.getGifComponent(gif3)} />	
 						</div>
 					</div>
 					<div className={'right-home-icons'}>
 						<div className={"home-page-icon-container"} onClick={openContactPage}>
 							<div className={'mobile-hover-cover'}>Connect</div>
-							<HoverButton hoverContent={'Connect'} defaultContent={this.getGifComponent("https://media.giphy.com/media/1EpaY72a3fmfHcE8/giphy.gif")} />
+							<HoverButton hoverContent={'Connect'} defaultContent={this.getGifComponent(gif4)} />
 						</div>
 						<div className={"home-page-icon-container"} onClick={openReelPage}>
 							<div className={'mobile-hover-cover'}>Reel</div>
-							<HoverButton hoverContent={'Reel'} defaultContent={this.getGifComponent("https://media.giphy.com/media/kVxifQzsa0iIM/giphy.gif")} />	
+							<HoverButton hoverContent={'Reel'} defaultContent={this.getGifComponent(gif5)} />	
 						</div>
 						<div className={"home-page-icon-container"} onClick={openFeaturePage}>
 							<div className={'mobile-hover-cover'}>Feature</div>
-							<HoverButton hoverContent={'Feature'} defaultContent={this.getGifComponent("https://media.giphy.com/media/UFExlG0VnJRGo/giphy.gif")} />	
+							<HoverButton hoverContent={'Feature'} defaultContent={this.getGifComponent(gif6)} />	
 						</div>
 					</div>
 				</div>

@@ -37,6 +37,6 @@ const contentFileIndex = {
 	shabazz6: require('./shabazz6.jpg'),
 	shabazz7: require('./shabazz7.jpg'),
 	shabazz8: require('./shabazz8.jpg')
-}
+};
 
 export default contentFileIndex;

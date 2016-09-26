@@ -1,26 +1,51 @@
 import React from 'react';
-import {Link} from 'react-router';
 import _ from 'lodash';
 
-import Collapse from '../../utilComponents/collapse/src/Collapse';
-import Panel from '../../utilComponents/collapse/src/Panel';
+import Collapse from './../../utilComponents/collapse/src/Collapse.jsx';
+import Panel from './../../utilComponents/collapse/src/Panel.jsx';
 import './styles.css';
 
-import ContentCollectionContainer from '../../utilComponents/ContentCollection/ContentCollectionContainer'
-import ContentCollectionHeader from '../../utilComponents/ContentCollectionHeader/ContentCollectionHeader'
-
-import Carousel from 'nuka-carousel'
+import ContentCollectionContainer from './../../utilComponents/ContentCollection/ContentCollectionContainer';
+import ContentCollectionHeader from './../../utilComponents/ContentCollectionHeader/ContentCollectionHeader';
 
 // Since this component is simple and static, there's no parent container for it.
 
 const ContentPage = React.createClass({
 
-	getInitialState() { 
-		return {}
+	getInitialState() {
+		const contentMonolith = require('./../../../../content/_content.json');
+		const category = this.props.category;
+
+		return {
+			contentMonolith: contentMonolith,
+			category: category,
+			collections: null
+		};
+	},
+
+	componentWillMount() {
+		const collections = this.getCollections(this.state.contentMonolith);
+		this.setState({
+			collections: collections
+		});
+	},
+
+	getCollections(contentMonolith) {
+		const _contentMonolithQueryFn = function(collection) { 
+			const _collectionQueryFn = function(collection) {
+				const _categoryQueryFn = function(category) {
+					return this.props.category === category;
+				};
+				return _.find(collection.category, _categoryQueryFn.bind(this));
+			};
+			return _collectionQueryFn.call(this, collection);
+		};
+
+		return _.filter(contentMonolith.collections, _contentMonolithQueryFn.bind(this));
 	},
 
 	_checkIfContentCollectionActive(key) {
-		for (var i = 0; i <= this.props.page.activePanelKey.length; i++) { 
+		for (let i = 0; i <= this.props.page.activePanelKey.length; i++) { 
 			if (this.props.page.activePanelKey[i] === key.toString()) { 
 				return true;
 			}
@@ -28,31 +53,10 @@ const ContentPage = React.createClass({
 		return false;
 	},
 
-	getCollections(contentMonolith) {
-		this.state.category = this.props.category;
-
-		var _contentMonolithQueryFn = function(collection) { 
-			 var _collectionQueryFn = function(collection) {
-			 	var _categoryQueryFn = function(category) {
-			 		return this.state.category == category;
-				}
-				return _.find(collection.category, _categoryQueryFn.bind(this))
-			}
-			return _collectionQueryFn.call(this, collection);
-		}
-
-		this.state.collections = _.filter(contentMonolith.collections, _contentMonolithQueryFn.bind(this));
-	},
-
-	componentWillMount() {
-		this.state.contentMonolith = require('./../../../../content/_content.json');
-		this.getCollections(this.state.contentMonolith); 
-	},
-
-	sortCollectionsByTitle() {
-		this.state.collections.sort(function(a, b) {
-			var titleA = a.name.toUpperCase(); // ignore upper and lowercase
-			var titleB = b.name.toUpperCase(); // ignore upper and lowercase
+	sortCollectionsByTitle(collections) {
+		collections.sort(function(a, b) {
+			const titleA = a.name.toUpperCase(); // ignore upper and lowercase
+			const titleB = b.name.toUpperCase(); // ignore upper and lowercase
 			if (titleA < titleB) {
 				return -1;
 			}
@@ -65,10 +69,10 @@ const ContentPage = React.createClass({
 		});
 	},
 
-	sortCollectionsByAuthor() {
-		this.state.collections.sort(function(a, b) {
-			var authorA = a.authors[0].toUpperCase(); // ignore upper and lowercase
-			var authorB = b.authors[0].toUpperCase(); // ignore upper and lowercase
+	sortCollectionsByAuthor(collections) {
+		collections.sort(function(a, b) {
+			const authorA = a.authors[0].toUpperCase(); // ignore upper and lowercase
+			const authorB = b.authors[0].toUpperCase(); // ignore upper and lowercase
 			if (authorA < authorB) {
 				return -1;
 			}
@@ -81,14 +85,10 @@ const ContentPage = React.createClass({
 		});
 	},
 
-	sortCollectionsByDate() { 
-		this.state.collections.sort(function(a, b) { 
+	sortCollectionsByDate(collections) { 
+		collections.sort(function(a, b) { 
 			return new Date(a.dateCreated) - new Date(b.dateCreated); 
-		})
-	},
-
-	addAlphabeticalJumpLinks() { 
-
+		});
 	},
 
 	getHeader(carouselRef, content) {
@@ -96,29 +96,29 @@ const ContentPage = React.createClass({
 			<div>
 				<ContentCollectionHeader carouselRef={carouselRef} content={content} />
 			</div>
-		)
+		);
 	},
 
 	getContentCollection(content, key) {
-		let headerCarouselRef = 'headerCarousel' + key.toString();
-		let mainCarouselRef = 'mainCarousel' + key.toString();
+		const headerCarouselRef = 'headerCarousel' + key.toString();
+		const mainCarouselRef = 'mainCarousel' + key.toString();
 
 // add alpha jump ids here: 
-		var alphaJumpElementId = 'alpha-jump-no-jump';
+		let alphaJumpElementId = 'alpha-jump-no-jump';
 		if (this.props.page.sortBy === 'title') {
 			// get first character
-			var _alphaJumpFirstChar = content.name.charAt(0);
+			const _alphaJumpFirstChar = content.name.charAt(0);
 			// check if first character is in provided alphabet array. remove if present. update alphaJumpElementId
-			if (_.find(this._alphabet, function(letter) { return letter === _alphaJumpFirstChar})) { 
-				_.remove(this._alphabet, function(letter) { return letter === _alphaJumpFirstChar});
+			if (_.find(this._alphabet, function(letter) { return (letter === _alphaJumpFirstChar); })) { 
+				_.remove(this._alphabet, function(letter) { return (letter === _alphaJumpFirstChar); });
 				alphaJumpElementId = 'alpha-jump-' + _alphaJumpFirstChar.toUpperCase();
 			}
 		} else if (this.props.page.sortBy === 'author') { 
 			// get first character
-			var _alphaJumpFirstChar = content.authors[0].charAt(0);
+			const _alphaJumpFirstChar = content.authors[0].charAt(0);
 			// check if first character is in provided alphabet array. remove if present. update alphaJumpElementId
-			if (_.find(this._alphabet, function(letter) { return letter === _alphaJumpFirstChar})) { 
-				_.remove(this._alphabet, function(letter) { return letter === _alphaJumpFirstChar});
+			if (_.find(this._alphabet, function(letter) { return letter === _alphaJumpFirstChar; })) { 
+				_.remove(this._alphabet, function(letter) { return letter === _alphaJumpFirstChar; });
 				alphaJumpElementId = 'alpha-jump-' + _alphaJumpFirstChar.toUpperCase();
 			}
 		}
@@ -128,65 +128,67 @@ const ContentPage = React.createClass({
 				<Panel header={this.getHeader(headerCarouselRef, content)} key={key} externalId={alphaJumpElementId}>
 					<ContentCollectionContainer carouselRef={mainCarouselRef} content={content} />
 				</Panel>
-			)
+			);
 		} else {
 			return (
-				<Panel header={this.getHeader(headerCarouselRef, content)} key={key} externalId={alphaJumpElementId}></Panel>
-			)
+				<Panel header={this.getHeader(headerCarouselRef, content)} key={key} externalId={alphaJumpElementId} />
+			);
 		}
 	},
 
 	getContentCollections() {
-		this.getCollections(this.state.contentMonolith);
+		const _collections = this.getCollections(this.state.contentMonolith);
 
 		if (this.props.page.sortBy === 'title') { 
 			// sort collections by title
-			this.sortCollectionsByTitle();
+			this.sortCollectionsByTitle(_collections);
 		} else if (this.props.page.sortBy === 'date') { 
 			// sort collections by date
-			this.sortCollectionsByDate();
+			this.sortCollectionsByDate(_collections);
 		} else if (this.props.page.sortBy === 'author') { 
 			// sort collecitons by author
-			this.sortCollectionsByAuthor();
+			this.sortCollectionsByAuthor(_collections);
 		}
 		this._alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-		var collections = this.state.collections.map(this.getContentCollection.bind(this));
+		
+		const collections = _collections.map(this.getContentCollection);
 		
 		if (collections.length === 0) { 
 			return (
-				<div>
+				<div className={'coming-soon-container'}>
 					Coming soon. ;)
 				</div>
-			)
+			);
 		}
 
-		return collections;
+		return (
+			<Collapse
+				accordion={this.props.page.accordion}
+				onChange={this.props.onChange}
+				activeKey={this.props.page.activePanelKey}
+			>
+				{collections}
+			</Collapse>
+		);
 	},
 
 	render() {
-		const accordion = this.props.page.accordion;
-		const btn = accordion ? 'accordion' : 'collapse';
-		const activePanelKey = this.props.page.activePanelKey;
-
-		const _alphaJumpIcons = ["%", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-		const _alphabeticalJumpIconHeight = 100 / (_alphaJumpIcons.length + 5);
-		const alphabeticalJumpIconHeight = _alphabeticalJumpIconHeight.toString() + "vh";
+		const _alphaJumpIcons = ["%", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 		
 		const _getIconFn = function(icon, i) {
 			if (icon === "%") {
 				return (
 					<div key={i} onClick={this.props.openSortCollectionsModal} className={"alphabetical-jump-icon"}>{icon}</div> 
-				) 
+				);
 			}
 			
 			if (this.props.page.sortBy === 'title' || this.props.page.sortBy === 'author') { 
-				var alphaJumpId = 'alpha-jump-' + icon;
-				var alphaJumpHandler = function() { 
+				const alphaJumpId = 'alpha-jump-' + icon;
+				const alphaJumpHandler = function() { 
 					if (document.getElementById(alphaJumpId)) { 
 						document.getElementById(alphaJumpId).scrollIntoView();
 					}
-					console.log(alphaJumpId);
-				}
+				};
 
 				return (
 					<div 
@@ -195,11 +197,11 @@ const ContentPage = React.createClass({
 						onClick={alphaJumpHandler}>
 						{icon}
 					</div> 
-				)
+				);
 			}
-		}
+		};
 
-		const getAlphaJumpIcons = _alphaJumpIcons.map(_getIconFn.bind(this))
+		const getAlphaJumpIcons = _alphaJumpIcons.map(_getIconFn.bind(this));
 
 		return (
 			<div style={{ width: '100%' }}>
@@ -209,13 +211,7 @@ const ContentPage = React.createClass({
 					</div>
 					<div className={"content-container"}>
 						<div className={'header-container'}>{this.props.header}</div>
-						<Collapse
-							accordion={accordion}
-							onChange={this.props.onChange}
-							activeKey={this.props.page.activePanelKey}
-						>
-							{this.getContentCollections()}
-						</Collapse>
+						{this.getContentCollections()}
 					</div>
 				</div>
 			</div>

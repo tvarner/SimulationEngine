@@ -1,2 +1,3 @@
-module.exports = require('./components/Modal');
+const Modal = require('./components/Modal');
 
+export default Modal;

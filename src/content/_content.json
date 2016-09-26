@@ -1,7 +1,16 @@
 { 
+	"homePage": {
+		"gif1": "https://media.giphy.com/media/dtbB41relo3N6/giphy.gif", 
+		"gif2": "https://media.giphy.com/media/tarn31SCK2v1S/giphy.gif", 
+		"gif3": "https://media.giphy.com/media/10W46ufXb3PzZS/giphy.gif", 
+		"gif4": "https://media.giphy.com/media/1EpaY72a3fmfHcE8/giphy.gif", 
+		"gif5": "https://media.giphy.com/media/kVxifQzsa0iIM/giphy.gif", 
+		"gif6": "https://media.giphy.com/media/UFExlG0VnJRGo/giphy.gif"
+	},
+
 	"collections": [
 		{
-			"category": ["photography", "category1"],
+			"category": ["photography", "feature"],
 			"name": "Gordon Parks Collection",
 			"authors": ["Gordon Parks"],
 			"dateCreated": "01/01/1953",
@@ -71,7 +80,7 @@
 		},
 
 		{
-			"category": ["photography", "category1"],
+			"category": ["photography", "feature"],
 			"name": "Margaret Bourke-White Collection",
 			"authors": ["Margaret Bourke-White"],
 			"dateCreated": "01/01/1954",
@@ -131,7 +140,7 @@
 		},
 
 		{
-			"category": ["photography", "category1"],
+			"category": ["photography", "feature"],
 			"name": "Jamel Shabazz Collection",
 			"authors": ["Jamel Shabazz"],
 			"dateCreated": "01/01/1980",
@@ -201,7 +210,7 @@
 		},
 
 		{
-			"category": ["photography", "reel"],
+			"category": ["photography"],
 			"name": "Richard Avedon Collection",
 			"authors": ["Richard Avedon"],
 			"dateCreated": "01/01/1955",
@@ -251,7 +260,7 @@
 		},
 
 		{
-			"category": ["photography", "reel"],
+			"category": ["photography"],
 			"name": "Eli Reed Collection",
 			"authors": ["Eli Reed"],
 			"dateCreated": "01/01/1956",
@@ -350,7 +359,7 @@
 		},
 
 		{
-			"category": ["photography", "reel"],
+			"category": ["photography"],
 			"name": "Irving Penn Collection",
 			"authors": ["Irving Penn"],
 			"dateCreated": "01/01/1957",
@@ -419,7 +428,7 @@
 			]
 		},
 		{
-			"category": ["photography", "reel"],
+			"category": ["photography"],
 			"name": "Some Funny Shit",
 			"authors": ["Irving Penn"],
 			"dateCreated": "01/01/1957",
@@ -458,7 +467,7 @@
 			]
 		},
 		{
-			"category": ["photography", "reel"],
+			"category": ["photography"],
 			"name": "Jonathans fucking art",
 			"authors": ["Jonathan Beckles", "Thomas Varner"],
 			"dateCreated": "01/01/1955",

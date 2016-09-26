@@ -1,11 +1,8 @@
 import React from 'react';
-import {Link} from 'react-router';
 import './styles.css';
 
-import logoImage from './../../../styles/assets/OfficialLogo.jpg'
-
 // Since this component is simple and static, there's no parent container for it.
-var ContactPage = React.createClass({
+const ContactPage = React.createClass({
 	render: function() { 
 		return (
 			<div style={{ height: '100%', width: '100%' }}>
@@ -14,7 +11,7 @@ var ContactPage = React.createClass({
 					<div className={'page-content'}>
 						<div className={'left-content'}>
 							<div className={'image-container'}>
-								<img onClick={this.props.openReelPage} className={'contact-page-logo'} src={logoImage} />
+								<img role={"presentation"} onClick={this.props.openReelPage} className={'contact-page-logo'} src={require('./../../../styles/assets/OfficialLogo.jpg')} />
 							</div>
 						</div>
 						<div className={'middle-content'}>
@@ -25,7 +22,7 @@ var ContactPage = React.createClass({
 						<div className={'right-content'}>
 							<div className={'text-container'}>
 								<a href={'https://www.instagram.com/jon_bex/'}>
-									<img className={'contact-page-instagram-icon'} src={'http://www.galleriavittoria.com/images/social/instagram.gif'}/>
+									<img role={"presentation"} className={'contact-page-instagram-icon'} src={'http://www.galleriavittoria.com/images/social/instagram.gif'}/>
 								</a>
 							</div>
 						</div>
@@ -34,6 +31,6 @@ var ContactPage = React.createClass({
 			</div>
 		);
 	}
-})
+});
 
 export default ContactPage;

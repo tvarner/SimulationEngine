@@ -1,45 +1,43 @@
 import React from 'react';
 import './styles.css';
 
-import Carousel from 'nuka-carousel'
-import contentFileIndex from './../../../../content/_contentFileIndex'
+import Carousel from 'nuka-carousel';
+import contentFileIndex from './../../../../content/_contentFileIndex';
 
-var ContentCollectionHeader = React.createClass({
+const ContentCollectionHeader = React.createClass({
 	displayName: 'ContentCollectionHeader',
-
-	mixins: [Carousel.ControllerMixin],
 
 	getInitialState() { 
 		return { 
-			slideIndex: 0
-		}
+			slideIndex: 0,
+			carousels: {}
+		};
 	},
 
 	getSlides(content) {
-		var slides = content.content.map(function(c, i) {
-
-	        if (c.type === "image") {
-	        	const src = contentFileIndex[c.url]
-	            const key = i;
-	            return (
-	                <div className={"collection-header-slide-container"} key={key}>
-	                    <img className={"collection-header-slide"} data-tag={key} src={src} />
-	                </div>
-	            );
-	        } else if (c.type == "video") {
-	      		const key = i;
-	            return (
-	            	<div className={"collection-header-slide-container"} key={key}>
-	            		{c.name}
-	            	</div>
-	            )
-	        } else if (c.type === "text") { 
-
-	        } else {
-	        	console.log(content);
-	        	throw new Error("Invalid content type")
-	        }
-		})
+		const slides = content.content.map(function(c, i) {
+			if (c.type === "image") {
+				const src = contentFileIndex[c.url];
+				const key = i;
+				return (
+					<div className={"collection-header-slide-container"} key={key}>
+						<img role={"presentation"} className={"collection-header-slide"} data-tag={key} src={src} />
+					</div>
+				);
+			} else if (c.type === "video") {
+				const key = i;
+				return (
+					<div className={"collection-header-slide-container"} key={key}>
+						{c.name}
+					</div>
+				);
+			} else if (c.type === "text") {
+				// TODO 
+				return (<div />);
+			} else {
+				throw new Error("Invalid content type");
+			}
+		});
 
 		return slides;
 	},
@@ -50,8 +48,26 @@ var ContentCollectionHeader = React.createClass({
 				<span key={i}>
 					{author}<span>{" "}</span>
 				</span>
-			)
-		})
+			);
+		});
+	},
+
+	setCarouselData() {
+		const data = this.state.carousels;
+		data[this.props.carouselRef] = this.refs[this.props.carouselRef];
+
+// debugger;
+
+		this.setState({
+			carousels: data
+		});
+	},
+
+	getAfterSlideFn() { 
+		const _getAfterSlideFn = function(newSlideIndex) { 
+			this.setState({ slideIndex: newSlideIndex });
+		};
+		return _getAfterSlideFn;
 	},
 
 	render() {
@@ -62,7 +78,7 @@ var ContentCollectionHeader = React.createClass({
 					ref={this.props.carouselRef}
 					data={this.setCarouselData.bind(this, this.props.carouselRef)}
 					slideIndex={this.state.slideIndex}
-					afterSlide={newSlideIndex => this.setState({ slideIndex: newSlideIndex })}
+					afterSlide={this.getAfterSlideFn().bind(this)}
 					autoplay={true}
 					wrapAround={true}
 					decorators={[]}>
@@ -80,7 +96,7 @@ var ContentCollectionHeader = React.createClass({
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 });
 

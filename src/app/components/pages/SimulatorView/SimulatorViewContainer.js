@@ -1,18 +1,18 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import {
 	_runSimulator,
 	_stopSimulator,
 	_exitSimulator,
 	_stopSimulation,
 	_destroySimulationGUI
-} from './SimulatorViewActions'
-import SimulatorView from './SimulatorView'
+} from './SimulatorViewActions';
+import SimulatorView from './SimulatorView';
 
 const mapStateToProps = (state) => {
 	return {
 		simulator: state.pages.simulatorView.simulator
-	}
-}
+	};
+};
 
 /* UI Interactions */
 const mapDispatchToProps = (dispatch) => {
@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch) => {
 
 		onNavigateFromSimulator: (ev) => { 
 			if (ev !== undefined) { 
-				ev.preventDefault()
+				ev.preventDefault();
 			}
 			dispatch(_stopSimulation());
 			dispatch(_stopSimulator());
@@ -35,23 +35,23 @@ const mapDispatchToProps = (dispatch) => {
 
 		onStopSimulator: (ev) => {
 			if (ev !== undefined) { 
-				ev.preventDefault()
+				ev.preventDefault();
 			} 
 			dispatch(_stopSimulator());
 		},
 
 		onExitSimulator: (ev) => { 
 			if (ev !== undefined) { 
-				ev.preventDefault()
+				ev.preventDefault();
 			}
 			dispatch(_exitSimulator());		
 		}
-	}
-}
+	};
+};
 
 const SimulatorViewContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(SimulatorView)
+)(SimulatorView);
 
-export default SimulatorViewContainer
+export default SimulatorViewContainer;

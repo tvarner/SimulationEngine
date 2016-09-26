@@ -1,6 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router';
-import * as THREE from 'three';
 import './styles.css';
 
 const SimulatorViewSidebarContent = React.createClass({
@@ -16,8 +14,8 @@ const SimulatorViewSidebarContent = React.createClass({
 				<a key={8} onClick={this.props.onStopSimulation} style={this.props.styles.sidebarLink}>Stop Simulation</a>
 				<a key={9} onClick={this.props.onClearSimulation} style={this.props.styles.sidebarLink}>Clear Simulation</a>
 			</div>
-		)
+		);
 	}
-})
+});
 
 export default SimulatorViewSidebarContent;

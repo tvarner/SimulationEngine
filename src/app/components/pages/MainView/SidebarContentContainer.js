@@ -1,21 +1,15 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import {
-	setActiveModal,
-	clearActiveModal,
 	toggleSidebar,
 	setView
-} from './MainViewActions'
+} from './MainViewActions';
 
-import SidebarContent from './SidebarContent'
+import SidebarContent from './SidebarContent';
 
 const mapStateToProps = function(state) { 
-	return {
-		//TODO
-	}
-}
+	return state;
+};
 
-/* UI Interactions */
-// TODO: add remainder of 
 const mapDispatchToProps = function(dispatch) {
 	return {
 		openHomePage: function() { 
@@ -57,12 +51,12 @@ const mapDispatchToProps = function(dispatch) {
 			dispatch(setView("REEL_PAGE"));
 			dispatch(toggleSidebar(false));
 		}
-	}
-}
+	};
+};
 
 const SidebarContentContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(SidebarContent)
+)(SidebarContent);
 
-export default SidebarContentContainer
+export default SidebarContentContainer;

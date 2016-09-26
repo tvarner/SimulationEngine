@@ -1,47 +1,47 @@
 import React from 'react';
 
-import './styles.css'
+import './styles.css';
 
-var VideoContentInfo = React.createClass({
+const VideoContentInfo = React.createClass({
 
 	getInitialState: function() { 
 		return { 
 			visible: false
-		}
+		};
 	},
 
 	getAuthors(authors) { 
 		return authors.map(function(author, i) { 
 			return (
 				<span key={i}>{author}<span>{" "}</span></span>
-			)
-		})
+			);
+		});
 	},
 
 	getDescription(description) { 
 		return (
 			<span className={'full-screen-content-image-info-description'}>{description}</span>
-		)
+		);
 	},
 
 	getDate(date) { 
 		return (
 			<span>{date}</span>
-		)
+		);
 	},
 
 	toggleVisibility() {
-		var visibility = !this.state.visible;
+		const visibility = !this.state.visible;
 		this.setState({
 			visible: visibility
-		})
+		});
 	},
 
 	getVisibility() { 
 		if (!this.state.visible) { 
 			return {
 				display: 'none'
-			}
+			};
 		}
 	},
 
@@ -62,7 +62,7 @@ var VideoContentInfo = React.createClass({
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 });
 

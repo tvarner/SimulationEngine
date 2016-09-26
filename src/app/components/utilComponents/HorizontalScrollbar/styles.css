@@ -43,3 +43,47 @@ div.header-thumbnail {
     max-width: 313%;
     max-height: 20vh;
 }
+
+
+/** 
+ * iPad with portrait orientation.
+ */
+@media all and (max-device-width: 769px) and (max-device-height: 1024px) and (orientation:portrait){
+		.scroll-image-container { 
+			width: 20vh;
+			height:16vh;
+			overflow: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+}
+
+/** 
+ * iPad with landscape orientation.
+ */
+@media all and (max-device-width: 769px) and (max-device-height: 1024px) and (orientation:landscape){
+		.scroll-image-container { 
+			width: 20vh;
+			height:16vh;
+			overflow: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+}
+
+/**
+ * iPhone 5
+ * You can also target devices with aspect ratio.
+ */
+@media screen and (max-device-width: 415px) {
+		.scroll-image-container { 
+			width: 20vh;
+			height:16vh;
+			overflow: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+}

@@ -1,10 +1,10 @@
 i.arrow { 
-	display: none;
+    display: none;
 }
 
 .content-image-container { 
-	height: 80vh;
-	width: 100vw;
+    height: 80vh;
+    width: 100vw;
     display: flex!important;
     align-items: center!important;
     justify-content: center!important;
@@ -12,18 +12,18 @@ i.arrow {
 }
 
 .content-video-container {
-	height: 80vh;
-	width: 100vw;
-	background-color: black;
+    height: 80vh;
+    width: 100vw;
+    background-color: black;
     display: flex!important;
     align-items: center!important;
     justify-content: center!important;
 }
 
 .collection-image { 
-	max-height: 100%!important;
-	max-width: 100%;
-	width: auto!important;
+    max-height: 100%!important;
+    max-width: 100%;
+    width: auto!important;
 }
 
 .slider-slide { 
@@ -33,11 +33,11 @@ i.arrow {
 }
 
 .scroll-image { 
-	max-height: 20vw;
+    max-height: 20vw;
 }
 
 .content-info-icon {
-	font-size: 3vh;
+    font-size: 3vh;
     background-color: black;
     height: 4vw;
     width: 4vw;
@@ -46,10 +46,10 @@ i.arrow {
     align-items: center;
     justify-content: center;
     background: rgba(0, 0, 0, 0.7);
-	position: absolute;
-	top: 0;
+    position: absolute;
+    top: 0;
     left: 0;
-   	margin-left: 2vh;
+    margin-left: 2vh;
     width: 100%;
 }
 
@@ -68,22 +68,22 @@ i.arrow {
  * iPad with portrait orientation.
  */
 @media all and (max-device-width: 769px) and (max-device-height: 1024px) and (orientation:portrait){
-	.collection-image {
-	    max-height: 100% !important;
-	    width: auto !important;
-	    max-width: 85vw;
-	}
+    .collection-image {
+        max-height: 100% !important;
+        width: auto !important;
+        max-width: 85vw;
+    }
 }
 
 /** 
  * iPad with landscape orientation.
  */
 @media all and (max-device-width: 769px) and (max-device-height: 1024px) and (orientation:landscape){
-	.collection-image {
-	    max-height: 100% !important;
-	    width: auto !important;
-	    max-width: 85vw;
-	}
+    .collection-image {
+        max-height: 100% !important;
+        width: auto !important;
+        max-width: 85vw;
+    }
 }
 
 /**
@@ -91,9 +91,9 @@ i.arrow {
  * You can also target devices with aspect ratio.
  */
 @media screen and (max-device-width: 415px) {
-	.collection-image {
-	    max-height: 100% !important;
-	    width: auto !important;
-	    max-width: 85vw;
-	}
+    .collection-image {
+        max-height: 100% !important;
+        width: auto !important;
+        max-width: 68vw;
+    }
 }

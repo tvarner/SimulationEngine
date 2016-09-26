@@ -8,12 +8,12 @@ const styles = {
 	header: {
 		backgroundColor: 'black',
 		color: 'white',
-	    fontSize: '6vh',
-	    height: '10%',
-	    width: '100%',
-	    position: 'absolute',
-	    display: 'flex',
-	    alignItems: 'center'
+		fontSize: '6vh',
+		height: '10%',
+		width: '100%',
+		position: 'absolute',
+		display: 'flex',
+		alignItems: 'center'
 	},
 };
 
