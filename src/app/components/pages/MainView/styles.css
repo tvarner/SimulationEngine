@@ -31,7 +31,8 @@
 
 .main-menu-icon {
     position: relative;
-    width: 39px;
+    width: 4vw;
+    min-width: 50px;
     height: 70px;
     background: #000;
   &:hover {
@@ -172,6 +173,10 @@
 	.menu-root-container { 
 		width: 40vw;
 	}
+
+	.main-menu-icon { 
+		width: 8vw;
+	}
 }
 
 /** 
@@ -180,6 +185,10 @@
 @media all and (max-device-width: 768px) and (max-device-height: 1024px) and (orientation:landscape){
 	.menu-root-container { 
 		width: 40vw;
+	}
+
+	.main-menu-icon { 
+		width: 8vw;
 	}
 }
 
@@ -190,5 +199,9 @@
 @media screen and (max-device-width: 415px) {
 	.menu-root-container { 
 		width: 60vw;
+	}
+
+	.main-menu-icon { 
+		width: 8vw;
 	}
 }

@@ -7,6 +7,8 @@ import Carousel from 'nuka-carousel';
 import HorizontalScrollbar from '../HorizontalScrollbar/HorizontalScrollbar';
 import VideoContentInfo from '../VideoContentInfo/VideoContentInfo';
 
+import './styles.css';
+
 const ContentCollection = React.createClass({
 	displayName: 'ContentCollection',
 

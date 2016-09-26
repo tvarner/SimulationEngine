@@ -4,6 +4,10 @@ import {
 } from '../MainView/MainViewActions';
 import ContactPage from './ContactPage';
 
+const mapStateToProps = (state) => { 
+	return state;
+};
+
 const mapDispatchToProps = (dispatch) => {
 	return {
 		openReelPage: () => { 
@@ -13,6 +17,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const ContactPageContainer = connect(
+	mapStateToProps,
 	mapDispatchToProps
 )(ContactPage);
 

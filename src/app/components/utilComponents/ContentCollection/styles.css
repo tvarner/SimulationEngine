@@ -44,7 +44,7 @@ i.arrow {
     color: white;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     background: rgba(0, 0, 0, 0.7);
     position: absolute;
     top: 0;

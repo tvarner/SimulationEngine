@@ -59,7 +59,7 @@ const Application = React.createClass({
 
 	_renderPage(page) {
 		return (
-			<div style={{ height: '100%', width: '100%'}}>
+			<div style={{ height: '90vh', width: '100vw'}}>
 				{page}
 				{this._renderActiveModal()}
 			</div>

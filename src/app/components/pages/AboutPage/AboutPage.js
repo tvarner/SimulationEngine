@@ -10,7 +10,7 @@ const AboutPage = () => {
 				<div className={'page-content'}>
 					<div className={'left-content'}>
 						<div className={'image-container'}>
-							<img role={"presentation"} className={'content'} src={'https://media.giphy.com/media/Wkcw6SzOtaSxG/giphy.gif'} />
+							<img role={"presentation"} className={'about-image'} src={'https://media.giphy.com/media/Wkcw6SzOtaSxG/giphy.gif'} />
 						</div>
 					</div>
 					<div className={'right-content'}>

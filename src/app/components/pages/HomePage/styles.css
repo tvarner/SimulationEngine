@@ -10,10 +10,12 @@
 
 .left-home-icons { 
 	width: 50%;
+	height: 100%;
 }
 
 .right-home-icons { 
 	width: 50%;
+	height: 100%;
 }
 
 .home-gif-container { 
@@ -92,8 +94,13 @@
 
 }
 
-.mobile-hover-cover { 
+.mobile-hover-cover {
+    width: 50%;
+    height: 30%;
 	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .home-page-icon-container  > .hover-button { 
