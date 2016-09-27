@@ -40,7 +40,6 @@ const ContentPage = React.createClass({
 			};
 			return _collectionQueryFn.call(this, collection);
 		};
-
 		return _.filter(contentMonolith.collections, _contentMonolithQueryFn.bind(this));
 	},
 

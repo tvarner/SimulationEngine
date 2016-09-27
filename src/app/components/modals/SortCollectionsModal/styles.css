@@ -1,6 +1,7 @@
 .sort-collections-modal { 
 	position: absolute;
     top: 10vh;
+    height: 20vh;
     background-color: black;
     left: 30px;
     color: lightsteelblue;
@@ -61,7 +62,6 @@
 	.sort-collections-modal { 
 	    position: absolute;
 	    top: 10vh;
-	    bottom: 75vh;
 	    background-color: black;
 	    left: 30px;
 	    color: lightsteelblue;
@@ -90,7 +90,6 @@
 		position: absolute;
 	    top: 10vh;
 	    background-color: black;
-	    bottom: 75vh;
 	    left: 30px;
 	    color: lightsteelblue;
 	}
