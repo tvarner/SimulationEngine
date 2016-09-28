@@ -2,7 +2,8 @@ i.arrow {
     display: none;
 }
 
-.content-image-container { 
+.content-image-container {
+    margin-top: 10vh;
     height: 80vh;
     width: 100vw;
     display: flex!important;
@@ -12,6 +13,7 @@ i.arrow {
 }
 
 .content-video-container {
+    margin-top: 10vh;
     height: 80vh;
     width: 100vw;
     background-color: black;

@@ -24,7 +24,6 @@ const HorizontalScrollbar = React.createClass({
 			if (c.type === "image") {
 				const src = contentFileIndex[c.url];
 				const key = i;
-
 				return (
 					<div className={'scroll-image-container'} key={key}>
 						<img role={"presentation"} className={'scroll-image'} data-tag={key} src={src} onClick={
