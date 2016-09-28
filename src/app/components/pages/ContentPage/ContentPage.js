@@ -8,6 +8,8 @@ import './styles.css';
 import ContentCollectionContainer from './../../utilComponents/ContentCollection/ContentCollectionContainer';
 import ContentCollectionHeader from './../../utilComponents/ContentCollectionHeader/ContentCollectionHeader';
 
+// import firebase from 'firebase';
+
 // Since this component is simple and static, there's no parent container for it.
 
 const ContentPage = React.createClass({
@@ -24,13 +26,43 @@ const ContentPage = React.createClass({
 	},
 
 	componentWillMount() {
+		// Initialize Firebase
+		
+		/*
+		const firebaseConfig = {
+			apiKey: "AIzaSyDVVrCSvqkeFSYavW_fK8X-bjXklpZLFlI",
+			authDomain: "jbportfolioapp.firebaseapp.com",
+			databaseURL: "https://jbportfolioapp.firebaseio.com",
+			storageBucket: "jbportfolioapp.appspot.com",
+			messagingSenderId: "687303676021"
+		};
+		const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+		// Get a reference to the storage service, which is used to create references in your storage bucket
+		const storage = firebase.storage();
+
+		// Create a storage reference from our storage service
+		const storageRef = storage.ref();
+
+		const contentRef = storageRef.child('content');
+
+		const database = firebase.database();
+		*/
+
+		// debugger;
+
+		// remove arg later
 		const collections = this.getCollections(this.state.contentMonolith);
+		
+
 		this.setState({
 			collections: collections
 		});
 	},
 
 	getCollections(contentMonolith) {
+		// query contentMonolith from database here instead of passing content monolith
+
 		const _contentMonolithQueryFn = function(collection) { 
 			const _collectionQueryFn = function(collection) {
 				const _categoryQueryFn = function(category) {
@@ -136,6 +168,7 @@ const ContentPage = React.createClass({
 	},
 
 	getContentCollections() {
+		// remove arg later
 		const _collections = this.getCollections(this.state.contentMonolith);
 
 		if (this.props.page.sortBy === 'title') { 

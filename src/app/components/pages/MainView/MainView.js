@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import Sidebar from 'react-sidebar';
+import Sidebar from './../../utilComponents/react-sidebar/src/index';
 import MaterialTitlePanel from './MaterialTitlePanel';
 import SidebarContentContainer from './SidebarContentContainer';
 

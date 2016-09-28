@@ -6,14 +6,16 @@ const styles = {
 		height: '100%'
 	},
 	header: {
+		overflow: 'hidden',
 		backgroundColor: 'black',
 		color: 'white',
 		fontSize: '6vh',
 		height: '10%',
 		width: '100%',
-		position: 'absolute',
+		position: 'fixed',
 		display: 'flex',
-		alignItems: 'center'
+		alignItems: 'center',
+		zIndex: 2
 	},
 };
 

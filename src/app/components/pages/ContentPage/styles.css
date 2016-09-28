@@ -6,7 +6,6 @@
 .alphabetical-jump { 
 	width: 30px;
 	height: 100px;
-	background-color: #FF69B4;
     position: fixed;
     height: 100vh;
     background-color: black;
@@ -14,7 +13,7 @@
 
 .alphabetical-jump-icon {
 	height: 3.325vh;
-	width: 30px;
+	width: 40px;
 	font-size: 3vh;
 	color: white;
 	display: -webkit-flex;

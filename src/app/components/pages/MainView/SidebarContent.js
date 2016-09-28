@@ -4,7 +4,7 @@ import MaterialTitlePanel from './MaterialTitlePanel';
 
 const styles = {
 	sidebar: {
-		height: '100%',
+		height: '100%'
 	},
 	sidebarLink: {
 		display: 'flex',
