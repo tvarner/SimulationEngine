@@ -17,7 +17,7 @@ export default class HomePage extends Component {
 	}
 
 	render() {
-		const { openAboutPage, openContactPage, openFilmPage, openPhotographyPage, openReelPage, openFeaturePage } = this.props;
+		const { openAboutPage, openContactPage, openSimulatorView} = this.props;
 		
 		const contentMonolith = require('./../../../../content/_content.json');
 		const gif1 = contentMonolith.homePage.gif1;
@@ -30,37 +30,23 @@ export default class HomePage extends Component {
 		return (
 			<div style={{ width: '100%', height: '100%'}}>
 				<div className={"home-page"}>
-					<div className={'left-home-icons'}>
+					<div className={'home-icons'}>
+						<div className={"home-page-icon-container"} onClick={openSimulatorView}>
+							<div className={'mobile-hover-cover'}>Simulator</div>
+							<HoverButton hoverContent={'Simulator'} defaultContent={this.getGifComponent(gif1)} />						
+						</div>
 						<div className={"home-page-icon-container"} onClick={openAboutPage}>
-							<div className={'mobile-hover-cover'}>Theory</div>
-							<HoverButton hoverContent={'Theory'} defaultContent={this.getGifComponent(gif1)} />						
+							<div className={'mobile-hover-cover'}>About</div>
+							<HoverButton hoverContent={'About'} defaultContent={this.getGifComponent(gif2)} />	
 						</div>
-						<div className={"home-page-icon-container"} onClick={openPhotographyPage}>
-							<div className={'mobile-hover-cover'}>Photography</div>
-							<HoverButton hoverContent={'Photography'} defaultContent={this.getGifComponent(gif2)} />	
-						</div>
-						<div className={"home-page-icon-container"} onClick={openFilmPage}>
-							<div className={'mobile-hover-cover'}>Film</div>
-							<HoverButton hoverContent={'Film'} defaultContent={this.getGifComponent(gif3)} />	
-						</div>
-					</div>
-					<div className={'right-home-icons'}>
 						<div className={"home-page-icon-container"} onClick={openContactPage}>
-							<div className={'mobile-hover-cover'}>Connect</div>
-							<HoverButton hoverContent={'Connect'} defaultContent={this.getGifComponent(gif4)} />
-						</div>
-						<div className={"home-page-icon-container"} onClick={openReelPage}>
-							<div className={'mobile-hover-cover'}>Reel</div>
-							<HoverButton hoverContent={'Reel'} defaultContent={this.getGifComponent(gif5)} />	
-						</div>
-						<div className={"home-page-icon-container"} onClick={openFeaturePage}>
-							<div className={'mobile-hover-cover'}>Feature</div>
-							<HoverButton hoverContent={'Feature'} defaultContent={this.getGifComponent(gif6)} />	
+							<div className={'mobile-hover-cover'}>Contact</div>
+							<HoverButton hoverContent={'Contact'} defaultContent={this.getGifComponent(gif3)} />	
 						</div>
 					</div>
 				</div>
 				<div className={"footer grow"}>
-					<HoverButton onClick={openContactPage} defaultContent={'Jonathan Andre Beckles & Company'} hoverContent={'Connect'} />
+					<HoverButton onClick={openContactPage} defaultContent={'By Thomas Varner'} hoverContent={'Contact'} />
 				</div>
 			</div>
 		);

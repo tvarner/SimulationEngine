@@ -8,13 +8,8 @@
 	display: flex;
 }
 
-.left-home-icons { 
-	width: 50%;
-	height: 100%;
-}
-
-.right-home-icons { 
-	width: 50%;
+.home-icons { 
+	width: 100%;
 	height: 100%;
 }
 

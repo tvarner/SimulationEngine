@@ -16,6 +16,12 @@ import {
 } from './SimulatorViewActions';
 import SimulatorViewSidebarContent from './SimulatorViewSidebarContent';
 
+const mapStateToProps = (state) => {
+	return {
+		simulator: state.pages.simulatorView.simulator
+	};
+};
+
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onOpenLoadSimulationModal: (ev) => {
@@ -101,6 +107,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 const SimulatorViewSidebarContentContainer = connect(
+	mapStateToProps,
 	mapDispatchToProps
 )(SimulatorViewSidebarContent);
 

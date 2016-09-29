@@ -118,11 +118,11 @@
 }
 
 .menu-button-link { 
-	font-size: 3vh;
+	font-size: 2vw;
 }
 
 .menu-button-link:hover {
-	font-size: 4vh;
+	font-size: 3vw;
 	-webkit-transition-property: font-size;
 	-moz-transition-property: font-size;
 	-o-transition-property: font-size;
@@ -138,16 +138,16 @@
 }
 
 .menu-button-link:hover:after { 
-	font-size: 4vh;
+	font-size: 3vw;
 }
 
 
 .menu-button-link { 
-	font-size: 3vh;
+	font-size: 2vw;
 }
 
 .menu-button-link:hover {
-	font-size: 4vh;
+	font-size: 3vw;
 	-webkit-transition-property: font-size;
 	-moz-transition-property: font-size;
 	-o-transition-property: font-size;
@@ -163,7 +163,7 @@
 }
 
 .menu-button-link:hover:after { 
-	font-size: 4vh;
+	font-size: 3vw;
 }
 
 /** 

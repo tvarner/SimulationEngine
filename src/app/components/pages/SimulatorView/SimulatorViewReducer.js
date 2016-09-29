@@ -1,4 +1,3 @@
-/*
 import _ from 'lodash';
 import { combineReducers } from 'redux';
 
@@ -144,6 +143,5 @@ function simulator(state = {
 const simulatorView = combineReducers({
 	simulator
 });
-*/
 
-export default {};
+export default simulatorView;

@@ -22,24 +22,8 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(setView("CONTACT_PAGE"));
 		},
 		
-		openContentPage: () => { 
-			dispatch(setView("CONTENT_PAGE"));
-		},
-
-		openPhotographyPage: () => {
-			dispatch(setView("PHOTOGRAPHY_PAGE"));
-		},
-
-		openFilmPage: () => { 
-			dispatch(setView("FILM_PAGE"));
-		},
-
-		openFeaturePage: () => { 
-			dispatch(setView("FEATURE_PAGE"));
-		},
-
-		openReelPage: () => { 
-			dispatch(setView("REEL_PAGE"));
+		openSimulatorView: () => { 
+			dispatch(setView("SIMULATOR_VIEW"));
 		}
 	};
 };

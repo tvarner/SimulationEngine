@@ -15,7 +15,7 @@ const styles = {
 		position: 'fixed',
 		display: 'flex',
 		alignItems: 'center',
-		zIndex: 2
+		zIndex: 0
 	},
 };
 

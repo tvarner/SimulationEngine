@@ -8,7 +8,12 @@ import SidebarContentContainer from './SidebarContentContainer';
 import HomePageContainer from '../HomePage/HomePageContainer';
 import AboutPage from '../AboutPage/AboutPage';
 import ContactPageContainer from '../ContactPage/ContactPageContainer';
-import ContentPageContainer from '../ContentPage/ContentPageContainer';
+
+// simulator components
+import SimulatorViewContainer from '../SimulatorView/SimulatorViewContainer'
+import SimulatorDataView from '../SimulatorDataView/SimulatorDataView'
+import LoadSimulationModalContainer from '../../modals/LoadSimulationModal/LoadSimulationModalContainer'
+import SaveSimulationModalContainer from '../../modals/SaveSimulationModal/SaveSimulationModalContainer'
 
 import SortCollectionsModalContainer from '../../modals/SortCollectionsModal/SortCollectionsModalContainer';
 import FullScreenContentModalContainer from '../../modals/FullScreenContentModal/FullScreenContentModalContainer';
@@ -43,7 +48,6 @@ const Application = React.createClass({
 					<FullScreenContentModalContainer data={this.props.modals.activeModalProps} />
 				);
 			}
-			/*
 			if (this.props.modals.activeModal === 'LOAD_SIMULATION_MODAL') {
 				return (
 					<LoadSimulationModalContainer />
@@ -53,7 +57,6 @@ const Application = React.createClass({
 					<SaveSimulationModalContainer />
 				)
 			}
-			*/
 		}
 	},
 
@@ -80,22 +83,14 @@ const Application = React.createClass({
 			return (
 				this._renderPage(<ContactPageContainer />)
 			);  
-		} else if (this.props.view === "PHOTOGRAPHY_PAGE") { 
+		} else if (this.props.view === "SIMULATOR_VIEW") { 
 			return (
-				this._renderPage(<ContentPageContainer category={'photography'} header={'PHOTOGRAPHY'} />)
-			);
-		} else if (this.props.view === "FILM_PAGE") { 
+				this._renderPage(<SimulatorViewContainer />)
+			)	
+		} else if (this.props.view === "SIMULATOR_DATA_VIEW") { 
 			return (
-				this._renderPage(<ContentPageContainer category={'film'} header={'FILM'}/>)
-			);  
-		} else if (this.props.view === "FEATURE_PAGE") { 
-			return (
-				this._renderPage(<ContentPageContainer category={'feature'} header={'FEATURE'}/>)
-			);  
-		} else if (this.props.view === "REEL_PAGE") { 
-			return (
-				this._renderPage(<ContentPageContainer category={'reel'} header={'REEL'} />)
-			);  
+				this._renderPage(<SimulatorDataView />)
+			)	
 		}
 	},
 

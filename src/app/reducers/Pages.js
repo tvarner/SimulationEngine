@@ -2,13 +2,13 @@ import { combineReducers } from 'redux';
 
 // Import page reducers from ../components/pages/<Page>/ directories
 
-import mainView from '../components/pages/MainView/MainViewReducer';
-import contentPage from '../components/pages/ContentPage/ContentPageReducer';
-// import simulatorView from '../components/pages/SimulatorView/SimulatorViewReducer'
+import mainView from './../components/pages/MainView/MainViewReducer';
+import simulatorView from './../components/pages/SimulatorView/SimulatorViewReducer';
+// import contentPage from '../components/pages/ContentPage/ContentPageReducer';
 
 const pages = combineReducers({
 	mainView,
-	contentPage
+	simulatorView
 });
 
 export default pages;

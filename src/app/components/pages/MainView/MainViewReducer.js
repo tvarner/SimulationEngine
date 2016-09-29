@@ -30,16 +30,8 @@ function view(state = "HOME_PAGE", action) {
 			return "ABOUT_PAGE";
 		} else if (action.view === "CONTACT_PAGE") {
 			return "CONTACT_PAGE";
-		} else if (action.view === "CONTENT_PAGE") { 
-			return "CONTENT_PAGE";
-		} else if (action.view === "PHOTOGRAPHY_PAGE") { 
-			return "PHOTOGRAPHY_PAGE";
-		} else if (action.view === "FILM_PAGE") { 
-			return "FILM_PAGE";
-		} else if (action.view === "FEATURE_PAGE") { 
-			return "FEATURE_PAGE";
-		} else if (action.view === "REEL_PAGE") { 
-			return "REEL_PAGE";
+		} else if (action.view === "SIMULATOR_VIEW") { 
+			return "SIMULATOR_VIEW";
 		} else {
 			return state;
 		}
