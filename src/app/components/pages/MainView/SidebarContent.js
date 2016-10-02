@@ -2,7 +2,7 @@ import React from 'react';
 
 import MaterialTitlePanel from './MaterialTitlePanel';
 
-import SimulatorViewSidebarContentContainer from '../SimulatorView/SimulatorViewSidebarContentContainer'
+import SimulatorViewSidebarContentContainer from '../SimulatorView/SimulatorViewSidebarContentContainer';
 
 const styles = {
 	sidebar: {
@@ -64,7 +64,7 @@ const SidebarContent = React.createClass({
 		if (this.props.view === "SIMULATOR_VIEW") {
 			return (
 				<SimulatorViewSidebarContentContainer styles={styles} />
-			)
+			);
 		}
 	},
 

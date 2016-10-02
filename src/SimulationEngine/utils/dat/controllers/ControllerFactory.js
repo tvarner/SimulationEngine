@@ -20,37 +20,37 @@ import BooleanController from './BooleanController';
 import common from '../utils/common';
 
 const ControllerFactory = function(object, property) {
-  const initialValue = object[property];
+	const initialValue = object[property];
 
-  // Providing options?
-  if (common.isArray(arguments[2]) || common.isObject(arguments[2])) {
-    return new OptionController(object, property, arguments[2]);
-  }
+	// Providing options?
+	if (common.isArray(arguments[2]) || common.isObject(arguments[2])) {
+		return new OptionController(object, property, arguments[2]);
+	}
 
-  // Providing a map?
-  if (common.isNumber(initialValue)) {
-    if (common.isNumber(arguments[2]) && common.isNumber(arguments[3])) {
-      // Has min and max.
-      if (common.isNumber(arguments[4])) { // has step
-        return new NumberControllerSlider(object, property, arguments[2], arguments[3], arguments[4]);
-      }
+	// Providing a map?
+	if (common.isNumber(initialValue)) {
+		if (common.isNumber(arguments[2]) && common.isNumber(arguments[3])) {
+			// Has min and max.
+			if (common.isNumber(arguments[4])) { // has step
+				return new NumberControllerSlider(object, property, arguments[2], arguments[3], arguments[4]);
+			}
 
-      return new NumberControllerSlider(object, property, arguments[2], arguments[3]);
-    }
-    return new NumberControllerBox(object, property, {min: arguments[2], max: arguments[3]});
-  }
+			return new NumberControllerSlider(object, property, arguments[2], arguments[3]);
+		}
+		return new NumberControllerBox(object, property, {min: arguments[2], max: arguments[3]});
+	}
 
-  if (common.isString(initialValue)) {
-    return new StringController(object, property);
-  }
+	if (common.isString(initialValue)) {
+		return new StringController(object, property);
+	}
 
-  if (common.isFunction(initialValue)) {
-    return new FunctionController(object, property, '');
-  }
+	if (common.isFunction(initialValue)) {
+		return new FunctionController(object, property, '');
+	}
 
-  if (common.isBoolean(initialValue)) {
-    return new BooleanController(object, property);
-  }
+	if (common.isBoolean(initialValue)) {
+		return new BooleanController(object, property);
+	}
 };
 
 export default ControllerFactory;

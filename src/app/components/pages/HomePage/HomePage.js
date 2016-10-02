@@ -23,9 +23,6 @@ export default class HomePage extends Component {
 		const gif1 = contentMonolith.homePage.gif1;
 		const gif2 = contentMonolith.homePage.gif2;
 		const gif3 = contentMonolith.homePage.gif3;
-		const gif4 = contentMonolith.homePage.gif4;
-		const gif5 = contentMonolith.homePage.gif5;
-		const gif6 = contentMonolith.homePage.gif6;
 
 		return (
 			<div style={{ width: '100%', height: '100%'}}>

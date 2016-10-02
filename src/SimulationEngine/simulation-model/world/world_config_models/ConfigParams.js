@@ -4,14 +4,11 @@
 *  //TODO: 	Integrate Length model, time model, variable interval into config params.
 			Pass config params to engine in order to manipulate state space "properly".
 */
-import * as _ from 'lodash';
-import * as THREE from 'three';
-
-var instance = null;
+let instance = null;
 
 export default class ConfigParams { 
 	constructor(params) { 
-		if(!!!instance) { 
+		if(!instance) { 
 			this.init(params);
 			instance = this;
 		}
@@ -19,7 +16,6 @@ export default class ConfigParams {
 
 	init(params) { 
 		this.params = params ? this.setParams(params) : {};
-
 /*
 		_.extend(this.params, {
 			// configuration params go here

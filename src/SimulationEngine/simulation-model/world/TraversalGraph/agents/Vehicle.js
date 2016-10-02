@@ -1,4 +1,4 @@
-import MobileAgent from './MobileAgent'
+import MobileAgent from './MobileAgent';
 
 export default class Vehicle extends MobileAgent { 
 	constructor(id, traversalGraph) { 

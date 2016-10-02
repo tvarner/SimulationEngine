@@ -4,271 +4,262 @@ $row-height: 27px;
 $button-height: 20px;
 
 .dg {
+	/** Clear list styles */
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		clear: both;
+	}
 
-  /** Clear list styles */
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    clear: both;
-  }
+	/* Auto-place container */
+	&.ac {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 0;
+		z-index: 0;
+	}
 
-  /* Auto-place container */
-  &.ac {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 0;
-    z-index: 0;
-  }
+	&:not(.ac) .main {
+		/** Exclude mains in ac so that we don't hide close button */
+		overflow: hidden;
+	}
 
-  &:not(.ac) .main {
-    /** Exclude mains in ac so that we don't hide close button */
-    overflow: hidden;
-  }
+	&.main {
+		&.taller-than-window {
+			overflow-y: auto;
 
-  &.main {
+			.close-button {
+				opacity: 1;
 
-    @include transition(opacity, 0.1s, linear);
+				/* TODO, these are style notes */
+				margin-top: -1px;
+				border-top: 1px solid $border-color;
+			}
+		}
 
-    &.taller-than-window {
+		@include transition(opacity, 0.1s, linear);
 
-      overflow-y: auto;
+		ul.closed .close-button {
+			opacity: 1 !important;
+		}
 
-      .close-button {
+		&:hover .close-button,
+		.close-button.drag {
+			opacity: 1;
+		}
 
-        opacity: 1;
+		.close-button {
+			border: 0;
 
-        /* TODO, these are style notes */
-        margin-top: -1px;
-        border-top: 1px solid $border-color;
+			/* opacity: 0; */
+			@include transition(opacity, 0.1s, linear);
 
-      }
+			position: absolute;
+			line-height: $button-height - 1;
+			height: $button-height;
 
-    }
+			/* TODO, these are style notes */
+			cursor: pointer;
+			text-align: center;
+			background-color: #000;
 
-    ul.closed .close-button {
-      opacity: 1 !important;
-    }
+			&:hover {
+				background-color: #111;
+			}
+		}
+	}
 
-    &:hover .close-button,
-    .close-button.drag {
-      opacity: 1;
-    }
+	/* Auto-placed GUI's */
+	&.a {
+		float: right;
+		margin-right: 15px;
+		overflow-x: hidden;
 
-    .close-button {
-      /*opacity: 0;*/
-      @include transition(opacity, 0.1s, linear);
-      border: 0;
-      position: absolute;
+		&.has-save > ul {
+			margin-top: $row-height;
 
-      line-height: $button-height - 1;
-      height: $button-height;
+			&.closed {
+				margin-top: 0;
+			}
+		}
 
-      /* TODO, these are style notes */
-      cursor: pointer;
-      text-align: center;
-      background-color: #000;
-      &:hover {
-        background-color: #111;
-      }
+		.save-row {
+			position: fixed;
+			top: 0;
+			z-index: 1002;
+		}
+	}
 
-    }
+	li {
+		@include transition(height, 0.1s, ease-out);
+	}
 
-  }
+	/* Line items that don't contain folders. */
+	li:not(.folder) {
+		cursor: auto;
+		height: $row-height;
+		line-height: $row-height;
+		overflow: hidden;
+		padding: 0 4px 0 5px;
+	}
 
-  /* Auto-placed GUI's */
-  &.a {
+	li.folder {
+		padding: 0;
+		border-left: $nest-margin solid rgba(0, 0, 0, 0);
+	}
 
-    float: right;
-    margin-right: 15px;
-    overflow-x: hidden;
+	/** Folder names */
+	li.title {
+		cursor: pointer;
+		margin-left: -$nest-margin;
+	}
 
-    &.has-save > ul {
-      margin-top: $row-height;
-      &.closed {
-        margin-top: 0;
-      }
-    }
+	/** Hides closed items */
+	.closed li:not(.title),
+	.closed ul li,
+	.closed ul li > * {
+		height: 0;
+		overflow: hidden;
+		border: 0;
+	}
 
-    .save-row {
-      position: fixed;
-      top: 0;
-      z-index: 1002;
-    }
+	/** Controller row */
+	.cr {
+		clear: both;
+		padding-left: 3px;
+		height: $row-height;
+	}
 
-  }
+	/** Name-half (left) */
+	.property-name {
+		cursor: default;
+		float: left;
+		clear: left;
+		width: 35%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 
-  li {
-    @include transition(height, 0.1s, ease-out);
-  }
+	/** Controller-half (right) */
+	.c {
+		float: left;
+		width: 60%;
+	}
 
-  /* Line items that don't contain folders. */
-  li:not(.folder) {
-    cursor: auto;
-    height: $row-height;
-    line-height: $row-height;
-    overflow: hidden;
-    padding: 0 4px 0 5px;
-  }
+	/** Controller placement */
+	.c input[type=text] {
+		border: 0;
+		margin-top: 4px;
+		padding: 3px;
+		width: 100%;
+		float: right;
+	}
 
-  li.folder {
-    padding: 0;
-    border-left: $nest-margin solid rgba(0, 0, 0, 0);
+	/** Shorter number boxes when slider is present. */
+	.has-slider input[type=text] {
+		width: 30%;
 
-  }
+		/* display: none; */
+		margin-left: 0;
+	}
 
-  /** Folder names */
-  li.title {
-    cursor: pointer;
-    margin-left: -$nest-margin;
-  }
+	.slider {
+		float: left;
+		width: 66%;
+		margin-left: -5px;
+		margin-right: 0;
+		height: 19px;
+		margin-top: -19px;
+	}
 
-  /** Hides closed items */
-  .closed li:not(.title),
-  .closed ul li,
-  .closed ul li > * {
-    height: 0;
-    overflow: hidden;
-    border: 0;
-  }
+	.slider-fg {
+		height: 100%;
+	}
 
-  /** Controller row */
-  .cr {
-    clear: both;
-    padding-left: 3px;
-    height: $row-height;
-  }
+	.c input[type=checkbox] {
+		margin-top: 9px;
+	}
 
-  /** Name-half (left) */
-  .property-name {
-    cursor: default;
-    float: left;
-    clear: left;
-    width: 35%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+	.c select {
+		margin-top: 5px;
+	}
 
-  /** Controller-half (right) */
-  .c {
-    float: left;
-    width: 60%;
-  }
+	/** Ensure the entire boolean and function row shows a hand */
+	.cr.function,
+	.cr.function .property-name, /* Don't know why I need to be this explicit */
+	.cr.function *,
+	.cr.boolean,
+	.cr.boolean * {
+		cursor: pointer;
+	}
 
-  /** Controller placement */
-  .c input[type=text] {
-    border: 0;
-    margin-top: 4px;
-    padding: 3px;
-    width: 100%;
-    float: right;
-  }
+	.selector {
+		display: none;
+		position: absolute;
+		margin-left: -9px;
+		margin-top: 23px;
+		z-index: 10;
+	}
 
-  /** Shorter number boxes when slider is present. */
-  .has-slider input[type=text] {
-    width: 30%;
-    /*display: none;*/
-    margin-left: 0;
-  }
+	.c:hover .selector,
+	.selector.drag {
+		display: block;
+	}
 
-  .slider {
-    float: left;
-    width: 66%;
-    margin-left: -5px;
-    margin-right: 0;
-    height: 19px;
-    margin-top: -19px;
-  }
+	li.save-row {
+		padding: 0;
 
-  .slider-fg {
-    height: 100%;
-  }
+		.button {
+			display: inline-block;
+			padding: 0 6px;
+		}
+	}
 
-  .c input[type=checkbox] {
-    margin-top: 9px;
-  }
-
-  .c select {
-    margin-top: 5px;
-  }
-
-  /** Ensure the entire boolean and function row shows a hand */
-  .cr.function,
-  .cr.function .property-name, /* Don't know why I need to be this explicit */
-  .cr.function *,
-  .cr.boolean,
-  .cr.boolean * {
-    cursor: pointer;
-  }
-
-  .selector {
-    display: none;
-    position: absolute;
-    margin-left: -9px;
-    margin-top: 23px;
-    z-index: 10;
-  }
-
-  .c:hover .selector,
-  .selector.drag {
-    display: block;
-  }
-
-  li.save-row {
-
-    padding: 0;
-
-    .button {
-      display: inline-block;
-      padding: 0px 6px;
-    }
-
-  }
-
-  &.dialogue {
-    background-color: #222;
-    width: 460px;
-    padding: 15px;
-    font-size: 13px;
-    line-height: 15px;
-  }
-
+	&.dialogue {
+		background-color: #222;
+		width: 460px;
+		padding: 15px;
+		font-size: 13px;
+		line-height: 15px;
+	}
 }
 
 /* TODO Separate style and structure */
 #dg-new-constructor {
-  padding: 10px;
-  color: #222;
-  font-family: Monaco, monospace;
-  font-size: 10px;
-  border: 0;
-  resize: none;
-  box-shadow: inset 1px 1px 1px #888;
-  word-wrap: break-word;
-  margin: 12px 0;
-  display: block;
-  width: 440px;
-  overflow-y: scroll;
-  height: 100px;
-  position: relative;
+	padding: 10px;
+	color: #222;
+	font-family: Monaco, monospace;
+	font-size: 10px;
+	border: 0;
+	resize: none;
+	box-shadow: inset 1px 1px 1px #888;
+	word-wrap: break-word;
+	margin: 12px 0;
+	display: block;
+	width: 440px;
+	overflow-y: scroll;
+	height: 100px;
+	position: relative;
 }
 
 #dg-local-explain {
-  display: none;
-  font-size: 11px;
-  line-height: 17px;
-  border-radius: 3px;
-  background-color: #333;
-  padding: 8px;
-  margin-top: 10px;
-  code {
-    font-size: 10px;
-  }
+	display: none;
+	font-size: 11px;
+	line-height: 17px;
+	border-radius: 3px;
+	background-color: #333;
+	padding: 8px;
+	margin-top: 10px;
+
+	code {
+		font-size: 10px;
+	}
 }
 
 #dat-gui-save-locally {
-  display: none;
+	display: none;
 }

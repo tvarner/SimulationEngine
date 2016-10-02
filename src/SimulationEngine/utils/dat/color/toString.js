@@ -14,13 +14,13 @@
 import common from '../utils/common';
 
 export default function(color) {
-  if (color.a === 1 || common.isUndefined(color.a)) {
-    let s = color.hex.toString(16);
-    while (s.length < 6) {
-      s = '0' + s;
-    }
-    return '#' + s;
-  }
+	if (color.a === 1 || common.isUndefined(color.a)) {
+		let s = color.hex.toString(16);
+		while (s.length < 6) {
+			s = '0' + s;
+		}
+		return '#' + s;
+	}
 
-  return 'rgba(' + Math.round(color.r) + ',' + Math.round(color.g) + ',' + Math.round(color.b) + ',' + color.a + ')';
+	return 'rgba(' + Math.round(color.r) + ',' + Math.round(color.g) + ',' + Math.round(color.b) + ',' + color.a + ')';
 }

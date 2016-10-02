@@ -29,58 +29,58 @@ import common from '../utils/common';
  * @member dat.controllers
  */
 class OptionController extends Controller {
-  constructor(object, property, opts) {
-    super(object, property);
+	constructor(object, property, opts) {
+		super(object, property);
 
-    let options = opts;
+		let options = opts;
 
-    const _this = this;
+		const _this = this;
 
-    /**
-     * The drop down menu
-     * @ignore
-     */
-    this.__select = document.createElement('select');
+		/**
+		 * The drop down menu
+		 * @ignore
+		 */
+		this.__select = document.createElement('select');
 
-    if (common.isArray(options)) {
-      const map = {};
-      common.each(options, function(element) {
-        map[element] = element;
-      });
-      options = map;
-    }
+		if (common.isArray(options)) {
+			const map = {};
+			common.each(options, function(element) {
+				map[element] = element;
+			});
+			options = map;
+		}
 
-    common.each(options, function(value, key) {
-      const opt = document.createElement('option');
-      opt.innerHTML = key;
-      opt.setAttribute('value', value);
-      _this.__select.appendChild(opt);
-    });
+		common.each(options, function(value, key) {
+			const opt = document.createElement('option');
+			opt.innerHTML = key;
+			opt.setAttribute('value', value);
+			_this.__select.appendChild(opt);
+		});
 
-    // Acknowledge original value
-    this.updateDisplay();
+		// Acknowledge original value
+		this.updateDisplay();
 
-    dom.bind(this.__select, 'change', function() {
-      const desiredValue = this.options[this.selectedIndex].value;
-      _this.setValue(desiredValue);
-    });
+		dom.bind(this.__select, 'change', function() {
+			const desiredValue = this.options[this.selectedIndex].value;
+			_this.setValue(desiredValue);
+		});
 
-    this.domElement.appendChild(this.__select);
-  }
+		this.domElement.appendChild(this.__select);
+	}
 
-  setValue(v) {
-    const toReturn = super.setValue(v);
+	setValue(v) {
+		const toReturn = super.setValue(v);
 
-    if (this.__onFinishChange) {
-      this.__onFinishChange.call(this, this.getValue());
-    }
-    return toReturn;
-  }
+		if (this.__onFinishChange) {
+			this.__onFinishChange.call(this, this.getValue());
+		}
+		return toReturn;
+	}
 
-  updateDisplay() {
-    this.__select.value = this.getValue();
-    return super.updateDisplay();
-  }
+	updateDisplay() {
+		this.__select.value = this.getValue();
+		return super.updateDisplay();
+	}
 }
 
 export default OptionController;

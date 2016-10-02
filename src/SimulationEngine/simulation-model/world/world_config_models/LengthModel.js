@@ -3,14 +3,12 @@
 * 
 * 
 */
-import * as _ from 'lodash';
-
-var instance = null; 
+let instance = null; 
 
 export default class LengthModel { 
 
 	constructor() { 
-		if(!!!instance) { 
+		if(!instance) { 
 			this.init();
 			instance = this;
 		}

@@ -2,9 +2,17 @@
   "plugins": [ "stylelint-selector-bem-pattern"],
   "extends": "stylelint-config-standard",
   "rules": {
+    "indentation": "tab",
+    "number-leading-zero": null,
+    "property-no-unknown": [ true, {
+      "ignoreProperties": [
+        "composes"
+      ]
+    }],
+    "unit-whitelist": ["em", "rem", "s", "px", "%"],
     "at-rule-no-vendor-prefix": true,
     "media-feature-name-no-vendor-prefix": true,
-    "property-no-vendor-prefix": true,
+    "property-no-vendor-prefix": null,
     "selector-no-vendor-prefix": true,
     "value-no-vendor-prefix": true,
     "comment-empty-line-before": [ "always", {

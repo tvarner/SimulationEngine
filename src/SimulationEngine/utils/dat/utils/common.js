@@ -21,111 +21,111 @@ const ARR_SLICE = Array.prototype.slice;
  */
 
 const Common = {
-  BREAK: {},
+	BREAK: {},
 
-  extend: function(target) {
-    this.each(ARR_SLICE.call(arguments, 1), function(obj) {
-      for (const key in obj) {
-        if (!this.isUndefined(obj[key])) {
-          target[key] = obj[key];
-        }
-      }
-    }, this);
+	extend: function(target) {
+		this.each(ARR_SLICE.call(arguments, 1), function(obj) {
+			for (const key in obj) {
+				if (!this.isUndefined(obj[key])) {
+					target[key] = obj[key];
+				}
+			}
+		}, this);
 
-    return target;
-  },
+		return target;
+	},
 
-  defaults: function(target) {
-    this.each(ARR_SLICE.call(arguments, 1), function(obj) {
-      for (const key in obj) {
-        if (this.isUndefined(target[key])) {
-          target[key] = obj[key];
-        }
-      }
-    }, this);
+	defaults: function(target) {
+		this.each(ARR_SLICE.call(arguments, 1), function(obj) {
+			for (const key in obj) {
+				if (this.isUndefined(target[key])) {
+					target[key] = obj[key];
+				}
+			}
+		}, this);
 
-    return target;
-  },
+		return target;
+	},
 
-  compose: function() {
-    const toCall = ARR_SLICE.call(arguments);
-    return function() {
-      let args = ARR_SLICE.call(arguments);
-      for (let i = toCall.length - 1; i >= 0; i--) {
-        args = [toCall[i].apply(this, args)];
-      }
-      return args[0];
-    };
-  },
+	compose: function() {
+		const toCall = ARR_SLICE.call(arguments);
+		return function() {
+			let args = ARR_SLICE.call(arguments);
+			for (let i = toCall.length - 1; i >= 0; i--) {
+				args = [toCall[i].apply(this, args)];
+			}
+			return args[0];
+		};
+	},
 
-  each: function(obj, itr, scope) {
-    if (!obj) {
-      return;
-    }
+	each: function(obj, itr, scope) {
+		if (!obj) {
+			return;
+		}
 
-    if (ARR_EACH && obj.forEach && obj.forEach === ARR_EACH) {
-      obj.forEach(itr, scope);
-    } else if (obj.length === obj.length + 0) { // Is number but not NaN
-      let key;
-      let l;
-      for (key = 0, l = obj.length; key < l; key++) {
-        if (key in obj && itr.call(scope, obj[key], key) === this.BREAK) {
-          return;
-        }
-      }
-    } else {
-      for (const key in obj) {
-        if (itr.call(scope, obj[key], key) === this.BREAK) {
-          return;
-        }
-      }
-    }
-  },
+		if (ARR_EACH && obj.forEach && obj.forEach === ARR_EACH) {
+			obj.forEach(itr, scope);
+		} else if (obj.length === obj.length + 0) { // Is number but not NaN
+			let key;
+			let l;
+			for (key = 0, l = obj.length; key < l; key++) {
+				if (key in obj && itr.call(scope, obj[key], key) === this.BREAK) {
+					return;
+				}
+			}
+		} else {
+			for (const key in obj) {
+				if (itr.call(scope, obj[key], key) === this.BREAK) {
+					return;
+				}
+			}
+		}
+	},
 
-  defer: function(fnc) {
-    setTimeout(fnc, 0);
-  },
+	defer: function(fnc) {
+		setTimeout(fnc, 0);
+	},
 
-  toArray: function(obj) {
-    if (obj.toArray) return obj.toArray();
-    return ARR_SLICE.call(obj);
-  },
+	toArray: function(obj) {
+		if (obj.toArray) return obj.toArray();
+		return ARR_SLICE.call(obj);
+	},
 
-  isUndefined: function(obj) {
-    return obj === undefined;
-  },
+	isUndefined: function(obj) {
+		return obj === undefined;
+	},
 
-  isNull: function(obj) {
-    return obj === null;
-  },
+	isNull: function(obj) {
+		return obj === null;
+	},
 
-  isNaN: function(obj) {
-    return isNaN(obj);
-  },
+	isNaN: function(obj) {
+		return isNaN(obj);
+	},
 
-  isArray: Array.isArray || function(obj) {
-    return obj.constructor === Array;
-  },
+	isArray: Array.isArray || function(obj) {
+		return obj.constructor === Array;
+	},
 
-  isObject: function(obj) {
-    return obj === Object(obj);
-  },
+	isObject: function(obj) {
+		return obj === Object(obj);
+	},
 
-  isNumber: function(obj) {
-    return obj === obj + 0;
-  },
+	isNumber: function(obj) {
+		return obj === obj + 0;
+	},
 
-  isString: function(obj) {
-    return obj === obj + '';
-  },
+	isString: function(obj) {
+		return obj === obj + '';
+	},
 
-  isBoolean: function(obj) {
-    return obj === false || obj === true;
-  },
+	isBoolean: function(obj) {
+		return obj === false || obj === true;
+	},
 
-  isFunction: function(obj) {
-    return Object.prototype.toString.call(obj) === '[object Function]';
-  }
+	isFunction: function(obj) {
+		return Object.prototype.toString.call(obj) === '[object Function]';
+	}
 
 };
 

@@ -15,12 +15,12 @@ import Controller from './Controller';
 import common from '../utils/common';
 
 function numDecimals(x) {
-  const _x = x.toString();
-  if (_x.indexOf('.') > -1) {
-    return _x.length - _x.indexOf('.') - 1;
-  }
+	const _x = x.toString();
+	if (_x.indexOf('.') > -1) {
+		return _x.length - _x.indexOf('.') - 1;
+	}
 
-  return 0;
+	return 0;
 }
 
 /**
@@ -38,85 +38,85 @@ function numDecimals(x) {
  * @member dat.controllers
  */
 class NumberController extends Controller {
-  constructor(object, property, params) {
-    super(object, property);
+	constructor(object, property, params) {
+		super(object, property);
 
-    const _params = params || {};
+		const _params = params || {};
 
-    this.__min = _params.min;
-    this.__max = _params.max;
-    this.__step = _params.step;
+		this.__min = _params.min;
+		this.__max = _params.max;
+		this.__step = _params.step;
 
-    if (common.isUndefined(this.__step)) {
-      if (this.initialValue === 0) {
-        this.__impliedStep = 1; // What are we, psychics?
-      } else {
-        // Hey Doug, check this out.
-        this.__impliedStep = Math.pow(10, Math.floor(Math.log(Math.abs(this.initialValue)) / Math.LN10)) / 10;
-      }
-    } else {
-      this.__impliedStep = this.__step;
-    }
+		if (common.isUndefined(this.__step)) {
+			if (this.initialValue === 0) {
+				this.__impliedStep = 1; // What are we, psychics?
+			} else {
+				// Hey Doug, check this out.
+				this.__impliedStep = Math.pow(10, Math.floor(Math.log(Math.abs(this.initialValue)) / Math.LN10)) / 10;
+			}
+		} else {
+			this.__impliedStep = this.__step;
+		}
 
-    this.__precision = numDecimals(this.__impliedStep);
-  }
+		this.__precision = numDecimals(this.__impliedStep);
+	}
 
-  setValue(v) {
-    let _v = v;
+	setValue(v) {
+		let _v = v;
 
-    if (this.__min !== undefined && _v < this.__min) {
-      _v = this.__min;
-    } else if (this.__max !== undefined && _v > this.__max) {
-      _v = this.__max;
-    }
+		if (this.__min !== undefined && _v < this.__min) {
+			_v = this.__min;
+		} else if (this.__max !== undefined && _v > this.__max) {
+			_v = this.__max;
+		}
 
-    if (this.__step !== undefined && _v % this.__step !== 0) {
-      _v = Math.round(_v / this.__step) * this.__step;
-    }
+		if (this.__step !== undefined && _v % this.__step !== 0) {
+			_v = Math.round(_v / this.__step) * this.__step;
+		}
 
-    return super.setValue(_v);
-  }
+		return super.setValue(_v);
+	}
 
-  /**
-   * Specify a minimum value for <code>object[property]</code>.
-   *
-   * @param {Number} minValue The minimum value for
-   * <code>object[property]</code>
-   * @returns {dat.controllers.NumberController} this
-   */
-  min(v) {
-    this.__min = v;
-    return this;
-  }
+	/**
+	 * Specify a minimum value for <code>object[property]</code>.
+	 *
+	 * @param {Number} minValue The minimum value for
+	 * <code>object[property]</code>
+	 * @returns {dat.controllers.NumberController} this
+	 */
+	min(v) {
+		this.__min = v;
+		return this;
+	}
 
-  /**
-   * Specify a maximum value for <code>object[property]</code>.
-   *
-   * @param {Number} maxValue The maximum value for
-   * <code>object[property]</code>
-   * @returns {dat.controllers.NumberController} this
-   */
-  max(v) {
-    this.__max = v;
-    return this;
-  }
+	/**
+	 * Specify a maximum value for <code>object[property]</code>.
+	 *
+	 * @param {Number} maxValue The maximum value for
+	 * <code>object[property]</code>
+	 * @returns {dat.controllers.NumberController} this
+	 */
+	max(v) {
+		this.__max = v;
+		return this;
+	}
 
-  /**
-   * Specify a step value that dat.controllers.NumberController
-   * increments by.
-   *
-   * @param {Number} stepValue The step value for
-   * dat.controllers.NumberController
-   * @default if minimum and maximum specified increment is 1% of the
-   * difference otherwise stepValue is 1
-   * @returns {dat.controllers.NumberController} this
-   */
-  step(v) {
-    this.__step = v;
-    this.__impliedStep = v;
-    this.__precision = numDecimals(v);
-    return this;
-  }
+	/**
+	 * Specify a step value that dat.controllers.NumberController
+	 * increments by.
+	 *
+	 * @param {Number} stepValue The step value for
+	 * dat.controllers.NumberController
+	 * @default if minimum and maximum specified increment is 1% of the
+	 * difference otherwise stepValue is 1
+	 * @returns {dat.controllers.NumberController} this
+	 */
+	step(v) {
+		this.__step = v;
+		this.__impliedStep = v;
+		this.__precision = numDecimals(v);
+		return this;
+	}
 }
 
 export default NumberController;

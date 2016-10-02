@@ -44,11 +44,11 @@
   }
 }
 
-.main-view-logo {
-}
+.main-view-logo {}
 
 .main-view-logo > .logo-image { 
-	height: 11.8vh;
+	height: 7vh;
+    margin-left: 1vh;
 }
 
 .logo-image:hover {

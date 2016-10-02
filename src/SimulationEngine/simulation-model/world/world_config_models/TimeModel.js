@@ -3,13 +3,11 @@
 * //TODO: edit description
 * 
 */
-import * as _ from 'lodash';
-
-var instance = null;
+let instance = null;
 
 export default class TimeModel { 
 	constructor() { 
-		if (!!!instance) { 
+		if (!instance) { 
 			this.init();
 			instance = this;
 		}

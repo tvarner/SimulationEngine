@@ -14,10 +14,9 @@
 import NumberController from './NumberController';
 import dom from '../dom/dom';
 import css from '../utils/css';
-import styleSheet from '!style!css!sass!./NumberControllerSlider.scss';
 
 function map(v, i1, i2, o1, o2) {
-  return o1 + (o2 - o1) * ((v - i1) / (i2 - i1));
+	return o1 + (o2 - o1) * ((v - i1) / (i2 - i1));
 }
 
 /**
@@ -39,65 +38,66 @@ function map(v, i1, i2, o1, o2) {
  * @member dat.controllers
  */
 class NumberControllerSlider extends NumberController {
-  constructor(object, property, min, max, step) {
-    super(object, property, {min: min, max: max, step: step});
+	constructor(object, property, min, max, step) {
+		super(object, property, {min: min, max: max, step: step});
 
-    const _this = this;
+		const _this = this;
 
-    this.__background = document.createElement('div');
-    this.__foreground = document.createElement('div');
+		this.__background = document.createElement('div');
+		this.__foreground = document.createElement('div');
 
-    dom.bind(this.__background, 'mousedown', onMouseDown);
+		dom.bind(this.__background, 'mousedown', onMouseDown);
 
-    dom.addClass(this.__background, 'slider');
-    dom.addClass(this.__foreground, 'slider-fg');
+		dom.addClass(this.__background, 'slider');
+		dom.addClass(this.__foreground, 'slider-fg');
 
-    function onMouseDown(e) {
-      dom.bind(window, 'mousemove', onMouseDrag);
-      dom.bind(window, 'mouseup', onMouseUp);
+		function onMouseDown(e) {
+			dom.bind(window, 'mousemove', onMouseDrag);
+			dom.bind(window, 'mouseup', onMouseUp);
 
-      onMouseDrag(e);
-    }
+			onMouseDrag(e);
+		}
 
-    function onMouseDrag(e) {
-      e.preventDefault();
+		function onMouseDrag(e) {
+			e.preventDefault();
 
-      const offset = dom.getOffset(_this.__background);
-      const width = dom.getWidth(_this.__background);
+			const offset = dom.getOffset(_this.__background);
+			const width = dom.getWidth(_this.__background);
 
-      _this.setValue(
-        map(e.clientX, offset.left, offset.left + width, _this.__min, _this.__max)
-      );
+			_this.setValue(
+				map(e.clientX, offset.left, offset.left + width, _this.__min, _this.__max)
+			);
 
-      return false;
-    }
+			return false;
+		}
 
-    function onMouseUp() {
-      dom.unbind(window, 'mousemove', onMouseDrag);
-      dom.unbind(window, 'mouseup', onMouseUp);
-      if (_this.__onFinishChange) {
-        _this.__onFinishChange.call(_this, _this.getValue());
-      }
-    }
+		function onMouseUp() {
+			dom.unbind(window, 'mousemove', onMouseDrag);
+			dom.unbind(window, 'mouseup', onMouseUp);
+			if (_this.__onFinishChange) {
+				_this.__onFinishChange.call(_this, _this.getValue());
+			}
+		}
 
-    this.updateDisplay();
+		this.updateDisplay();
 
-    this.__background.appendChild(this.__foreground);
-    this.domElement.appendChild(this.__background);
-  }
+		this.__background.appendChild(this.__foreground);
+		this.domElement.appendChild(this.__background);
+	}
 
-  updateDisplay() {
-    const pct = (this.getValue() - this.__min) / (this.__max - this.__min);
-    this.__foreground.style.width = pct * 100 + '%';
-    return super.updateDisplay();
-  }
+	updateDisplay() {
+		const pct = (this.getValue() - this.__min) / (this.__max - this.__min);
+		this.__foreground.style.width = pct * 100 + '%';
+		return super.updateDisplay();
+	}
 }
 
 /**
  * Injects default stylesheet for slider elements.
  */
 NumberControllerSlider.useDefaultStyles = function() {
-  css.inject(styleSheet);
+	const styleSheet = require('./NumberControllerSlider.scss');
+	css.inject(styleSheet);
 };
 
 export default NumberControllerSlider;

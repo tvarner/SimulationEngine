@@ -1,6 +1,3 @@
-import * as _ from 'lodash';
-import * as THREE from 'three';
-
 export default class VariableInterval { 
 
 	constructor(engine) {
@@ -16,10 +13,10 @@ export default class VariableInterval {
 	runLoop(thisArg) { 
 		if (this.stopped) return;
 
-		var context = thisArg ? thisArg : this.engine;
-		var result = this.callback.call(context);
+		const context = thisArg ? thisArg : this.engine;
+		const result = this.callback.call(context);
 
-		if (typeof result == 'number') { 
+		if (typeof result === 'number') { 
 			if (result === 0) return; // <-- return 0 in order to not loop
 			this.interval = result;
 		}

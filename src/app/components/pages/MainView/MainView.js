@@ -10,10 +10,10 @@ import AboutPage from '../AboutPage/AboutPage';
 import ContactPageContainer from '../ContactPage/ContactPageContainer';
 
 // simulator components
-import SimulatorViewContainer from '../SimulatorView/SimulatorViewContainer'
-import SimulatorDataView from '../SimulatorDataView/SimulatorDataView'
-import LoadSimulationModalContainer from '../../modals/LoadSimulationModal/LoadSimulationModalContainer'
-import SaveSimulationModalContainer from '../../modals/SaveSimulationModal/SaveSimulationModalContainer'
+import SimulatorViewContainer from '../SimulatorView/SimulatorViewContainer';
+import SimulatorDataView from '../SimulatorDataView/SimulatorDataView';
+import LoadSimulationModalContainer from '../../modals/LoadSimulationModal/LoadSimulationModalContainer';
+import SaveSimulationModalContainer from '../../modals/SaveSimulationModal/SaveSimulationModalContainer';
 
 import SortCollectionsModalContainer from '../../modals/SortCollectionsModal/SortCollectionsModalContainer';
 import FullScreenContentModalContainer from '../../modals/FullScreenContentModal/FullScreenContentModalContainer';
@@ -51,11 +51,11 @@ const Application = React.createClass({
 			if (this.props.modals.activeModal === 'LOAD_SIMULATION_MODAL') {
 				return (
 					<LoadSimulationModalContainer />
-				)
+				);
 			} else if (this.props.modals.activeModal === 'SAVE_SIMULATION_MODAL') { 
 				return (
 					<SaveSimulationModalContainer />
-				)
+				);
 			}
 		}
 	},
@@ -86,11 +86,11 @@ const Application = React.createClass({
 		} else if (this.props.view === "SIMULATOR_VIEW") { 
 			return (
 				this._renderPage(<SimulatorViewContainer />)
-			)	
+			);
 		} else if (this.props.view === "SIMULATOR_DATA_VIEW") { 
 			return (
 				this._renderPage(<SimulatorDataView />)
-			)	
+			);	
 		}
 	},
 
@@ -105,7 +105,7 @@ const Application = React.createClass({
 		const contentHeader = (
 			<div style={{height: '100%', display: 'flex', alignItems: 'center'}}>
 				<div className={'main-view-logo'} onClick={this.props.logoButtonClick}>
-					<img role={"presentation"} className={'logo-image'} src={require('./../../../styles/assets/OfficialLogo.jpg')} />
+					<img role={"presentation"} className={'logo-image'} src={require('./../../../styles/assets/flower_of_life_bw.jpg')} />
 				</div>
 				{!this.props.sidebar.docked &&
 				<div className="main-menu-icon" onClick={this.props.menuButtonClick}>
