@@ -21,12 +21,12 @@ import * as Detector from './utils/Detector';
 
 // controls
 import buildOrbitControls from './controls/OrbitControls';
+import buildTransformControls from './controls/TransformControls'
 // import buildFlyControls from './controls/FlyControls';
 // import buildPointerLockControls from './controls/PointerLockControls';
 
 // loaders
-import buildColladaLoader from './loaders/ColladaLoader'; 
-import buildColladaLoader2 from './loaders/ColladaLoader2';
+import buildColladaLoader from './loaders/ColladaLoader';
 
 // world config params
 // import * as ConfigParams from '../simulation-model/world/world_config_models/ConfigParams';
@@ -65,8 +65,7 @@ export default class View {
 		//  Texture Loader: load materials
 		this.textureLoader = new THREE.TextureLoader();
 
-
-		buildColladaLoader2(THREE);
+		buildColladaLoader (THREE);
 		this.colladaLoader = new THREE.ColladaLoader();
 
 		// addEventListeners should be last scene init. function in initializeScene
@@ -92,7 +91,7 @@ export default class View {
 	}
 
 	initializeScene() {
-		if (this.mainSceneActivated === false) { 
+		if (this.mainSceneActivated === false) {
 			this.scene = new THREE.Scene;
 
 			this._initializeCameraLightsControls();
@@ -203,8 +202,9 @@ export default class View {
 	}
 
 	initializeControls(controlsId) {
-		// TODO: implement rest of controls 
-
+		// TODO: implement rest of controls
+		
+		buildTransformControls(THREE);
 		if (controlsId === 'orbit' || controlsId === undefined) { 
 			buildOrbitControls(THREE);
 			this.userControls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
@@ -269,7 +269,6 @@ export default class View {
 		// console.log(circle);
 		this.scene.add( circle );
 	}
-
 
 	addGrid() {
 		const size = 100, step = 1;
