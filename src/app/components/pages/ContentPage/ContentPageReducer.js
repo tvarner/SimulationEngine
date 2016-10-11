@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 function page(state = {
-	time: parseInt(Math.random() * 10, 10) + 1,
+	time: parseInt(Math.random() * 10) + 1,
 	accordion: false,
 	activePanelKey: [null],
 	text: 	'A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.',
@@ -22,7 +22,7 @@ function page(state = {
 		});
 	case 'RE_RENDER':
 		return Object.assign({}, state, {
-			time: parseInt(Math.random() * 10, 10) + 1
+			time: parseInt(Math.random() * 10) + 1
 		});
 	case 'SORT_BY':
 		if (action.sortBy === 'title') { 

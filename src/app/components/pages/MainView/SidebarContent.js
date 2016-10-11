@@ -76,8 +76,9 @@ const SidebarContent = React.createClass({
 				<MaterialTitlePanel title={getMenuButtonHeader()} style={style}>
 					<div className={'menu-content-container'} style={styles.content}>
 						<div key={1} className={'menu-button-link grow'} onClick={this.props.openHomePage} style={styles.sidebarLink}>Home</div>
-						<div key={2} className={'menu-button-link grow'} onClick={this.props.openAboutPage} style={styles.sidebarLink}>Theory</div>
-						<div key={3} className={'menu-button-link grow'} onClick={this.props.openContactPage} style={styles.sidebarLink}>Connect</div>
+						<div key={2} className={'menu-button-link grow'} onClick={this.props.openSimulatorView} style={styles.sidebarLink}>Simulator</div>						
+						<div key={3} className={'menu-button-link grow'} onClick={this.props.openAboutPage} style={styles.sidebarLink}>About</div>
+						<div key={4} className={'menu-button-link grow'} onClick={this.props.openContactPage} style={styles.sidebarLink}>Contact</div>
 						{this.renderPageSidebarContent()}
 					</div>
 				</MaterialTitlePanel>

@@ -18,13 +18,16 @@ import dat from '../../utils/dat/index';
 import TraversalGraph from '../../simulation-model/world/TraversalGraph/TraversalGraph';
 import RandomExamplePathModel from './RandomExamplePathModel';
 
-const Simulation = { 
-	name: "Example Simulation 1",
-	colorModel: ColorModel,
-	lengthModel: new LengthModel(),
-	timeModel: new TimeModel(),
-	defaultSystemTimeLimit: 60, // <-- in seconds
+const ExampleTraversalSimulation = function() { 
+	this.name = "Example Simulation 1";
+	this.colorModel = ColorModel;
+	this.lengthModel = new LengthModel();
+	this.timeModel = new TimeModel();
+	this.defaultSystemTimeLimit = 60; // <-- in seconds
+}
 
+
+ExampleTraversalSimulation.prototype = { 
 	initializeModel: function(stateSpace) {
 		// TODO: LOAD/BUILD MODELS SYNCHRONOUSLY!!!!! pg.48 Threejs cookbook
 		// Add optimization in general from books
@@ -137,7 +140,25 @@ const Simulation = {
 	updateStateSpace: function(t, stateSpace) {
 		// edit math on t (delta t) to control the system time increment per time step.
 		// t = 0.1 --> 0.1 [system] seconds
-		stateSpace.updateStateSpace(t);
+
+		// DES: apply atomic operations to simulation state space here
+
+		// Phase A & B: Check bounded events, and set next events
+		stateSpace._checkBoundedEvents();
+
+		// Phase C: check all default conditional events
+		stateSpace._checkConditionalEvents();
+
+/* Internal simulation models updates [START]: */
+
+		// update mobile agents
+		stateSpace.traversalGraph.updateStateSpace(t); // <-- delta in ms
+
+/* Internal simulation models updates [END]: */
+
+		// update system time for next iteration
+		stateSpace.systemTime += t;
+		stateSpace.systemTime = parseFloat(stateSpace.systemTime.toFixed(2)); // to correct for floating point addition errors
 	},
 
 	updateControls: function(stateSpace) { 
@@ -167,4 +188,4 @@ const Simulation = {
 	}
 };
 
-export default Simulation;
+export default ExampleTraversalSimulation;

@@ -27,28 +27,8 @@ const mapDispatchToProps = function(dispatch) {
 			dispatch(toggleSidebar(false));
 		},
 		
-		openContentPage: function() { 
-			dispatch(setView("CONTENT_PAGE"));
-			dispatch(toggleSidebar(false));
-		},
-
-		openPhotographyPage: function() { 
-			dispatch(setView("PHOTOGRAPHY_PAGE"));
-			dispatch(toggleSidebar(false));
-		},
-
-		openFilmPage: function() { 
-			dispatch(setView("FILM_PAGE"));
-			dispatch(toggleSidebar(false));
-		},
-
-		openFeaturePage: function() { 
-			dispatch(setView("FEATURE_PAGE"));
-			dispatch(toggleSidebar(false));
-		},
-
-		openReelPage: function() { 
-			dispatch(setView("REEL_PAGE"));
+		openSimulatorView: function() { 
+			dispatch(setView("SIMULATOR_VIEW"));
 			dispatch(toggleSidebar(false));
 		}
 	};

@@ -1,0 +1,26 @@
+.load-simulation-modal-overlay { 
+	background-color: rgba(0, 0, 0, 0.7);;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.load-simulation-modal { 
+	position: absolute;
+	height: 50vh;
+	background-color: #00E5EE;
+	color: white;
+	overflow                : auto;
+	-webkit-overflow-scrolling : touch;
+	border-radius           : 4px;
+	outline                 : none;
+	padding                 : 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}

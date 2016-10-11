@@ -9,20 +9,24 @@ const ContactPage = React.createClass({
 				<div className={'contact-page'}>
 					<div className={'page-header'}>Connect</div>
 					<div className={'page-content'}>
-						<div className={'left-content'}>
-							<div className={'image-container'}>
-								<img role={"presentation"} onClick={this.props.openReelPage} className={'contact-page-logo'} src={require('./../../../styles/assets/OfficialLogo.jpg')} />
-							</div>
-						</div>
-						<div className={'middle-content'}>
+						<div className={'right-content'}>
 							<div className={'text-container'}>
-								<a className={'contact-page-email-link'} href={"mailto:jonandrebex@gmail.com?Subject=Hello"} target="_top">email</a>
+								<a href={"mailto:thomas.g.varner@gmail.com?Subject=Hello"} target="_top">
+									<img role={"presentation"} className={'contact-page-instagram-icon'} src={require('./email-icon.png')}/>
+								</a>
 							</div>
 						</div>
 						<div className={'right-content'}>
 							<div className={'text-container'}>
-								<a href={'https://www.instagram.com/jon_bex/'}>
-									<img role={"presentation"} className={'contact-page-instagram-icon'} src={'http://www.galleriavittoria.com/images/social/instagram.gif'}/>
+								<a href={'https://www.linkedin.com/in/thomas-varner-b9847823?trk=hp-identity-name'}>
+									<img role={"presentation"} className={'contact-page-instagram-icon'} src={require('./linkedin-icon.png')}/>
+								</a>
+							</div>
+						</div>
+						<div className={'right-content'}>
+							<div className={'text-container'}>
+								<a href={'https://github.com/tvarner'}>
+									<img role={"presentation"} className={'contact-page-instagram-icon'} src={require('./github-icon.png')}/>
 								</a>
 							</div>
 						</div>

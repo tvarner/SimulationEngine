@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '../../utilComponents/react-modal/lib/index';
+import Modal from './../../utilComponents/react-modal/lib/index';
 
 import './styles.css';
 

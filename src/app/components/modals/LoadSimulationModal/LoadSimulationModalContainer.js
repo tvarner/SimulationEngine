@@ -3,7 +3,16 @@ import {
 	setView,
 	setActiveModal,
 	clearActiveModal
-} from '../../pages/MainView/MainViewActions';
+} from './../../pages/MainView/MainViewActions';
+
+import {
+	initializeSimulationGUI,
+	destroySimulationGUI,
+	clearSimulation,
+	setActiveSimulation,
+	initializeSimulation
+} from './../../pages/SimulatorView/SimulatorViewActions';
+
 import LoadSimulationModal from './LoadSimulationModal';
 
 const mapStateToProps = (state) => {
@@ -15,6 +24,22 @@ const mapStateToProps = (state) => {
 /* UI Interactions */
 const mapDispatchToProps = (dispatch) => {
 	return {
+		startSimulation: (simulationId) => {
+
+			// TODO: refactor this to a start simulation operation
+
+			// set Active Simulation must be called before initialize Simulation
+			// together these operations start a simulation
+
+			// TODO: clear previous simulation if it exists
+			
+			dispatch(destroySimulationGUI());
+			dispatch(clearSimulation(true));
+			dispatch(setActiveSimulation(simulationId));
+			dispatch(initializeSimulation());
+			dispatch(initializeSimulationGUI());
+		},
+
 		setView: (view) => { 
 			dispatch(setView(view));
 		}, 

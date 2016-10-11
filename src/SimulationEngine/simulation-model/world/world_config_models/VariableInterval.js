@@ -25,7 +25,7 @@ export default class VariableInterval {
 	}
 
 	stop() { 
-		this.stopped = false;
+		this.stopped = true;
 		window.clearTimeout(this.timeout);
 	}
 

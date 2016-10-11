@@ -3,7 +3,7 @@ import {
 	setView,
 	setActiveModal,
 	clearActiveModal
-} from '../../pages/MainView/MainViewActions';
+} from './../../pages/MainView/MainViewActions';
 import SaveSimulationModal from './SaveSimulationModal';
 
 const mapStateToProps = (state) => {

@@ -5,14 +5,13 @@ import {
 	setView
 } from '../MainView/MainViewActions';
 import {
-	_initializeSimulation,
-	_runSimulation,
-	_stopSimulation,
-	_clearSimulation,
-	_initializeSimulationGUI,
-	_destroySimulationGUI,
-	_setSimulationViewControls,
-	_setSceneElement
+	initializeSimulation,
+	playSimulation,
+	pauseSimulation,
+	clearSimulation,
+	initializeSimulationGUI,
+	destroySimulationGUI,
+	setSimulationViewControls
 } from './SimulatorViewActions';
 import SimulatorViewSidebarContent from './SimulatorViewSidebarContent';
 
@@ -28,8 +27,8 @@ const mapDispatchToProps = (dispatch) => {
 			if (ev !== undefined) { 
 				ev.preventDefault();
 			} 
+			dispatch(pauseSimulation());
 			dispatch(setActiveModal("LOAD_SIMULATION_MODAL"));
-			dispatch(_stopSimulation());
 			dispatch(toggleSidebar(false));
 		},
 
@@ -37,8 +36,8 @@ const mapDispatchToProps = (dispatch) => {
 			if (ev !== undefined) { 
 				ev.preventDefault();
 			}
+			dispatch(pauseSimulation());
 			dispatch(setActiveModal("SAVE_SIMULATION_MODAL"));
-			dispatch(_stopSimulation());
 			dispatch(toggleSidebar(false));
 		},
 
@@ -54,12 +53,7 @@ const mapDispatchToProps = (dispatch) => {
 			if (ev !== undefined) { 
 				ev.preventDefault();
 			}
-
-			dispatch(_initializeSimulation("TEMP_EXAMPLE"));
-			dispatch(_runSimulation());
-			
-			// initialize Gui after starting simulation
-			dispatch(_initializeSimulationGUI());
+			dispatch(playSimulation());
 			dispatch(toggleSidebar(false));
 		},
 
@@ -68,7 +62,7 @@ const mapDispatchToProps = (dispatch) => {
 			if (ev !== undefined) { 
 				ev.preventDefault();
 			} 
-			dispatch(_stopSimulation("TEMP_EXAMPLE"));
+			dispatch(pauseSimulation());
 			dispatch(toggleSidebar(false));
 		}, 
 
@@ -76,8 +70,9 @@ const mapDispatchToProps = (dispatch) => {
 			if (ev !== undefined) { 
 				ev.preventDefault();
 			}
-			dispatch(_destroySimulationGUI());
-			dispatch(_clearSimulation());
+			dispatch(pauseSimulation());
+			dispatch(destroySimulationGUI());
+			dispatch(clearSimulation(true));
 			dispatch(toggleSidebar(false));
 		},
 
@@ -85,8 +80,8 @@ const mapDispatchToProps = (dispatch) => {
 			if (ev !== undefined) { 
 				ev.preventDefault();
 			}
-			dispatch(_destroySimulationGUI());
-			dispatch(_stopSimulation("TEMP_EXAMPLE"));
+			dispatch(pauseSimulation());
+			dispatch(destroySimulationGUI());
 			dispatch(toggleSidebar(false));
 		},
 
@@ -94,14 +89,7 @@ const mapDispatchToProps = (dispatch) => {
 			if (ev !== undefined) { 
 				ev.preventDefault();
 			} 
-			dispatch(_setSimulationViewControls());
-		},
-
-		onSetSceneElement: (ev) => {
-			if (ev !== undefined) { 
-				ev.preventDefault();
-			} 
-			dispatch(_setSceneElement());
+			dispatch(setSimulationViewControls());
 		}
 	};
 };

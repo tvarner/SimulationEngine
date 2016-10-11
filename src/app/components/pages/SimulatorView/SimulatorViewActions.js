@@ -1,83 +1,87 @@
-export function _runSimulator() { 
+export function initializeSimulator() { 
 	return { 
-		type: 'RUN_SIMULATOR'
+		type: 'INITIALIZE_SIMULATOR'
 	};
 }
 
-export function _stopSimulator() {
+export function playSimulator() { 
+	return {
+		type: 'PLAY_SIMULATOR'
+	}
+}
+
+export function pauseSimulator() {
 	return { 
-		type: 'STOP_SIMULATOR'
+		type: 'PAUSE_SIMULATOR'
 	};
 }
 
-export function _exitSimulator() {
+export function exitSimulator() {
 	return {
 		type: 'EXIT_SIMULATOR'
 	};
 }
 
-export function _initializeSimulation(simulationId) {
+export function setActiveSimulation(simulationId) { 
 	return {
-		type: 'INITIALIZE_SIMULATION',
+		type: 'SET_ACTIVE_SIMULATION',
 		simulationId: simulationId
 	};
 }
 
-export function _runSimulation(simulationId) {
-	return { 
-		type: 'RUN_SIMULATION',
-		simulationId: simulationId
+export function initializeSimulation() {
+	return {
+		type: 'INITIALIZE_SIMULATION'
 	};
 }
 
-export function _stopSimulation(simulationId) {
+export function playSimulation() {
 	return { 
-		type: 'STOP_SIMULATION',
-		simulationId: simulationId
+		type: 'PLAY_SIMULATION'
 	};
 }
 
-export function _clearSimulation() {
+export function pauseSimulation() {
 	return { 
-		type: 'CLEAR_SIMULATION'
+		type: 'PAUSE_SIMULATION'
 	};
 }
 
-export function _loadSimulation(simulationId) {
+export function clearSimulation(reinitializeScene) {
 	return { 
+		type: 'CLEAR_SIMULATION',
+		reinitializeScene: reinitializeScene
+	};
+}
+
+export function loadSimulation(simulationId) {
+	return {
 		type: 'LOAD_SIMULATION',
 		simulationId: simulationId
 	};
 }
 
-export function _saveSimulation(simulationId) {
+export function saveSimulation() {
 	return { 
-		type: 'SAVE_SIMULATION',
-		simulationId: simulationId
+		type: 'SAVE_SIMULATION'
 	};
 }
 
-export function _initializeSimulationGUI() {
+export function initializeSimulationGUI() {
 	return {
 		type: 'INITIALIZE_SIMULATION_GUI'
 	};
 }
 
-export function _destroySimulationGUI() {
+export function destroySimulationGUI() {
 	return {
 		type: 'DESTROY_SIMULATION_GUI'
 	};
 }
 
-export function _setSimulationViewControls(controlsId) { 
+export function setSimulationViewControls(controlsId) { 
 	return { 
 		type: 'SET_SIMULATION_VIEW_CONTROLS',
 		controlsId: controlsId
-	};
-}
-
-export function _setSceneElement() { 
-	return {
-		type: 'SET_SCENE_ELEMENT'
 	};
 }

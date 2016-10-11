@@ -1,5 +1,4 @@
-export default class EventB { 
-
+export default class EventB {
 	constructor(engine) { 
 		this.engine = engine;
 		this.stateSpace = engine.stateSpace;

@@ -1,16 +1,16 @@
 .sort-collections-modal { 
 	position: absolute;
-    top: 10vh;
-    height: 20vh;
-    background-color: black;
-    left: 30px;
-    color: lightsteelblue;
-    overflow                : auto;
-    -webkit-overflow-scrolling : touch;
-    border-radius           : 4px;
-    outline                 : none;
-    padding                 : 10px;
-    display: flex;
+	top: 10vh;
+	height: 20vh;
+	background-color: black;
+	left: 30px;
+	color: lightsteelblue;
+	overflow                : auto;
+	-webkit-overflow-scrolling : touch;
+	border-radius           : 4px;
+	outline                 : none;
+	padding                 : 10px;
+	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 }    
@@ -18,21 +18,21 @@
 .sort-collections-modal-overlay { 
 	background-color: transparent;
 	position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
 }
 
 .sort-collections-modal-header {
 	font-size: 2vh;
-    font-weight: 600;
+	font-weight: 600;
 }
 
 .sort-collections-modal-link {
 	font-size: 2vh;
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .sort-collections-modal-link:hover {
@@ -60,11 +60,11 @@
  */
 @media all and (max-device-width: 769px) and (max-device-height: 1024px) and (orientation:portrait) {
 	.sort-collections-modal { 
-	    position: absolute;
-	    top: 10vh;
-	    background-color: black;
-	    left: 30px;
-	    color: lightsteelblue;
+		position: absolute;
+		top: 10vh;
+		background-color: black;
+		left: 30px;
+		color: lightsteelblue;
 	}
 }
 
@@ -73,11 +73,11 @@
  */
 @media all and (max-device-width: 769px) and (max-device-height: 1024px) and (orientation:landscape) {
 	.sort-collections-modal { 
-	    position: absolute;
-	    top: 10vh;
-	    background-color: black;
-	    left: 30px;
-	    color: lightsteelblue;
+		position: absolute;
+		top: 10vh;
+		background-color: black;
+		left: 30px;
+		color: lightsteelblue;
 	}
 }
 
@@ -88,10 +88,10 @@
 @media screen and (max-device-width: 415px) and (orientation:portrait) {
 	.sort-collections-modal {
 		position: absolute;
-	    top: 10vh;
-	    background-color: black;
-	    left: 30px;
-	    color: lightsteelblue;
+		top: 10vh;
+		background-color: black;
+		left: 30px;
+		color: lightsteelblue;
 	}
 }
 
@@ -101,10 +101,10 @@
  */
 @media screen and (max-device-width: 415px) and (orientation:landscape) {
 	.sort-collections-modal {
-	    position: absolute; 
-	    top: 10vh;
-	    background-color: black;
-	    left: 30px;
-	    color: lightsteelblue;
+		position: absolute; 
+		top: 10vh;
+		background-color: black;
+		left: 30px;
+		color: lightsteelblue;
 	}
 }

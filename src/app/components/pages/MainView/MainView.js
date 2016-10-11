@@ -50,11 +50,11 @@ const Application = React.createClass({
 			}
 			if (this.props.modals.activeModal === 'LOAD_SIMULATION_MODAL') {
 				return (
-					<LoadSimulationModalContainer />
+					<LoadSimulationModalContainer data={this.props.modals.activeModalProps} />
 				);
 			} else if (this.props.modals.activeModal === 'SAVE_SIMULATION_MODAL') { 
 				return (
-					<SaveSimulationModalContainer />
+					<SaveSimulationModalContainer data={this.props.modals.activeModalProps} />
 				);
 			}
 		}

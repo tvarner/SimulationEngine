@@ -46,14 +46,14 @@ function modals(state = {
 }, action) {
 	switch(action.type) { 
 	case 'SET_ACTIVE_MODAL':
-		if (action.modal === "SORT_COLLECTIONS_MODAL") { 
+		if (action.modal === "LOAD_SIMULATION_MODAL") { 
 			return Object.assign({}, state, {
-				activeModal: 'SORT_COLLECTIONS_MODAL',
+				activeModal: 'LOAD_SIMULATION_MODAL',
 				activeModalProps: action.modalProps
 			});
-		} else if (action.modal === "FULL_SCREEN_CONTENT_MODAL") { 
+		} else if (action.modal === "SAVE_SIMULATION_MODAL") { 
 			return Object.assign({}, state, {
-				activeModal: 'FULL_SCREEN_CONTENT_MODAL',
+				activeModal: 'SAVE_SIMULATION_MODAL',
 				activeModalProps: action.modalProps
 			});
 		} else { 

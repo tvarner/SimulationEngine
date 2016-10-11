@@ -21,7 +21,7 @@ import * as Detector from './utils/Detector';
 
 // controls
 import buildOrbitControls from './controls/OrbitControls';
-import buildTransformControls from './controls/TransformControls'
+import buildTransformControls from './controls/TransformControls';
 // import buildFlyControls from './controls/FlyControls';
 // import buildPointerLockControls from './controls/PointerLockControls';
 
@@ -41,14 +41,123 @@ import Stats from 'stats.js';
 
 export default class View {
 	constructor() {
-		this.initialize();
-	}
+		buildTransformControls(THREE);
+		buildOrbitControls(THREE);
+		buildColladaLoader(THREE);
 
-	// initialize View state
-	initialize() {
+		//  Texture Loader: load materials
+		this.textureLoader = new THREE.TextureLoader();
+		this.colladaLoader = new THREE.ColladaLoader();
+
+
+		// initialize View state
 		// Any View configuration prior to the loading of the scene is done here.
 		this.renderLoopActive = false;
-		this.mainSceneActivated = false;
+		this.mainSceneInitialized = false;
+	}
+
+	initializeScene() {
+		// implement single scene here?????
+		this.scene = new THREE.Scene;
+
+		// add simulation view utils
+		// this.addAxis(30);
+		this.addGrid();
+
+		// set mainSceneInitialized flag to true
+		this.mainSceneInitialized = true;
+	}
+
+	clearScene(reinitializeScene) {
+		// clearing the scene is removing all references to previously defined scene objects and 
+		// reinitializing the scene
+
+		// remove all children from the scene. The scene itself is an object3D and root container of all Object3D
+		// this.scene.children = [];
+
+		let numCalls = 0;
+		let numGeoDisposals = 0;
+		let numMatDisposals = 0;
+		let numMatGeoDisposals = 0;
+		let numMeshGeoDisposals = 0;
+		let numMeshMatDisposals = 0;
+
+		const disposeChildrenFn = function(object) { 
+			if (object.children) {
+				if (object.children.length > 0) { 
+					object.children.map(disposeChildrenFn.bind(this));
+				}
+			}
+
+			this.scene.remove(object);
+
+			if (object.geometry) { 
+				object.geometry.dispose();
+
+				numGeoDisposals++;
+			}
+
+			if (object.material) {
+				if (object.material.children) { 
+					if (object.material.children.length > 0) { 
+						object.material.children.map(disposeChildrenFn.bind(this));
+					}
+				}
+
+				if (object.material.geometry) { 
+					object.material.geometry.dispose();
+
+					numMatGeoDisposals++;
+				}
+
+				if (object.material.map) { 
+					object.material.map.dispose();
+				}
+
+				object.material.dispose();
+				numMatDisposals++;
+			}
+			if (object.mesh) {
+				if (object.mesh.children) {
+					if (object.mesh.children.length > 0) { 
+						object.mesh.children.map(disposeChildrenFn.bind(this));
+					}
+				}
+				if (object.mesh.geometry) { 
+					object.mesh.geometry.dispose();
+
+					numMeshGeoDisposals++;
+				}
+				if (object.mesh.material) {
+					if (object.mesh.material.map) { 
+						object.mesh.material.map.dispose();
+					}
+					object.mesh.material.dispose();
+					numMeshMatDisposals++;
+				}
+			}
+
+			numCalls++;
+		}
+
+		// recursively remove all object3ds:
+		while (this.scene.children.length > 0) { 
+			this.scene.children.map(disposeChildrenFn.bind(this));
+		}
+
+		// set previously defined camera, lights, and controls to undefined
+		this.camera = undefined;
+		this.light = undefined;
+		this.userControls = undefined;
+
+		// set mainSceneInitialized flag to false, since the main scene is being destroyed.
+		this.mainSceneInitialized = false;
+
+		this._clearRenderer();
+
+		if (reinitializeScene) {
+			this.startRenderLoop();
+		}
 	}
 
 	_initializeRenderer() { 
@@ -62,16 +171,10 @@ export default class View {
 		this.renderer.shadowMapSoft = true;
 		this.renderer.setPixelRatio( window.devicePixelRatio );
 
-		//  Texture Loader: load materials
-		this.textureLoader = new THREE.TextureLoader();
-
-		buildColladaLoader (THREE);
-		this.colladaLoader = new THREE.ColladaLoader();
-
-		// addEventListeners should be last scene init. function in initializeScene
 		this.addEventListeners();
 		
-		document.getElementById("simulator").appendChild(this.renderer.domElement);
+		// remove these chidren in clearScene()
+		document.getElementById("simulationEngine").appendChild(this.renderer.domElement);
 		
 		this.stats = new Stats();
 		this.stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
@@ -81,132 +184,70 @@ export default class View {
 		this.stats.dom.style.bottom = '0px';
 		this.stats.dom.style.right = '0px';
 
-		document.getElementById("simulator").appendChild( this.stats.dom );
+		document.getElementById("simulationEngine").appendChild(this.stats.dom);
+	}
+
+	_clearRenderer() { 
+		this.removeEventListeners();
+
+		// remove these chidren in clearScene()
+		document.getElementById("simulationEngine").removeChild(this.renderer.domElement);
+		document.getElementById("simulationEngine").removeChild(this.stats.dom);
+
+		this.Detector = undefined;
+		this.renderer = undefined;
+		this.stats = undefined;
 	}
 
 	_initializeCameraLightsControls() { 
-		this.initializeCamera();
-		this.initializeLights();
-		this.initializeControls();
+		this._initializeCamera();
+		this._initializeLights();
+		this._initializeControls();
 	}
 
-	initializeScene() {
-		if (this.mainSceneActivated === false) {
-			this.scene = new THREE.Scene;
+	_initializeCamera() {
+		if (!this.camera) { 
+			// create a new camera
+			this.camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 1000);
 
-			this._initializeCameraLightsControls();
+			// add camera to scene
+			this.scene.add(this.camera);
 
-			// add simulation view utils
-			// this.addAxis(30);
-			this.addGrid();
+			// set default position of camera or last camera position
+			if (this.lastCameraPosition) { 
+				this.camera.position.set(this.lastCameraPosition.x, this.lastCameraPosition.y, this.lastCameraPosition.z);
+			} else { 
+				this.camera.position.set(40, 40, 37);
+			}
 
-			// set mainSceneActivated flag to true
-			this.mainSceneActivated = true;
-			this.renderLoopActive = false;
+			// set the default orientation of the camera (which is the origin position of the scene)
+			this.camera.lookAt(this.scene.position);
 		}
 	}
 
-	render() {
-/* SIMULATION VIEW UPDATE LOGIC [START] */
-		if (this.mainSceneActivated === true) {
-			this.checkEvents();
-			this.updateScene();
-			this._render();
-			this.stats.update();
-		}
-/* SIMULATION VIEW UPDATE LOGIC [END] */
-	}
-
-	_render() {
-		if (this.mainSceneActivated === true && this.renderLoopActive === true) { 
-			this.stats.begin();
-			this.userControls.update();
-			this.renderer.render(this.scene, this.camera); // render the scene
-			this.stats.end();
-
-			requestAnimationFrame(this.render.bind(this));
+	_initializeLights() {
+		if (!this.light) { 
+			/* Lights */
+			this.light = new THREE.DirectionalLight( 0xFFFFFF );
+			this.light.position.set( 20, 20, -15 );
+			this.light.target.position.copy( this.scene.position );
+			this.light.castShadow = true;
+			this.light.shadow.camera.left = -150;
+			this.light.shadow.camera.top = -150;
+			this.light.shadow.camera.right = 150;
+			this.light.shadow.camera.bottom = 150;
+			this.light.shadow.camera.near = 20;
+			this.light.shadow.camera.far = 400;
+			this.light.shadow.bias = -.0001;
+			this.light.shadow.mapSize.width = this.light.shadow.mapSize.height = 2048;
+			// this.light.shadowDarkness = .7;
+			this.scene.add( this.light );
 		}
 	}
 
-	startRenderLoop() {
-		this._initializeRenderer();
-
-		if (this.mainSceneActivated === false) {    // <-- so that scene isn't re-created when user navigates back to simulator
-			// initialize simulation view
-			this.initializeScene();
-		} else { 
-			this._initializeCameraLightsControls();
-		}
-
-		if (this.mainSceneActivated === true && this.renderLoopActive === false) {
-			// console.log('STARTING RENDER LOOP [IN VIEW]')
-
-			// set renderLoopActive flag to true
-			this.renderLoopActive = true;
-
-			// start render loop
-			this.render();
-		}
-	}
-
-	stopRenderLoop() {
-		if (this.mainSceneActivated === true && this.renderLoopActive === true) {
-			// console.log('STOPPING RENDER LOOP [IN VIEW]')
-			// set renderLoopActive flag to false 
-			this.renderLoopActive = false;
-		}
-	}
-
-	checkEvents() { 
-		// TODO
-	}
-
-	updateScene() { 
-		// TODO
-	}
-
-	initializeCamera() {
-		let position = undefined;
-		if (this.camera) { 
-			position = this.camera.position.clone();
-		}
-
-		this.camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 1000);
-		
-		if (position !== undefined) { 
-			this.camera.position.copy(position);
-		} else { 
-			this.camera.position.set(40, 40, 37);
-		}
-
-		this.camera.lookAt(this.scene.position);
-		this.scene.add(this.camera);
-	}
-
-	initializeLights() {
-		/* Lights */
-		this.light = new THREE.DirectionalLight( 0xFFFFFF );
-		this.light.position.set( 20, 20, -15 );
-		this.light.target.position.copy( this.scene.position );
-		this.light.castShadow = true;
-		this.light.shadow.camera.left = -150;
-		this.light.shadow.camera.top = -150;
-		this.light.shadow.camera.right = 150;
-		this.light.shadow.camera.bottom = 150;
-		this.light.shadow.camera.near = 20;
-		this.light.shadow.camera.far = 400;
-		this.light.shadow.bias = -.0001;
-		this.light.shadow.mapSize.width = this.light.shadow.mapSize.height = 2048;
-		// this.light.shadowDarkness = .7;
-		this.scene.add( this.light );
-	}
-
-	initializeControls(controlsId) {
+	_initializeControls(controlsId) {
 		// TODO: implement rest of controls
-		
-		buildTransformControls(THREE);
-		if (controlsId === 'orbit' || controlsId === undefined) { 
-			buildOrbitControls(THREE);
+		if (controlsId === 'orbit' || controlsId === undefined) {
 			this.userControls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
 			// controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
 			this.userControls.enableDamping = true;
@@ -221,6 +262,71 @@ export default class View {
 		}
 	}
 
+	render() {
+		/* SIMULATION VIEW UPDATE LOGIC [START] */
+
+		if (this.mainSceneInitialized === true && this.renderLoopActive === true) {
+			this.stats.begin();
+			
+			// update the scene
+			this.checkEvents();
+			this.updateScene();
+			this.userControls.update();
+
+			// render the scene
+			this.renderer.render(this.scene, this.camera); 
+			
+			this.stats.end();
+
+			requestAnimationFrame(this.render.bind(this));
+		}
+
+		/* SIMULATION VIEW UPDATE LOGIC [END] */
+	}
+
+	startRenderLoop() {
+		// initialize renderer
+		// Note on this: the idea is not initialize the renderer independently of the scene.
+		// initializing the renderer indep. Allows one to maintain the WebGL context after
+		// clearing and reinitializing the scene, without having to create an entirely new
+		// WebGL context when the scene is repurposed/reinitialized.
+		// But currently dealing with a hard to find memory leak. Even after clearing the scene
+		// and disposing of geometries, materials.
+		// So the renderer is reinitialized here. 
+		this._initializeRenderer();
+
+		// <-- so that scene isn't re-created when user navigates back to simulator
+		if (this.mainSceneInitialized === false) {
+			// initialize scene (simulation view)
+			this.initializeScene();
+		}
+
+		this._initializeCameraLightsControls();
+
+debugger;
+
+		if (this.mainSceneInitialized === true && this.renderLoopActive === false) {
+			// start render loop
+			this.renderLoopActive = true;
+			this.render();
+		}
+	}
+
+	stopRenderLoop() {
+		if (this.mainSceneInitialized === true && this.renderLoopActive === true) {
+			// set renderLoopActive flag to false 
+			this.renderLoopActive = false;
+		}
+	}
+
+	checkEvents() { 
+		// TODO
+	}
+
+	updateScene() {
+		this.lastCameraPosition = this.camera.position;
+	}
+
 	addEventListeners() {
 		// Add window resize logic
 		const onWindowResize = () => {
@@ -229,7 +335,11 @@ export default class View {
 			this.camera.updateProjectionMatrix();
 		};
 		this.onWindowResize = onWindowResize.bind(this);
-		window.addEventListener( 'resize', this.onWindowResize, false );
+		window.addEventListener('resize', this.onWindowResize, false);
+	}
+
+	removeEventListeners() { 
+		window.removeEventListener('resize', this.onWindowResize, false);
 	}
 
 	addAxis(AXIS_LENGTH) {
@@ -312,7 +422,6 @@ export default class View {
 		ground.rotation.x = -Math.PI / 2;
 		ground.receiveShadow = true;
 		this.scene.add( ground );
-
 
 		for ( let i = 0; i < 50; i++ ) {
 			const size = Math.random() * 2 + .5;

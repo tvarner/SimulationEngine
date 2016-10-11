@@ -6,19 +6,20 @@ const SimulatorView = React.createClass({
 
 	componentDidMount() {
 		// load and run Simulation Engine and scene here:
-		this.props.onRunSimulator();
+		this.props.onPlaySimulator();
 	},
 
 	componentWillUnmount() {
 		// clean up scene here:
 		this.props.onNavigateFromSimulator();
 		
+		// debugger;
 		// exit Simulation Engine if simulator.running flag set to false
 	},
 
 	render() {
 		return(
-			<div id="simulator" className={this.props.simulator.sceneElement} />
+			<div id={this.props.simulationEngine.sceneElement} className={this.props.simulationEngine.sceneElement} />
 		);
 	}
 });

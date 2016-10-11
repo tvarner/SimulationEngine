@@ -108,7 +108,6 @@ export default class StateSpace {
 			};
 			_.each(this.conditionalEvents, _conditionalCheckFn.bind(this));
 		} else if (!this.boundedEvents) {
-
 			// throw new Error("Simulation cannot run without conditional and bounded events");
 		}
 	}

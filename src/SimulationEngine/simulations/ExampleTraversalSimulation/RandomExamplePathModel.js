@@ -297,24 +297,7 @@ export default class RandomExamplePathModel extends PathTraversalModel {
 									// get lane 1, and lane 0 exit counter
 									// const lane1 = traversalGraph.getLane("lane 1");
 
-
-
-
-
-
-
-
-
-									// will not work. cannot use position of node to find exit counter
 									const lane1tolane2ExitPosition = traversalGraph.getNode("lattice1_2_2_2").pathPosition;
-
-
-
-
-
-
-
-
 
 									// this normalized exit lane counter needs to be cached. expensive operation
 									const lane1tolane2ExitCounter = traversalGraph.getNormalizedLaneExitCounter("lane 1", lane1tolane2ExitPosition);

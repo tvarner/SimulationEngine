@@ -3,10 +3,10 @@ import {
 	setView,
 	setActiveModal,
 	clearActiveModal
-} from '../../pages/MainView/MainViewActions';
+} from './../../pages/MainView/MainViewActions';
 import { 
 	sortBy
-} from '../../pages/ContentPage/ContentPageActions';
+} from './../../pages/ContentPage/ContentPageActions';
 import SortCollectionsModal from './SortCollectionsModal';
 
 const mapStateToProps = (state) => {

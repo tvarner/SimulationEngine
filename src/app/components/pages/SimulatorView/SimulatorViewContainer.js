@@ -1,50 +1,52 @@
 import { connect } from 'react-redux';
 import {
-	_runSimulator,
-	_stopSimulator,
-	_exitSimulator,
-	_stopSimulation,
-	_destroySimulationGUI
+	initializeSimulator,
+	playSimulator,
+	pauseSimulator,
+	exitSimulator,
+	destroySimulationGUI,
+	initializeSimulationGUI
 } from './SimulatorViewActions';
 import SimulatorView from './SimulatorView';
 
 const mapStateToProps = (state) => {
 	return {
-		simulator: state.pages.simulatorView.simulator
+		simulationEngine: state.pages.simulatorView.simulationEngine
 	};
 };
 
 /* UI Interactions */
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onRunSimulator: (ev) => {
+		onPlaySimulator: (ev) => {
 			if (ev !== undefined) { 
 				ev.preventDefault();
 			}
-			dispatch(_runSimulator());
+			dispatch(initializeSimulator());
+			dispatch(playSimulator());
+			dispatch(initializeSimulationGUI());
 		},
 
-		onNavigateFromSimulator: (ev) => { 
-			if (ev !== undefined) { 
-				ev.preventDefault();
-			}
-			dispatch(_stopSimulation());
-			dispatch(_stopSimulator());
-			dispatch(_destroySimulationGUI());
-		},
-
-		onStopSimulator: (ev) => {
+		onPauseSimulator: (ev) => {
 			if (ev !== undefined) { 
 				ev.preventDefault();
 			} 
-			dispatch(_stopSimulator());
+			dispatch(pauseSimulator());
 		},
 
 		onExitSimulator: (ev) => { 
 			if (ev !== undefined) { 
 				ev.preventDefault();
 			}
-			dispatch(_exitSimulator());		
+			dispatch(exitSimulator());		
+		},
+
+		onNavigateFromSimulator: (ev) => { 
+			if (ev !== undefined) { 
+				ev.preventDefault();
+			}
+			dispatch(destroySimulationGUI());
+			dispatch(pauseSimulator());
 		}
 	};
 };

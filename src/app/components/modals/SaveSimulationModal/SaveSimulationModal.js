@@ -1,5 +1,7 @@
 import React from 'react';
-import Modal from '../../utilComponents/react-modal/lib/index';
+import Modal from './../../utilComponents/react-modal/lib/index';
+
+import './styles.css';
 
 export default class LoadSimulationModel extends React.Component {
 	render () {
@@ -7,22 +9,14 @@ export default class LoadSimulationModel extends React.Component {
 
 		return (
 			<Modal
-				style={{
-					overlay: {
-						backgroundColor: 'papayawhip'
-					},
-					content: {
-						color: 'lightsteelblue'
-					}
-				}}
+				className={'save-simulation-modal'}
+				overlayClassName={'save-simulation-modal-overlay'}
 				isOpen={true}
 				onRequestClose={_onRequestClose}
 			>
 				<h1>Save Simulation Modal</h1>
-				<h3>Styled Using Inline Styles</h3>
+				<div>TODO ;)</div>
 				<button onClick={this.props.clearActiveModal}>Close</button>
-				<input />
-				<input />
 			</Modal>
 		);
 	}

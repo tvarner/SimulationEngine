@@ -2,25 +2,26 @@
 // import * as THREE from 'three';
 // import TimeModel from '../simulation-model/world/world_config_models/TimeModel';
 // import dat from '../utils/dat/index';
+import StateSpace from './../simulation-model/StateSpace';
 import VariableInterval from '../simulation-model/world/world_config_models/VariableInterval';
 
 export default class Engine { 
-	constructor() {
-		this.initialize();
-	}
+	constructor() {}
 
-	initialize() { 
+	initializeSimulation(simulation, view) {
+		// initialize necessary engine params for each new general simulation
 		this.eventLog = [];
 		this.currentEvent;
 		this.previousEvent;
-		this.variableInterval = new VariableInterval(this);    
-	}
+		this.variableInterval = new VariableInterval(this);  
 
-	initializeModel(stateSpace, simulation) {
-		this.initialize();
-		this.stateSpace = stateSpace;
+		// initialize simulation state space  
+		this.stateSpace = new StateSpace();
+		this.stateSpace.initialize(/* stateSpaceModel */); // pass a state space model here (optional)
+		this.stateSpace.setView(view); // pass a view to the model for reference
+		
 		this.simulation = simulation;
-		this.simulation.initializeModel(this.stateSpace);
+		this.simulation.initializeModel(this.stateSpace);	
 	}
 
 	// refer to initializeModel above
@@ -79,14 +80,14 @@ export default class Engine {
 		// Update simulation model END: *************************
 	}
 
-	_updateControls() {
-		this.simulation.updateControls(this.stateSpace);
-	}
 
 	_updateStateSpace() { 
 		this.simulation.updateStateSpace(this.simulation.timeModel.AGENT_UPDATE_FREQUENCY, this.stateSpace);
 	}
 
+	_updateControls() {
+		this.simulation.updateControls(this.stateSpace);
+	}
 	// insert and configure dat.GUI AFTER model is initialized (this.initializeModel)
 	// for primary user view
 	initializeControls() {
@@ -99,14 +100,32 @@ export default class Engine {
 		}
 	}
 
-	runSimulation() {
+	playSimulation() {
 		this._setSimulationUpdateFunction();
 		// start simulation by starting the execution of the variable interval
 		this.variableInterval.start();
 	}
 
-	stopSimulation() { 
+	pauseSimulation() {
+		// pause simulation by stopping the execution of the variable interval
 		this.variableInterval.stop();
+	}
+
+	clearSimulation(reinitializeScene) {
+		// pause simulation (stop variable interval)
+		this.pauseSimulation();
+
+		// remove all simulation specific scene objects
+		// reinitialize scene with default scene objects
+		this.clearScene(reinitializeScene);
+
+		// clear simulation and state space
+		this.stateSpace = undefined;
+		this.simulation = undefined;
+	}
+
+	clearScene(reinitializeScene) {
+		this.stateSpace.view.clearScene(reinitializeScene);
 	}
 
 	// immediately executes an event
@@ -148,7 +167,6 @@ export default class Engine {
 
 	// processes and packages eventLog and other data
 	generateSimulationReport(reportGeneratorFunction) {
-		// debugger;
 		// console.log("Simulation report: ");
 		// console.log(this.eventLog);
 

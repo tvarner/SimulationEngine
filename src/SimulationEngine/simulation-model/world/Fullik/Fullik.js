@@ -565,8 +565,14 @@ Fullik.Joint.prototype = {
 	validateAngle:function( angle ) {
 		let _angle = angle;
 
-		if( _angle < Fullik.MIN_ANGLE_DEGS ) { _angle = Fullik.MIN_ANGLE_DEGS; console.log( '! min _angle is '+ Fullik.MIN_ANGLE_DEGS ); }
-		if( _angle > Fullik.MAX_ANGLE_DEGS ) { _angle = Fullik.MAX_ANGLE_DEGS; console.log( '! max _angle is '+ Fullik.MAX_ANGLE_DEGS ); }
+		if( _angle < Fullik.MIN_ANGLE_DEGS ) { 
+			_angle = Fullik.MIN_ANGLE_DEGS; 
+			// console.log( '! min _angle is '+ Fullik.MIN_ANGLE_DEGS ); 
+		}
+		if( _angle > Fullik.MAX_ANGLE_DEGS ) { 
+			_angle = Fullik.MAX_ANGLE_DEGS; 
+			// console.log( '! max _angle is '+ Fullik.MAX_ANGLE_DEGS ); 
+		}
 
 		return _angle;
 	},
