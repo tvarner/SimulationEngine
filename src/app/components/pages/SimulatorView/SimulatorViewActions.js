@@ -7,7 +7,7 @@ export function initializeSimulator() {
 export function playSimulator() { 
 	return {
 		type: 'PLAY_SIMULATOR'
-	}
+	};
 }
 
 export function pauseSimulator() {

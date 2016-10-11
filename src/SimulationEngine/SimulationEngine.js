@@ -72,7 +72,7 @@ class SimulationEngine {
 	}
 
 	setSimulationEngineUserControls() { 
-		//TODO 
+		// TODO 
 	}
 
 
@@ -104,7 +104,7 @@ class SimulationEngine {
 				this.engine.initializeSimulation(this.activeSimulation, this.view);
 				this.cleared = false;
 			} else { 
-				console.warn('Simulation Engine must have an active simulation before initializing simulation')
+				console.warn('Simulation Engine must have an active simulation before initializing simulation');
 			}
 		} else { 
 			console.warn('Simulation Engine must be initialized before initializing simulation');
@@ -126,7 +126,7 @@ class SimulationEngine {
 			if (this.activeSimulation) {
 				this.engine.playSimulation();
 			} else { 
-				console.warn('Simulation Engine must have an active simulation before playing simulation')
+				console.warn('Simulation Engine must have an active simulation before playing simulation');
 			}
 		} else { 
 			console.warn('Simulation Engine must be initialized before playing simulation');
@@ -138,7 +138,7 @@ class SimulationEngine {
 			if (this.activeSimulation) {
 				this.engine.pauseSimulation();
 			} else { 
-				console.warn('Simulation Engine must have an active simulation before pausing simulation')
+				console.warn('Simulation Engine must have an active simulation before pausing simulation');
 			}
 		} else { 
 			console.warn('Simulation Engine must be initialized before pausing simulation');
@@ -154,7 +154,7 @@ class SimulationEngine {
 				this.activeSimulation = undefined;
 				this.cleared = true;
 			} else { 
-				console.warn('Simulation Engine must have an active simulation before clearing simulation')
+				console.warn('Simulation Engine must have an active simulation before clearing simulation');
 			}
 		} else { 
 			console.warn('Simulation Engine must be initialized before clearing simulation');
@@ -166,7 +166,7 @@ class SimulationEngine {
 			if (this.activeSimulation) {
 				this.engine.initializeControls(); // <-- for primary user view only
 			} else { 
-				console.warn('Simulation Engine must have an active simulation before initializing simulation GUI')
+				console.warn('Simulation Engine must have an active simulation before initializing simulation GUI');
 			}
 		} else { 
 			console.warn('Simulation Engine must be initialized before initializing simulation GUI');
@@ -178,7 +178,7 @@ class SimulationEngine {
 			if (this.activeSimulation) {
 				this.engine.destroyControls();
 			} else { 
-				console.warn('Simulation Engine must have an active simulation before destroying simulation GUI')
+				console.warn('Simulation Engine must have an active simulation before destroying simulation GUI');
 			}
 		} else { 
 			console.warn('Simulation Engine must be initialized before destroying simulation GUI');

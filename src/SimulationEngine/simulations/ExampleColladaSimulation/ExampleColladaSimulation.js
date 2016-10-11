@@ -19,16 +19,17 @@ import TWEEN from 'tween';
 
 const ExampleColladaSimulation = function() { 
 	this.name = "Example Kinematics Simulation"; 
-	this.colorModel  = ColorModel;
+	this.colorModel = ColorModel;
 	this.lengthModel = new LengthModel() ;
-	this.timeModel  = new TimeModel();
+	this.timeModel = new TimeModel();
 	this.defaultSystemTimeLimit = 60; // <-- in seconds
-}
+};
 
 
 ExampleColladaSimulation.prototype = { 
 	initializeModel: function(stateSpace) {
-		
+		this.stateSpace = stateSpace;
+
 		this.stateSpace.view.colladaLoader.options.convertUpAxis = true;
 		
 		const colladaUrl = require('file!./models/kawada-hironx.dae');
@@ -51,19 +52,18 @@ ExampleColladaSimulation.prototype = {
 			this.setupTween();
 
 			// animate();
-			debugger;
 		};
 
 		this.stateSpace.view.colladaLoader.load( colladaUrl, colladaLoaderFn.bind(this));
 	},
 
-	initializeControls: function(stateSpace) {},
+	initializeControls: function(/* stateSpace */) {},
 
-	updateStateSpace: function(t, stateSpace) {
+	updateStateSpace: function(/* t, stateSpace */) {
 		this.kinematicsTween.update();
 	},
 
-	updateControls: function(stateSpace) {},
+	updateControls: function(/* stateSpace */) {},
 
 	setupTween: function() {
 		const duration = this.getRandomInt( 1000, 5000 );
@@ -82,7 +82,7 @@ ExampleColladaSimulation.prototype = {
 			for ( let i = 0; i < this.kinematics.joints.length; i ++ ) {
 				this.kinematics.setJointValue( i, this[ i ] );
 			}
-		}
+		};
 
 		this.kinematicsTween.onUpdate( tweenKinematicsUpdateFn.bind(this) );
 
@@ -93,6 +93,6 @@ ExampleColladaSimulation.prototype = {
 	getRandomInt: function( min, max ) {
 		return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
 	}
-}
+};
 
 export default ExampleColladaSimulation;

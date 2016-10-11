@@ -13,6 +13,7 @@
 .load-simulation-modal { 
 	position: absolute;
 	height: 50vh;
+	width: 30vw;
 	background-color: #00E5EE;
 	color: white;
 	overflow                : auto;

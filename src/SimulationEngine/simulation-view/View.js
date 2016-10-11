@@ -75,47 +75,29 @@ export default class View {
 		// remove all children from the scene. The scene itself is an object3D and root container of all Object3D
 		// this.scene.children = [];
 
-		let numCalls = 0;
-		let numGeoDisposals = 0;
-		let numMatDisposals = 0;
-		let numMatGeoDisposals = 0;
-		let numMeshGeoDisposals = 0;
-		let numMeshMatDisposals = 0;
-
-		const disposeChildrenFn = function(object) { 
+		const disposeChildrenFn = function(object) {
+			this.scene.remove(object);
 			if (object.children) {
 				if (object.children.length > 0) { 
 					object.children.map(disposeChildrenFn.bind(this));
 				}
 			}
-
-			this.scene.remove(object);
-
 			if (object.geometry) { 
 				object.geometry.dispose();
-
-				numGeoDisposals++;
 			}
-
 			if (object.material) {
 				if (object.material.children) { 
 					if (object.material.children.length > 0) { 
 						object.material.children.map(disposeChildrenFn.bind(this));
 					}
 				}
-
 				if (object.material.geometry) { 
 					object.material.geometry.dispose();
-
-					numMatGeoDisposals++;
 				}
-
 				if (object.material.map) { 
 					object.material.map.dispose();
 				}
-
 				object.material.dispose();
-				numMatDisposals++;
 			}
 			if (object.mesh) {
 				if (object.mesh.children) {
@@ -125,20 +107,15 @@ export default class View {
 				}
 				if (object.mesh.geometry) { 
 					object.mesh.geometry.dispose();
-
-					numMeshGeoDisposals++;
 				}
 				if (object.mesh.material) {
 					if (object.mesh.material.map) { 
 						object.mesh.material.map.dispose();
 					}
 					object.mesh.material.dispose();
-					numMeshMatDisposals++;
 				}
 			}
-
-			numCalls++;
-		}
+		};
 
 		// recursively remove all object3ds:
 		while (this.scene.children.length > 0) { 
@@ -302,8 +279,6 @@ export default class View {
 		}
 
 		this._initializeCameraLightsControls();
-
-debugger;
 
 		if (this.mainSceneInitialized === true && this.renderLoopActive === false) {
 			// start render loop

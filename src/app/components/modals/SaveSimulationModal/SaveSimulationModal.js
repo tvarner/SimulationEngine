@@ -14,7 +14,7 @@ export default class LoadSimulationModel extends React.Component {
 				isOpen={true}
 				onRequestClose={_onRequestClose}
 			>
-				<h1>Save Simulation Modal</h1>
+				<h1>Save Simulation</h1>
 				<div>TODO ;)</div>
 				<button onClick={this.props.clearActiveModal}>Close</button>
 			</Modal>

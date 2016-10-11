@@ -26,3 +26,15 @@ export const clearActiveModal = () => {
 		type: 'CLEAR_ACTIVE_MODAL'
 	};
 };
+
+export const activateSpinner = () => { 
+	return { 
+		type: 'ACTIVATE_SPINNER'
+	};
+};
+
+export const clearSpinner = () => { 
+	return { 
+		type: 'CLEAR_SPINNER'
+	};
+};

@@ -28,7 +28,7 @@
 		"quotes": 0,
 		"indent": ["error", "tab"],
 		"eqeqeq": 1,
-		"no-console": 1,
+		"no-console": ["error", { allow: ["warn", "error"] }],
 		"no-debugger": 1,
 		"no-multi-spaces": 1,
 		"no-param-reassign": 1,

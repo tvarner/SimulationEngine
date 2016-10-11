@@ -42,7 +42,8 @@ function view(state = "HOME_PAGE", action) {
 
 function modals(state = {
 	activeModal: null, 
-	activeModalProps: null
+	activeModalProps: null,
+	spinnerActive: false
 }, action) {
 	switch(action.type) { 
 	case 'SET_ACTIVE_MODAL':
@@ -63,6 +64,14 @@ function modals(state = {
 		return Object.assign({}, state, {
 			activeModal: null,
 			activeModalProps: null
+		});
+	case 'ACTIVATE_SPINNER':
+		return Object.assign({}, state, {
+			spinnerActive: true
+		});
+	case 'CLEAR_SPINNER':
+		return Object.assign({}, state, {
+			spinnerActive: false
 		});
 	default:
 		return state;

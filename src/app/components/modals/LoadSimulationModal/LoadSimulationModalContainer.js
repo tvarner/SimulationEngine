@@ -2,7 +2,9 @@ import { connect } from 'react-redux';
 import {
 	setView,
 	setActiveModal,
-	clearActiveModal
+	clearActiveModal,
+	activateSpinner,
+	clearSpinner
 } from './../../pages/MainView/MainViewActions';
 
 import {
@@ -25,7 +27,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		startSimulation: (simulationId) => {
-
 			// TODO: refactor this to a start simulation operation
 
 			// set Active Simulation must be called before initialize Simulation
@@ -33,11 +34,20 @@ const mapDispatchToProps = (dispatch) => {
 
 			// TODO: clear previous simulation if it exists
 			
+			// clear previous simulation if it exists
 			dispatch(destroySimulationGUI());
 			dispatch(clearSimulation(true));
+
+			// load new simulation
+			dispatch(activateSpinner());
+
+			// debugger;
 			dispatch(setActiveSimulation(simulationId));
 			dispatch(initializeSimulation());
+			dispatch(clearSpinner());
+
 			dispatch(initializeSimulationGUI());
+			dispatch(clearActiveModal());
 		},
 
 		setView: (view) => { 

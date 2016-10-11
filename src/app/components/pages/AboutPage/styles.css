@@ -25,7 +25,7 @@
 	height: 10%;
 	width: 100%;
     font-size: 6vh;
-    /* color: black; */
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,6 +36,14 @@
     width: 100%;
     background-color: transparent;
     display: flex;
+    flex-direction: column;
+    padding: 5vh;
+    color: white;
+    font-family: Helvetica;
+}
+
+.about-page > .page-content > div { 
+	margin-top: 5vh;
 }
 
 .about-page > .page-content > .left-content { 

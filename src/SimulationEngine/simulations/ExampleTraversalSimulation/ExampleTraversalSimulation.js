@@ -24,7 +24,7 @@ const ExampleTraversalSimulation = function() {
 	this.lengthModel = new LengthModel();
 	this.timeModel = new TimeModel();
 	this.defaultSystemTimeLimit = 60; // <-- in seconds
-}
+};
 
 
 ExampleTraversalSimulation.prototype = { 

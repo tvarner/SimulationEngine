@@ -21,11 +21,11 @@ import Fullik from '../../simulation-model/world/Fullik/Fullik';
 
 const ExampleKinematicsSimulation = function() { 
 	this.name = "Example Kinematics Simulation"; 
-	this.colorModel  = ColorModel;
+	this.colorModel = ColorModel;
 	this.lengthModel = new LengthModel() ;
-	this.timeModel  = new TimeModel();
+	this.timeModel = new TimeModel();
 	this.defaultSystemTimeLimit = 60; // <-- in seconds
-}
+};
 
 ExampleKinematicsSimulation.prototype = { 
 	initializeModel: function(stateSpace) {

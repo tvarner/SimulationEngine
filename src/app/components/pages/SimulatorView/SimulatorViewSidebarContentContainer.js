@@ -5,11 +5,9 @@ import {
 	setView
 } from '../MainView/MainViewActions';
 import {
-	initializeSimulation,
 	playSimulation,
 	pauseSimulation,
 	clearSimulation,
-	initializeSimulationGUI,
 	destroySimulationGUI,
 	setSimulationViewControls
 } from './SimulatorViewActions';

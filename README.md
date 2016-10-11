@@ -2,4 +2,4 @@
  
 Coming soon ;)
 
-Built over Fusion Starter: https://github.com/cox-auto-kc/fusion-starter
+Stack: React, Redux, three.js, SASS/CSS (will be migrating to inline styles using Radium), Webpack, Babel, Mocha, Chai, ESLint. Deployed using Firebase.

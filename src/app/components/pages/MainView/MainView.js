@@ -5,18 +5,20 @@ import Sidebar from './../../utilComponents/react-sidebar/src/index';
 import MaterialTitlePanel from './MaterialTitlePanel';
 import SidebarContentContainer from './SidebarContentContainer';
 
-import HomePageContainer from '../HomePage/HomePageContainer';
-import AboutPage from '../AboutPage/AboutPage';
-import ContactPageContainer from '../ContactPage/ContactPageContainer';
+import HomePageContainer from './../HomePage/HomePageContainer';
+import AboutPage from './../AboutPage/AboutPage';
+import ContactPageContainer from './../ContactPage/ContactPageContainer';
 
 // simulator components
-import SimulatorViewContainer from '../SimulatorView/SimulatorViewContainer';
-import SimulatorDataView from '../SimulatorDataView/SimulatorDataView';
-import LoadSimulationModalContainer from '../../modals/LoadSimulationModal/LoadSimulationModalContainer';
-import SaveSimulationModalContainer from '../../modals/SaveSimulationModal/SaveSimulationModalContainer';
+import SimulatorViewContainer from './../SimulatorView/SimulatorViewContainer';
+import SimulatorDataView from './../SimulatorDataView/SimulatorDataView';
+import LoadSimulationModalContainer from './../../modals/LoadSimulationModal/LoadSimulationModalContainer';
+import SaveSimulationModalContainer from './../../modals/SaveSimulationModal/SaveSimulationModalContainer';
 
-import SortCollectionsModalContainer from '../../modals/SortCollectionsModal/SortCollectionsModalContainer';
-import FullScreenContentModalContainer from '../../modals/FullScreenContentModal/FullScreenContentModalContainer';
+import SortCollectionsModalContainer from './../../modals/SortCollectionsModal/SortCollectionsModalContainer';
+import FullScreenContentModalContainer from './../../modals/FullScreenContentModal/FullScreenContentModalContainer';
+
+import SpinnerModal from './../../modals/SpinnerModal/SpinnerModal';
 
 import './styles.css';
 
@@ -32,6 +34,13 @@ const styles = {
 };
 
 const Application = React.createClass({
+	_renderSpinner() {
+		if (this.props.modals.spinnerActive) {
+			return (
+				<SpinnerModal data={this.props.modals.activeModalProps} />
+			);
+		}
+	},
 
 	_renderActiveModal() {
 		// Modals: 
@@ -52,7 +61,8 @@ const Application = React.createClass({
 				return (
 					<LoadSimulationModalContainer data={this.props.modals.activeModalProps} />
 				);
-			} else if (this.props.modals.activeModal === 'SAVE_SIMULATION_MODAL') { 
+			}
+			if (this.props.modals.activeModal === 'SAVE_SIMULATION_MODAL') { 
 				return (
 					<SaveSimulationModalContainer data={this.props.modals.activeModalProps} />
 				);
@@ -65,6 +75,7 @@ const Application = React.createClass({
 			<div style={{ height: '90vh', width: '100vw'}}>
 				{page}
 				{this._renderActiveModal()}
+				{this._renderSpinner()}
 			</div>
 		);
 	},
