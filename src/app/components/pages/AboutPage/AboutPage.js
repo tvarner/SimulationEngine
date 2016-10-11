@@ -10,9 +10,11 @@ const AboutPage = () => {
 				<div className={'page-content'}>
 					<div>
 						More descriptive description coming soon. In the meantime, (1) click the Simulator icon, 
-						(2) open the sidebar, (3) click Load Simulation, (4) select from the list of 
-						example simulations to open a simulation. Stack: ES6, React, Redux, three.js, D3, 
-						SASS/CSS (eventually migrating to fully inline styles using Radium), Mocha, Chai, Webpack 
+						(2) open the sidebar, (3) click LOAD SIMULATION, (4) select from the list of 
+						example simulations to open a simulation, (5) open the sidebar and select RUN SIMULATION. 
+					</div>
+					<div>
+						Stack: ES6, React, Redux, three.js, D3, SASS/CSS (eventually migrating to fully inline styles using Radium), Mocha, Chai, Webpack 
 					</div>
 					<div>Simulations:</div>
 					<div>
@@ -28,6 +30,10 @@ const AboutPage = () => {
 						as well as an API for the construction and manipulation of joint kinematic systems. 
 						Fullik is a javascript conversion of a java library called Caliko (https://github.com/FedUni/caliko),
 						that implements the FABRIK inverse kinematics (IK) algorithm.
+					</div>
+					<div>
+						Next up: Adding to TraversalGraph and Fullik. Implementing ros3djs (https://github.com/RobotWebTools/ros3djs)
+						module for robotics simulations in Simulation Engine.
 					</div>
 					<div>
 						More to come. :)
