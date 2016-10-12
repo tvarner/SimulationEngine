@@ -1,6 +1,7 @@
 .spinner-overlay { 
 	background-color: rgba(0, 0, 0, 0.7);;
 	position: fixed;
+	z-index: 3;
 	top: 0px;
 	left: 0px;
 	right: 0px;
@@ -12,10 +13,19 @@
 
 .spinner { 
 	position: absolute;
-	z-index: 3;
+	z-index: 4;
 	width: 10vh;
 	height: 10vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border: none;
+}
+
+.loading-icon { 
+	width: 10vh;
+	height: 10vh;
+    background: url(./gears.svg);
+    background-size: 10vh 10vh;
+    border: none;
 }

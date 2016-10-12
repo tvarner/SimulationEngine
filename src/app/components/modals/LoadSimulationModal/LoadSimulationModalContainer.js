@@ -24,9 +24,9 @@ const mapStateToProps = (state) => {
 };
 
 /* UI Interactions */
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = function(dispatch) {
 	return {
-		startSimulation: (simulationId) => {
+		startSimulation: function(simulationId) {
 			// TODO: refactor this to a start simulation operation
 
 			// set Active Simulation must be called before initialize Simulation
@@ -34,30 +34,36 @@ const mapDispatchToProps = (dispatch) => {
 
 			// TODO: clear previous simulation if it exists
 			
-			// clear previous simulation if it exists
-			dispatch(destroySimulationGUI());
-			dispatch(clearSimulation(true));
+			const startSimulationFn = function() {
+				debugger;
+				dispatch(setActiveSimulation(simulationId));
+				dispatch(initializeSimulation());
+				dispatch(initializeSimulationGUI());
+				dispatch(clearActiveModal());
+				dispatch(clearSpinner());
+			}
 
-			// load new simulation
+			const clearSimulationAndActivateSpinner = function() { 
+				// clear previous simulation if it exists
+				dispatch(destroySimulationGUI());
+				dispatch(clearSimulation(true));
+
+				// unfortunate hack to avoid race condition
+				setTimeout(this.forceUpdate.bind(this, startSimulationFn.bind(this)), 200);
+			}	
+
 			dispatch(activateSpinner());
-
-			// debugger;
-			dispatch(setActiveSimulation(simulationId));
-			dispatch(initializeSimulation());
-			dispatch(clearSpinner());
-
-			dispatch(initializeSimulationGUI());
-			dispatch(clearActiveModal());
+			this.forceUpdate(clearSimulationAndActivateSpinner.bind(this));
 		},
 
-		setView: (view) => { 
+		setView: function(view) { 
 			dispatch(setView(view));
 		}, 
 
-		setActiveModal: (modal) => { 
+		setActiveModal: function(modal) { 
 			dispatch(setActiveModal(modal));
 		},
-		clearActiveModal: () => { 
+		clearActiveModal: function() { 
 			dispatch(clearActiveModal());
 		}
 	};

@@ -16,7 +16,7 @@ export default class SpinnerModal extends React.Component {
 				isOpen={true}
 				onRequestClose={this.props.clearActiveModal}
 			>
-				Loading...
+				<div className={'loading-icon'} />
 			</Modal>
 		);
 	}

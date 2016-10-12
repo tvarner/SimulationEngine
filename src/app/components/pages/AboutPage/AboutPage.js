@@ -26,7 +26,7 @@ const AboutPage = () => {
 					</div>
 					<div>
 						<span style={{fontWeight: 'bold'}}>Stack:</span> ES6, React, Redux, three.js, D3, SASS/CSS (eventually migrating to fully inline styles using Radium), Mocha, Chai, Webpack, and others.<br/>
-						<span style={{fontWeight: 'bold'}}>github:</span> 
+						<a href={'https://github.com/tvarner/SimulationEngine'} style={{fontWeight: 'bold'}}>github</a>
 					</div>
 					<div>
 						<span style={{fontWeight: 'bold', fontSize: 'large'}}>Instructions:</span>
