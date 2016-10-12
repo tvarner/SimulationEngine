@@ -72,7 +72,7 @@ const Application = React.createClass({
 
 	_renderPage(page) {
 		return (
-			<div style={{ height: '90vh', width: '100vw'}}>
+			<div style={{width: '100%', height: '90%', position: 'fixed', overflowY: 'scroll'}}>
 				{page}
 				{this._renderActiveModal()}
 				{this._renderSpinner()}
