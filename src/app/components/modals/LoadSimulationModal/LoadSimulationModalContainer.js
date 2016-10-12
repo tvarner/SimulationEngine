@@ -35,13 +35,12 @@ const mapDispatchToProps = function(dispatch) {
 			// TODO: clear previous simulation if it exists
 			
 			const startSimulationFn = function() {
-				debugger;
 				dispatch(setActiveSimulation(simulationId));
 				dispatch(initializeSimulation());
 				dispatch(initializeSimulationGUI());
 				dispatch(clearActiveModal());
 				dispatch(clearSpinner());
-			}
+			};
 
 			const clearSimulationAndActivateSpinner = function() { 
 				// clear previous simulation if it exists
@@ -50,7 +49,7 @@ const mapDispatchToProps = function(dispatch) {
 
 				// unfortunate hack to avoid race condition
 				setTimeout(this.forceUpdate.bind(this, startSimulationFn.bind(this)), 200);
-			}	
+			};
 
 			dispatch(activateSpinner());
 			this.forceUpdate(clearSimulationAndActivateSpinner.bind(this));
