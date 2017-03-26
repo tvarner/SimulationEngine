@@ -16,10 +16,7 @@
 //    Zoom - middle mouse, or mousewheel / touch: two finger spread or squish
 //    Pan - right mouse, or arrow keys / touch: three finter swipe
 
-
-
-
-export default function buildOrbitControls(THREE) { 
+export default function buildOrbitControls(THREE) {
 	THREE.OrbitControls = function ( object, domElement ) {
 		this.object = object;
 

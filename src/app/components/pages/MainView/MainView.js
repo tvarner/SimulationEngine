@@ -14,11 +14,10 @@ import SimulatorViewContainer from './../SimulatorView/SimulatorViewContainer';
 import SimulatorDataView from './../SimulatorDataView/SimulatorDataView';
 import LoadSimulationModalContainer from './../../modals/LoadSimulationModal/LoadSimulationModalContainer';
 import SaveSimulationModalContainer from './../../modals/SaveSimulationModal/SaveSimulationModalContainer';
-
-import SortCollectionsModalContainer from './../../modals/SortCollectionsModal/SortCollectionsModalContainer';
-import FullScreenContentModalContainer from './../../modals/FullScreenContentModal/FullScreenContentModalContainer';
-
 import SpinnerModal from './../../modals/SpinnerModal/SpinnerModal';
+
+
+import SimulationViewContainer from '../SimulationView/SimulationViewContainer';
 
 import './styles.css';
 
@@ -47,16 +46,6 @@ const Application = React.createClass({
 
 		// ADD ACTIVE MODAL LOGIC (one MODAL at a time)
 		if (this.props.modals.activeModal !== null) {
-			if (this.props.modals.activeModal === 'SORT_COLLECTIONS_MODAL') {
-				return (
-					<SortCollectionsModalContainer data={this.props.modals.activeModalProps} />
-				);
-			}
-			if (this.props.modals.activeModal === 'FULL_SCREEN_CONTENT_MODAL') {
-				return (
-					<FullScreenContentModalContainer data={this.props.modals.activeModalProps} />
-				);
-			}
 			if (this.props.modals.activeModal === 'LOAD_SIMULATION_MODAL') {
 				return (
 					<LoadSimulationModalContainer data={this.props.modals.activeModalProps} />
@@ -101,6 +90,10 @@ const Application = React.createClass({
 		} else if (this.props.view === "SIMULATOR_DATA_VIEW") { 
 			return (
 				this._renderPage(<SimulatorDataView />)
+			);	
+		} else if (this.props.view === "SIMULATION_VIEW") { 
+			return (
+				this._renderPage(<SimulationViewContainer />)
 			);	
 		}
 	},

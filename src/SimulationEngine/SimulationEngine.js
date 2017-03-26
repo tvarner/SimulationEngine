@@ -1,5 +1,5 @@
 /*
-    Simulator entry point.
+		Simulator entry point.
 */
 import Engine from './simulation-controller/Engine';
 import View from './simulation-view/View';
@@ -7,12 +7,14 @@ import View from './simulation-view/View';
 // simulations
 import ExampleTraversalSimulation from './simulations/ExampleTraversalSimulation/ExampleTraversalSimulation';
 import ExampleKinematicsSimulation from './simulations/ExampleKinematicsSimulation/ExampleKinematicsSimulation';
+import ExampleRoboticsSimulation from './simulations/ExampleRoboticsSimulation/ExampleRoboticsSimulation';
 
 class SimulationEngine { 
 	constructor() {
 		// create new engine
 		this.engine = new Engine();
 		this.activeSimulation = undefined;
+		this.simulationInitialized = false;
 		this.simulationEngineInitialized = false;
 		this.cleared = true;
 	}
@@ -87,7 +89,7 @@ class SimulationEngine {
 
 
 
-	setActiveSimulation(simulationId) { 
+	setActiveSimulation(simulationId) {
 		// set active simulation based on simulation id
 
 		// set active simulation (temporary)
@@ -95,6 +97,8 @@ class SimulationEngine {
 			this.activeSimulation = new ExampleTraversalSimulation();
 		} else if (simulationId === 'Example Kinematics Simulation') { 
 			this.activeSimulation = new ExampleKinematicsSimulation();
+		} else if (simulationId === 'Example Robotics Simulation') { 
+			this.activeSimulation = new ExampleRoboticsSimulation();
 		}
 	}
 
@@ -102,6 +106,7 @@ class SimulationEngine {
 		if (this.simulationEngineInitialized) {
 			if (this.activeSimulation && this.cleared) {
 				this.engine.initializeSimulation(this.activeSimulation, this.view);
+				this.simulationInitialized = true;
 				this.cleared = false;
 			} else { 
 				console.warn('Simulation Engine must have an active simulation before initializing simulation');
@@ -163,10 +168,10 @@ class SimulationEngine {
 
 	initializeSimulationGUI() {
 		if (this.simulationEngineInitialized) {
-			if (this.activeSimulation) {
+			if (this.activeSimulation && this.simulationInitialized && this.cleared) {
 				this.engine.initializeControls(); // <-- for primary user view only
 			} else { 
-				console.warn('Simulation Engine must have an active simulation before initializing simulation GUI');
+				console.warn('Simulation Engine must have an active simulation that is initialized before initializing simulation GUI');
 			}
 		} else { 
 			console.warn('Simulation Engine must be initialized before initializing simulation GUI');

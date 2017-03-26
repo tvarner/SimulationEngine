@@ -18,6 +18,7 @@ open -a Google\ Chrome --args --allow-file-access-from-files
 */
 import * as THREE from 'three';
 import * as Detector from './utils/Detector';
+import _ from 'lodash';
 
 // controls
 import buildOrbitControls from './controls/OrbitControls';
@@ -54,6 +55,7 @@ export default class View {
 		// Any View configuration prior to the loading of the scene is done here.
 		this.renderLoopActive = false;
 		this.mainSceneInitialized = false;
+		this.renderCallbacks = [];
 	}
 
 	initializeScene() {
@@ -75,8 +77,14 @@ export default class View {
 		// remove all children from the scene. The scene itself is an object3D and root container of all Object3D
 		// this.scene.children = [];
 
+
+
+		// TODO: redo disposal
+
+
+
+
 		const disposeChildrenFn = function(object) {
-			this.scene.remove(object);
 			if (object.children) {
 				if (object.children.length > 0) { 
 					object.children.map(disposeChildrenFn.bind(this));
@@ -115,22 +123,29 @@ export default class View {
 					object.mesh.material.dispose();
 				}
 			}
+			this.scene.remove(object);
 		};
+
+
+
+
 
 		// recursively remove all object3ds:
 		while (this.scene.children.length > 0) { 
-			this.scene.children.map(disposeChildrenFn.bind(this));
+			this.scene.children.forEach(disposeChildrenFn.bind(this));
 		}
 
 		// set previously defined camera, lights, and controls to undefined
 		this.camera = undefined;
 		this.light = undefined;
-		this.userControls = undefined;
+		this.cameraControls = undefined;
 
 		// set mainSceneInitialized flag to false, since the main scene is being destroyed.
 		this.mainSceneInitialized = false;
 
 		this._clearRenderer();
+
+		this._clearRenderCallbacks();
 
 		if (reinitializeScene) {
 			this.startRenderLoop();
@@ -225,13 +240,13 @@ export default class View {
 	_initializeControls(controlsId) {
 		// TODO: implement rest of controls
 		if (controlsId === 'orbit' || controlsId === undefined) {
-			this.userControls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
+			this.cameraControls = new THREE.OrbitControls( this.camera, this.renderer.domElement );
 			// controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
-			this.userControls.enableDamping = true;
-			this.userControls.dampingFactor = 0.25;
-			this.userControls.enableZoom = true;
-			this.userControls.zoomSpeed = 0.25;
-			this.userControls.rotateSpeed = 0.25;
+			this.cameraControls.enableDamping = true;
+			this.cameraControls.dampingFactor = 0.25;
+			this.cameraControls.enableZoom = true;
+			this.cameraControls.zoomSpeed = 0.25;
+			this.cameraControls.rotateSpeed = 0.25;
 		} else if (controlsId === 'fly') {
 			// TODO
 		} else if (controlsId === 'pointer') { 
@@ -241,20 +256,29 @@ export default class View {
 
 	render() {
 		/* SIMULATION VIEW UPDATE LOGIC [START] */
-
+		
+		// this.rendering = true;
 		if (this.mainSceneInitialized === true && this.renderLoopActive === true) {
 			this.stats.begin();
 			
 			// update the scene
 			this.checkEvents();
 			this.updateScene();
-			this.userControls.update();
+			this.cameraControls.update();
 
 			// render the scene
 			this.renderer.render(this.scene, this.camera); 
 			
 			this.stats.end();
 
+			// call each renderCallback
+			if (this.renderCallbacks.length) { 
+				for (let i = 0; i < this.renderCallbacks.length; i++) { 
+					this.renderCallbacks[i].fn();
+				}
+			}
+
+			// this.rendering = false;
 			requestAnimationFrame(this.render.bind(this));
 		}
 
@@ -292,6 +316,39 @@ export default class View {
 			// set renderLoopActive flag to false 
 			this.renderLoopActive = false;
 		}
+	}
+
+	addRenderCallback(callbackId, callback) { 
+		if (!this.renderCallbacks) { 
+			this.renderCallbacks = [];
+		}
+
+		if (_.find(this.renderCallbacks, function(callback) { 
+				return callback.callbackId === callbackId;
+		})) { 
+			throw new Error("callbackId is already in use");
+		}
+
+		this.renderCallbacks.push({
+			callbackId,
+			fn: callback
+		});
+	}
+
+	removeRenderCallback(callbackId) { 
+		const index = _.findIndex(this.renderCallbacks, function(callback) { 
+				return callback.callbackId === callbackId;
+			});
+
+		if (index === -1) { 
+			throw new Error("callbackId in renderCallbacks was not found");
+		}
+
+		this.renderCallbacks.splice(index, 1);
+	}
+
+	_clearRenderCallbacks() { 
+		this.renderCallbacks = [];
 	}
 
 	checkEvents() { 
@@ -444,22 +501,5 @@ export default class View {
 			new THREE.Vector3( h, -h, h )
 		);
 		return geometry;
-	}
-
-	addElipse() { 
-		const curve = new THREE.EllipseCurve(
-			0, 0,             // ax, aY
-			7, 15,            // xRadius, yRadius
-			0, 3/2 * Math.PI, // aStartAngle, aEndAngle
-			false             // aClockwise
-		);
-
-		const path = new THREE.Path( curve.getPoints( 50 ) );
-		const geometry = path.createPointsGeometry( 50 );
-		const material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
-
-		// Create the final Object3d to add to the scene
-		const ellipse = new THREE.Line( geometry, material );
-		this.scene.add( ellipse );
 	}
 }

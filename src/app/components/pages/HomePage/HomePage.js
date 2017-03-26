@@ -17,7 +17,7 @@ export default class HomePage extends Component {
 	}
 
 	render() {
-		const { openAboutPage, openContactPage, openSimulatorView} = this.props;
+		const { openAboutPage, openContactPage, openSimulatorView /* , openSimulationView */} = this.props;
 		
 		const contentMonolith = require('./../../../../content/_content.json');
 		const gif1 = contentMonolith.homePage.gif1;

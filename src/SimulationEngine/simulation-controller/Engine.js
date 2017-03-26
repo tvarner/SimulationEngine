@@ -21,7 +21,7 @@ export default class Engine {
 		this.stateSpace.setView(view); // pass a view to the model for reference
 		
 		this.simulation = simulation;
-		this.simulation.initializeModel(this.stateSpace);	
+		this.simulation.initializeModel(this.stateSpace);
 	}
 
 	// refer to initializeModel above
@@ -30,8 +30,8 @@ export default class Engine {
 
 /*
 	The Model and Controller are updated in the variableInterval for more precise timing between updates (not system dependent)
-	using a setTimeout that is set and reset in the variableInterval loop. The render function set and updated in the View is used for 
-	updating controls, and later, dynamics. The variableInterval loop is suitable for kinematic and general system decisions
+	using a setTimeout that is set and reset in the variableInterval loop. The render function is set and updated in the View, and
+	is used for updating controls, and later, dynamics. The variableInterval loop is suitable for kinematic and general system decisions
 	that are not dependent on the state of every frame. In other words, variableInterval loop is best used for modeling decisions
 	at SPECIFIC moments in time over the life of the simulation (discrete event processes), whereas the render loop (as made 
 	available by the DOM animationFrame) is best suited for modeling decisions made at EVERY moment in time over the life of the 
@@ -81,13 +81,14 @@ export default class Engine {
 	}
 
 
-	_updateStateSpace() { 
+	_updateStateSpace() {
 		this.simulation.updateStateSpace(this.simulation.timeModel.AGENT_UPDATE_FREQUENCY, this.stateSpace);
 	}
 
 	_updateControls() {
 		this.simulation.updateControls(this.stateSpace);
 	}
+
 	// insert and configure dat.GUI AFTER model is initialized (this.initializeModel)
 	// for primary user view
 	initializeControls() {
@@ -97,6 +98,7 @@ export default class Engine {
 	destroyControls() {
 		if (this.stateSpace.view.gui) { 
 			this.stateSpace.view.gui.destroy();
+			this.stateSpace.view.gui = undefined;
 		}
 	}
 

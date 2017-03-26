@@ -17,7 +17,6 @@ const styles = {
 		alignItems: 'center',
 		justifyContent: 'center'
 	},
-
 	divider: {
 		margin: '8px 0',
 		height: 1,
@@ -28,7 +27,7 @@ const styles = {
 		height: '100%',
 		backgroundColor: 'white',
 		fontSize: '2vw'
-	},
+	}
 };
 
 /*

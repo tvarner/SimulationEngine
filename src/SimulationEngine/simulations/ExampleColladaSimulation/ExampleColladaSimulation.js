@@ -15,7 +15,7 @@ import ColorModel from '../../simulation-model/world/world_config_models/ColorMo
 // import dat from '../../utils/dat/index';
 
 // general utils
-import TWEEN from 'tween';
+import TWEEN from 'tween.js';
 
 const ExampleColladaSimulation = function() { 
 	this.name = "Example Kinematics Simulation"; 

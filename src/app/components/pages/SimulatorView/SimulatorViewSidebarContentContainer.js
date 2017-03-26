@@ -51,6 +51,7 @@ const mapDispatchToProps = (dispatch) => {
 			if (ev !== undefined) { 
 				ev.preventDefault();
 			}
+
 			dispatch(playSimulation());
 			dispatch(toggleSidebar(false));
 		},

@@ -32,6 +32,8 @@ function view(state = "HOME_PAGE", action) {
 			return "CONTACT_PAGE";
 		} else if (action.view === "SIMULATOR_VIEW") { 
 			return "SIMULATOR_VIEW";
+		} else if (action.view === "SIMULATION_VIEW") { 
+			return "SIMULATION_VIEW";
 		} else {
 			return state;
 		}

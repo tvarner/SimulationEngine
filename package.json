@@ -49,6 +49,7 @@
     "js-priority-queue": "0.1.5",
     "json-loader": "0.5.4",
     "lodash": "4.16.1",
+    "npm-run-all": "3.1.0",
     "nuka-carousel": "2.0.3",
     "object-assign": "4.1.0",
     "radium": "0.18.1",
@@ -74,11 +75,11 @@
     "redux": "3.5.2",
     "redux-logger": "2.6.1",
     "redux-thunk": "2.1.0",
+    "roslib": "0.18.0",
     "stats.js": "0.16.0",
     "string.prototype.repeat": "0.2.0",
     "svg-react-loader": "0.3.7",
     "three": "0.81.2",
-    "tween": "0.9.0",
     "tween.js": "16.3.5"
   },
   "devDependencies": {
@@ -112,7 +113,6 @@
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.9.0",
     "firebase-tools": "3.0.7",
-    "fusion-theme": "2.0.1",
     "glob": "7.0.6",
     "html-loader": "0.4.4",
     "html-webpack-plugin": "2.22.0",

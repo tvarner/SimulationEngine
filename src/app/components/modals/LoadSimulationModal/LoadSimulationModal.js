@@ -19,6 +19,7 @@ export default class LoadSimulationModel extends React.Component {
 				<h1>Load Simulation</h1>
 				<a onClick={this.props.startSimulation.bind(this, 'Example Kinematics Simulation')}>Example Kinematics Simulation</a>
 				<a onClick={this.props.startSimulation.bind(this, 'Example Traversal Simulation')}>Example Traversal Simulation</a>
+				<a onClick={this.props.startSimulation.bind(this, 'Example Robotics Simulation')}>Example Robotics Simulation</a>
 				<button onClick={this.props.clearActiveModal}>Close</button>
 			</Modal>
 		);

@@ -99,7 +99,6 @@ export default class MobileAgent {
 			});
 
 		this.buildBody();
-		this.buildInternalBody();
 	}
 
 	/* Can be overriden by child object to describe agent specific geometry */
@@ -113,6 +112,8 @@ export default class MobileAgent {
 
 		this.body.up = new THREE.Vector3(0, 1, 0);
 		this.axis = new THREE.Vector3();
+
+		this.buildInternalBody();
 
 		return this.body;
 	}

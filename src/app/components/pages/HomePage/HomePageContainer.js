@@ -24,6 +24,10 @@ const mapDispatchToProps = (dispatch) => {
 		
 		openSimulatorView: () => { 
 			dispatch(setView("SIMULATOR_VIEW"));
+		}, 
+
+		openSimulationView: () => { 
+			dispatch(setView("SIMULATION_VIEW"));
 		}
 	};
 };
