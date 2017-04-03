@@ -12,7 +12,9 @@ import {
 	destroySimulationGUI,
 	clearSimulation,
 	setActiveSimulation,
-	initializeSimulation
+	initializeSimulation,
+	playSimulator,
+	pauseSimulator
 } from './../../pages/SimulatorView/SimulatorViewActions';
 
 import LoadSimulationModal from './LoadSimulationModal';
@@ -35,6 +37,7 @@ const mapDispatchToProps = function(dispatch) {
 			// TODO: clear previous simulation if it exists
 			
 			const startSimulationFn = function() {
+				dispatch(playSimulator());
 				dispatch(setActiveSimulation(simulationId));
 				dispatch(initializeSimulation());
 				dispatch(initializeSimulationGUI());
@@ -45,7 +48,8 @@ const mapDispatchToProps = function(dispatch) {
 			const clearSimulationAndActivateSpinner = function() { 
 				// clear previous simulation if it exists
 				dispatch(destroySimulationGUI());
-				dispatch(clearSimulation(true));
+				dispatch(pauseSimulator());
+				dispatch(clearSimulation());
 
 				// unfortunate hack to avoid race condition
 				setTimeout(this.forceUpdate.bind(this, startSimulationFn.bind(this)), 200);

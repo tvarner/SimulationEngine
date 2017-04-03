@@ -4,6 +4,7 @@ import {
 	playSimulator,
 	pauseSimulator,
 	exitSimulator,
+	pauseSimulation,
 	destroySimulationGUI,
 	initializeSimulationGUI
 } from './SimulatorViewActions';
@@ -27,25 +28,12 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(initializeSimulationGUI());
 		},
 
-		onPauseSimulator: (ev) => {
-			if (ev !== undefined) { 
-				ev.preventDefault();
-			} 
-			dispatch(pauseSimulator());
-		},
-
-		onExitSimulator: (ev) => { 
-			if (ev !== undefined) { 
-				ev.preventDefault();
-			}
-			dispatch(exitSimulator());		
-		},
-
 		onNavigateFromSimulator: (ev) => { 
 			if (ev !== undefined) { 
 				ev.preventDefault();
 			}
 			dispatch(destroySimulationGUI());
+			dispatch(pauseSimulation());
 			dispatch(pauseSimulator());
 		}
 	};

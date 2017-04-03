@@ -43,6 +43,7 @@ const mapDispatchToProps = (dispatch) => {
 			if (ev !== undefined) { 
 				ev.preventDefault();
 			} 
+			dispatch(pauseSimulation());
 			dispatch(setView("SIMULATOR_DATA_VIEW"));
 			dispatch(toggleSidebar(false));
 		},

@@ -26,27 +26,36 @@ class SimulationEngine {
 		if (!this.simulationEngineInitialized) {
 			// create new view
 			this.view = new View();
+			this.engine.view = this.view;
 
 			this.simulationEngineInitialized = true;
 		}
 	}
 
 	playSimulationEngine() {
-		if (this.simulationEngineInitialized) { 
+		if (this.simulationEngineInitialized) {
 			// start the render loop
-			this.view.startRenderLoop();
+			if (this.view) { 
+				this.view.startRenderLoop();
+			}
+/*
+			if (this.activeSimulation) { 
+				this.playSimulation(); 
+			}
+*/
 		} else {
 			console.warn('Simulation Engine must be initialized before playing Simulation Engine');
 		}
 	}
 
-	pauseSimulationEngine() { 
+	pauseSimulationEngine() {
 		// pause active simulation if there is an active simulation
-		if (this.simulationEngineInitialized) { 
+		if (this.simulationEngineInitialized) {
+
+			// this.activeSimulation will be undefined if clearSimulation() was previously called 
 			if (this.activeSimulation) { 
 				this.pauseSimulation(); 
 			}
-
 			// stop render loop
 			if (this.view) { 
 				this.view.stopRenderLoop(); 
@@ -60,7 +69,7 @@ class SimulationEngine {
 	closeSimulationEngine() { 
 		if (this.simulationEngineInitialized) { 
 			// clear active simulation if it exists
-			if (this.activeSimulation) { this.clearSimulation(false); }
+			if (this.activeSimulation) { this.clearSimulation(); }
 
 			// stop render loop (pause simulation engine)
 			this.pauseSimulationEngine();
@@ -105,7 +114,7 @@ class SimulationEngine {
 	initializeSimulation() {
 		if (this.simulationEngineInitialized) {
 			if (this.activeSimulation && this.cleared) {
-				this.engine.initializeSimulation(this.activeSimulation, this.view);
+				this.engine.initializeSimulation(this.activeSimulation);
 				this.simulationInitialized = true;
 				this.cleared = false;
 			} else { 
@@ -115,8 +124,6 @@ class SimulationEngine {
 			console.warn('Simulation Engine must be initialized before initializing simulation');
 		}
 	}
-
-
 
 
 
@@ -152,15 +159,11 @@ class SimulationEngine {
 
 // FIX Clear simulation bug
 
-	clearSimulation(reinitializeScene) {
+	clearSimulation() {
 		if (this.simulationEngineInitialized) {
-			if (this.activeSimulation && !this.cleared) {
-				this.engine.clearSimulation(reinitializeScene);
-				this.activeSimulation = undefined;
-				this.cleared = true;
-			} else { 
-				console.warn('Simulation Engine must have an active simulation before clearing simulation');
-			}
+			this.engine.clearSimulation();
+			this.activeSimulation = undefined;
+			this.cleared = true;
 		} else { 
 			console.warn('Simulation Engine must be initialized before clearing simulation');
 		}
@@ -191,4 +194,4 @@ class SimulationEngine {
 	}
 }
 
-export default new SimulationEngine();
+export default SimulationEngine;

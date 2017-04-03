@@ -58,7 +58,7 @@ export function executeSetpoints(robot) {
 	for (const x in robot.joints) { 
 		// retrieve the setpoints initialized in this.setpoints
 		const sequence_index = robot.params.dance_sequence_index[robot.params.dance_pose_index];
-		robot.params.setpoint_target[x] = this.setpoints[sequence_index][x];
+		robot.params.setpoint_target[x] = robot.setpoints[sequence_index][x];
 	}
 }
 

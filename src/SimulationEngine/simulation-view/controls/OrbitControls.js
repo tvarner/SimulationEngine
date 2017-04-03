@@ -717,7 +717,6 @@ export default function buildOrbitControls(THREE) {
 		window.addEventListener( 'keydown', onKeyDown, false );
 
 		// force an update at start
-
 		this.update();
 	};
 

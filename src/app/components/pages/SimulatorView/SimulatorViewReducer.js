@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-
 import SimulationEngine from './../../../../SimulationEngine/SimulationEngine';
+
+const engine = new SimulationEngine();
 
 function simulationEngine(state = {
 	simulatorInitialized: false,
@@ -10,52 +11,50 @@ function simulationEngine(state = {
 	switch(action.type) { 
 	case 'INITIALIZE_SIMULATOR':
 		if (!state.simulatorInitialized) { 
-			SimulationEngine.initializeSimulationEngine();
+			engine.initializeSimulationEngine();
 		}
 		return Object.assign({}, state, {
 			simulatorInitialized: true
 		});
 	case 'PLAY_SIMULATOR':
-		SimulationEngine.playSimulationEngine();
+		engine.playSimulationEngine();
 		return state;
 	case 'PAUSE_SIMULATOR':
-		SimulationEngine.pauseSimulationEngine();
+		engine.pauseSimulationEngine();
 		return state;
 	case 'EXIT_SIMULATOR':
 		if (state.simulatorInitialized) { 
-			SimulationEngine.closeSimulationEngine();
+			engine.closeSimulationEngine();
 		}
 		return Object.assign({}, state, {
 			simulatorInitialized: false
 		});
 	case 'SET_ACTIVE_SIMULATION':
 		if (action.simulationId) { 
-			SimulationEngine.setActiveSimulation(action.simulationId);
+			engine.setActiveSimulation(action.simulationId);
 		}
 		return state;
 	case 'INITIALIZE_SIMULATION':
-		SimulationEngine.initializeSimulation();
+		engine.initializeSimulation();
 		return state;
 	case 'PLAY_SIMULATION':
-		SimulationEngine.playSimulation();
+		engine.playSimulation();
 		return state;
 	case 'PAUSE_SIMULATION':
-		SimulationEngine.pauseSimulation();
+		engine.pauseSimulation();
 		return state;
 	case 'CLEAR_SIMULATION':
-		if (action.reinitializeScene !== undefined) { 
-			SimulationEngine.clearSimulation(action.reinitializeScene);
-		}
+		engine.clearSimulation();
 		return state;
 	case 'INITIALIZE_SIMULATION_GUI':
-		SimulationEngine.initializeSimulationGUI();
+		engine.initializeSimulationGUI();
 		return state;
 	case 'DESTROY_SIMULATION_GUI':
-		SimulationEngine.destroySimulationGUI();
+		engine.destroySimulationGUI();
 		return state;
 	case 'SET_SIMULATION_VIEW_CONTROLS':
 		if (action.controlsId) { 
-			SimulationEngine.setSimulationViewControls(action.controlsId);
+			engine.setSimulationViewControls(action.controlsId);
 		}
 		return state;
 	case 'LOAD_SIMULATION':

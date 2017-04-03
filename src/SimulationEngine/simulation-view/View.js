@@ -18,6 +18,7 @@ open -a Google\ Chrome --args --allow-file-access-from-files
 */
 import * as THREE from 'three';
 import * as Detector from './utils/Detector';
+import WebGLDebugUtils from './utils/webgl-debug';
 import _ from 'lodash';
 
 // controls
@@ -56,6 +57,7 @@ export default class View {
 		this.renderLoopActive = false;
 		this.mainSceneInitialized = false;
 		this.renderCallbacks = [];
+		this.rendererCleared = true;
 	}
 
 	initializeScene() {
@@ -68,72 +70,39 @@ export default class View {
 
 		// set mainSceneInitialized flag to true
 		this.mainSceneInitialized = true;
+
+		this.simId = this.simId === undefined ? 0 : this.simId + 1;
 	}
 
-	clearScene(reinitializeScene) {
+	clearScene() {
 		// clearing the scene is removing all references to previously defined scene objects and 
 		// reinitializing the scene
 
 		// remove all children from the scene. The scene itself is an object3D and root container of all Object3D
 		// this.scene.children = [];
-
-
-
-		// TODO: redo disposal
-
-
-
-
-		const disposeChildrenFn = function(object) {
-			if (object.children) {
-				if (object.children.length > 0) { 
-					object.children.map(disposeChildrenFn.bind(this));
-				}
-			}
-			if (object.geometry) { 
-				object.geometry.dispose();
-			}
-			if (object.material) {
-				if (object.material.children) { 
-					if (object.material.children.length > 0) { 
-						object.material.children.map(disposeChildrenFn.bind(this));
-					}
-				}
-				if (object.material.geometry) { 
-					object.material.geometry.dispose();
-				}
-				if (object.material.map) { 
-					object.material.map.dispose();
-				}
-				object.material.dispose();
-			}
-			if (object.mesh) {
-				if (object.mesh.children) {
-					if (object.mesh.children.length > 0) { 
-						object.mesh.children.map(disposeChildrenFn.bind(this));
-					}
-				}
-				if (object.mesh.geometry) { 
-					object.mesh.geometry.dispose();
-				}
-				if (object.mesh.material) {
-					if (object.mesh.material.map) { 
-						object.mesh.material.map.dispose();
-					}
-					object.mesh.material.dispose();
-				}
-			}
-			this.scene.remove(object);
-		};
-
-
-
-
-
 		// recursively remove all object3ds:
-		while (this.scene.children.length > 0) { 
-			this.scene.children.forEach(disposeChildrenFn.bind(this));
+		this.numDisposedObjects = 0;
+		while(this.scene.children.length > 0) { 
+			this.scene.children.forEach((child) => {
+
+				if (child === null || child === undefined) { 
+					debugger;
+				}
+
+				if (child.traverse) { 
+					child.traverse(this.disposeObject3D.bind(this));
+				} else { 
+					// for cameras
+					this.scene.remove(child);
+				}
+			});
 		}
+
+		// this.scene = {};
+
+		this._clearRenderer();
+
+		this._clearRenderCallbacks();
 
 		// set previously defined camera, lights, and controls to undefined
 		this.camera = undefined;
@@ -142,56 +111,99 @@ export default class View {
 
 		// set mainSceneInitialized flag to false, since the main scene is being destroyed.
 		this.mainSceneInitialized = false;
+	}
 
-		this._clearRenderer();
+	disposeObject3D(object) {
+		this.numDisposedObjects++;
+		this.scene.remove(object);
 
-		this._clearRenderCallbacks();
+		if (object.mesh) {
+			if (object.mesh.material.map) { 
+				object.mesh.material.map.dispose();
+			}
+			object.mesh.material.dispose();
+			object.mesh.geometry.dispose();
+		}
 
-		if (reinitializeScene) {
-			this.startRenderLoop();
+		if (object.geometry) { 
+			object.geometry.dispose();
+		}
+
+		if (object.material) { 
+			if (object.material.map) { 
+				object.material.map.dispose();
+			}
+			object.material.dispose();
+		}
+
+		if (object.isPath) {
+			object.tube.dispose();
+			delete object.cluster;
+			delete object.pathInfo;
+			delete object.laneExits;
+			delete object.vertices;
+			delete object.curve;
+			delete object.entrancePosition;
+			delete object.exitPosition;
+			delete object.tube;
 		}
 	}
 
-	_initializeRenderer() { 
-		this.Detector = Detector; 
-		if ( ! this.Detector.webgl ) this.Detector.addGetWebGLMessage();
+	_initializeRenderer() {
+		if (this.rendererCleared === true) { 
+			this.Detector = Detector; 
+			if ( ! this.Detector.webgl ) this.Detector.addGetWebGLMessage();
 
-		// renderer
-		this.renderer = new THREE.WebGLRenderer({ antialias: true });
-		this.renderer.setSize(window.innerWidth, window.innerHeight);
-		this.renderer.shadowMap.enabled = true;
-		this.renderer.shadowMapSoft = true;
-		this.renderer.setPixelRatio( window.devicePixelRatio );
+			// renderer
+			this.renderer = new THREE.WebGLRenderer({ antialias: true });
+			this.renderer.setSize(window.innerWidth, window.innerHeight);
+			this.renderer.shadowMap.enabled = true;
+			this.renderer.shadowMapSoft = true;
+			this.renderer.setPixelRatio( window.devicePixelRatio );
 
-		this.addEventListeners();
-		
-		// remove these chidren in clearScene()
-		document.getElementById("simulationEngine").appendChild(this.renderer.domElement);
-		
-		this.stats = new Stats();
-		this.stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+			this.addEventListeners();
+			
+			// remove these chidren in clearScene()
+			document.getElementById("simulationEngine").appendChild(this.renderer.domElement);
+			
+			this.stats = new Stats();
+			this.stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
 
-		this.stats.dom.style.top = '';
-		this.stats.dom.style.left = '';
-		this.stats.dom.style.bottom = '0px';
-		this.stats.dom.style.right = '0px';
+			this.stats.dom.style.top = '';
+			this.stats.dom.style.left = '';
+			this.stats.dom.style.bottom = '0px';
+			this.stats.dom.style.right = '0px';
 
-		document.getElementById("simulationEngine").appendChild(this.stats.dom);
+			document.getElementById("simulationEngine").appendChild(this.stats.dom);
+
+			this.rendererCleared = false;
+		}
 	}
 
-	_clearRenderer() { 
-		this.removeEventListeners();
+	_clearRenderer() {
+		if (this.rendererCleared === false) { 
+			this.removeEventListeners();
 
-		// remove these chidren in clearScene()
-		document.getElementById("simulationEngine").removeChild(this.renderer.domElement);
-		document.getElementById("simulationEngine").removeChild(this.stats.dom);
+			// reset WebGL rendering context
+			WebGLDebugUtils.resetToInitialState(this.renderer.context);
 
-		this.Detector = undefined;
-		this.renderer = undefined;
-		this.stats = undefined;
+			//
+			document.getElementById("simulationEngine").removeChild(this.renderer.domElement);
+			//
+			document.getElementById("simulationEngine").removeChild(this.stats.dom);
+
+			this.animFrame = undefined;
+			this.Detector = undefined;
+			this.renderer.domElement = undefined;
+			this.renderer = undefined;
+			this.stats = undefined;
+
+			this.rendererCleared = true;
+
+		}
 	}
 
-	_initializeCameraLightsControls() { 
+	initializeCameraLightsControls() { 
 		this._initializeCamera();
 		this._initializeLights();
 		this._initializeControls();
@@ -254,9 +266,9 @@ export default class View {
 		}
 	}
 
-	render() {
+	render(simId) {
 		/* SIMULATION VIEW UPDATE LOGIC [START] */
-		
+
 		// this.rendering = true;
 		if (this.mainSceneInitialized === true && this.renderLoopActive === true) {
 			this.stats.begin();
@@ -278,16 +290,19 @@ export default class View {
 				}
 			}
 
+
+			let u = simId === this.simId ? this.simId : simId;
+
 			// this.rendering = false;
-			requestAnimationFrame(this.render.bind(this));
+			this.animFrame = requestAnimationFrame(this.render.bind(this, u));
 		}
 
 		/* SIMULATION VIEW UPDATE LOGIC [END] */
 	}
 
-	startRenderLoop() {
+	startRenderLoop(simId) {
 		// initialize renderer
-		// Note on this: the idea is not initialize the renderer independently of the scene.
+		// Note on this: the idea is to initialize the renderer independently of the scene.
 		// initializing the renderer indep. Allows one to maintain the WebGL context after
 		// clearing and reinitializing the scene, without having to create an entirely new
 		// WebGL context when the scene is repurposed/reinitialized.
@@ -300,14 +315,13 @@ export default class View {
 		if (this.mainSceneInitialized === false) {
 			// initialize scene (simulation view)
 			this.initializeScene();
+			this.initializeCameraLightsControls();
 		}
-
-		this._initializeCameraLightsControls();
 
 		if (this.mainSceneInitialized === true && this.renderLoopActive === false) {
 			// start render loop
 			this.renderLoopActive = true;
-			this.render();
+			this.render(this.simId);
 		}
 	}
 
@@ -315,6 +329,8 @@ export default class View {
 		if (this.mainSceneInitialized === true && this.renderLoopActive === true) {
 			// set renderLoopActive flag to false 
 			this.renderLoopActive = false;
+			cancelAnimationFrame(this.animFrame);
+			this.animFrame = undefined;
 		}
 	}
 
@@ -370,8 +386,15 @@ export default class View {
 		window.addEventListener('resize', this.onWindowResize, false);
 	}
 
-	removeEventListeners() { 
+	removeEventListeners() {
+		// remove all simulation event listeners from window 
 		window.removeEventListener('resize', this.onWindowResize, false);
+
+		// dispose events added to canvas from camera controls
+		this.cameraControls.dispose();
+
+		// dispose events added to canvas from WebGL renderer
+		this.renderer.dispose()
 	}
 
 	addAxis(AXIS_LENGTH) {

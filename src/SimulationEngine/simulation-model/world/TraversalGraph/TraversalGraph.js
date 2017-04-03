@@ -31,13 +31,8 @@ export default class TraversalGraph {
 
 	init(pathsModel) {
 		this.lengthModel = new LengthModel();
-		this.lanes;
-		this.nodes;
-		this.mobileAgents;
-		this.intersectionVertices;
 		this.IOPoints;
 		this.edgeLength; // <-- MUST BE AN INTEGER --> b/c agent positions are autocorrected at integer component values (with precision up to multiples of 1/8)
-		this.mobileAgents;
 		this.lanes = [];
 		this.nodes = [];
 		this.intersectionVertices = [];
@@ -58,7 +53,7 @@ export default class TraversalGraph {
 			this.pathsModel = pathsModel;
 			if (this.pathsModel.clusters) {
 				// Add cluster nodes to traversal graph body
-				const _renderClusterFn = function(cluster) { 
+				const _renderClusterFn = function(cluster) {
 					this.body.add(cluster.body);
 				};
 				_.each(this.pathsModel.clusters, _renderClusterFn.bind(this));
@@ -170,6 +165,7 @@ export default class TraversalGraph {
 				// add paths to appropriate cluster and correct for position
 				const clusterId = _path[0].pathInfo.clusterId;
 				const cluster = this.getCluster(clusterId);
+
 				cluster.body.add(lane.path);
 
 				// this.body.add(lane.path);
@@ -226,6 +222,7 @@ export default class TraversalGraph {
 					_curve = this.buildStraight(this.getNode(s.startNode), this.getNode(s.endNode), s.segments);
 				} else if (s.type === 'bend') { 
 					_curve = this.buildBend(this.getNode(s.startNode), this.getNode(s.endNode), s.flip, s.segments);
+				
 				} else { 
 					throw new Error("Invalid segment type");
 				}
@@ -315,7 +312,8 @@ export default class TraversalGraph {
 			curve: curve,
 			entrancePosition: pathEntranceVertex,
 			exitPosition: pathExitVertex,
-			tube: tube
+			tube: tube,
+			isPath: true 
 		});
 
 		return path;

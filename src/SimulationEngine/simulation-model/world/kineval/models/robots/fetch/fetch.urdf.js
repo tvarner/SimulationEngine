@@ -283,8 +283,8 @@ robot.retrieveCollada = function() {
 		// console.info('assign '+'./fetch_dae_files/'+robot.fetch_dae_files[i]);
 		
 		// retrieve dae files in staging mode:
-		// robot.assignFetchModel('./SimulationEngine/simulation-model/world/kineval/models/robots/fetch/'+robot.fetch_dae_files[i],geom_index[0]);
-		// console.info('assign '+'./SimulationEngine/simulation-model/world/kineval/models/robots/fetch/'+robot.fetch_dae_files[i]);
+		robot.assignFetchModel('./SimulationEngine/simulation-model/world/kineval/models/robots/fetch/'+robot.fetch_dae_files[i],geom_index[0]);
+		console.info('assign '+'./SimulationEngine/simulation-model/world/kineval/models/robots/fetch/'+robot.fetch_dae_files[i]);
 	}
 };
 

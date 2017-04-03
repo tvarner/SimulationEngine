@@ -92,6 +92,7 @@ export default{
 	},
 
 	init: function init(view, robot, world, options) {
+debugger;
 		// add imported robot and world to kineval
 		this.robot = robot;
 		this.robot.world = world;

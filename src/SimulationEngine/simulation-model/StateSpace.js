@@ -10,10 +10,9 @@
 /* module utilitiy dependencies are added in define array */
 
 import * as _ from 'lodash';
-import PriorityQueue from 'js-priority-queue';
+// import PriorityQueue from 'js-priority-queue';
 
 // import * as THREE from 'three';
-// import TraversalGraph from './world/TraversalGraph/TraversalGraph';
 
 export default class StateSpace { 
 	constructor() {}
@@ -21,13 +20,13 @@ export default class StateSpace {
 	initialize() { 
 		// console.log("initialize() <-- state space");
 
-		/* event sortation/comparison logic goes here */
+		/* event sortation/comparison logic goes here 
 		this.eventQueue = new PriorityQueue({
 			comparator: function(eventA, eventB) {
 				return eventB.executionTime - eventA.executionTime;
 			}
 		});
-
+		*/
 		// System model intialization
 
 		// ******* Implement action callback, what we want on each time step
@@ -44,7 +43,6 @@ export default class StateSpace {
 		this.systemTime = 0;
 
 		this.message = "initialized";
-		this.traversalGraph;
 	}
 
 	updateStateSpace(t, data) {
@@ -59,7 +57,6 @@ export default class StateSpace {
 /* Internal simulation models updates [START]: */
 
 		// update mobile agents
-		this.traversalGraph.updateStateSpace(t, data); // <-- delta in ms
 
 /* Internal simulation models updates [END]: */
 

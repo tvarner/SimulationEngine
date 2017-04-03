@@ -6,6 +6,13 @@ const SimulatorView = React.createClass({
 
 	componentDidMount() {
 		// load and run Simulation Engine and scene here:
+		
+
+
+		// potential cause of memeory leak???
+		// this is getting called when switching simulation
+
+
 		this.props.onPlaySimulator();
 	},
 

@@ -47,10 +47,9 @@ export function pauseSimulation() {
 	};
 }
 
-export function clearSimulation(reinitializeScene) {
+export function clearSimulation() {
 	return { 
-		type: 'CLEAR_SIMULATION',
-		reinitializeScene: reinitializeScene
+		type: 'CLEAR_SIMULATION'
 	};
 }
 
