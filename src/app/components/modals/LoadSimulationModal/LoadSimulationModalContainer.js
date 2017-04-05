@@ -4,7 +4,8 @@ import {
 	setActiveModal,
 	clearActiveModal,
 	activateSpinner,
-	clearSpinner
+	clearSpinner,
+	toggleSidebar
 } from './../../pages/MainView/MainViewActions';
 
 import {
@@ -14,7 +15,8 @@ import {
 	setActiveSimulation,
 	initializeSimulation,
 	playSimulator,
-	pauseSimulator
+	pauseSimulator,
+	playSimulation
 } from './../../pages/SimulatorView/SimulatorViewActions';
 
 import LoadSimulationModal from './LoadSimulationModal';
@@ -43,6 +45,8 @@ const mapDispatchToProps = function(dispatch) {
 				dispatch(initializeSimulationGUI());
 				dispatch(clearActiveModal());
 				dispatch(clearSpinner());
+
+				dispatch(playSimulation());
 			};
 
 			const clearSimulationAndActivateSpinner = function() { 

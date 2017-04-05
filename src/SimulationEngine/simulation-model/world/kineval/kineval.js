@@ -78,7 +78,7 @@ import {
 // ////////////////////////////////////////////////
 
 // create the kineval object/namespace
-export default{
+export default {
 	start: function kinevalExecute(view, robot, world, eventoptions) {
 		// KinEval uses init() to initialize threejs scene, user input, and robot kinematics
 		// STUDENT: you should use my_init() instead
@@ -183,10 +183,11 @@ debugger;
 			}
 
 			// toggled robot link collision bounding box display
-			if (this.robot.params.display_collision_bboxes)
+			if (this.robot.params.display_collision_bboxes) {
 				this.robot.links[x].bbox_mesh.visible = true;
-			else
+			} else {
 				this.robot.links[x].bbox_mesh.visible = false;
+			}
 		}
 
 		// display bounding box for robot link in collision

@@ -9,7 +9,10 @@ import {
 	pauseSimulation,
 	clearSimulation,
 	destroySimulationGUI,
-	setSimulationViewControls
+	setSimulationViewControls,
+	initializeSimulator,
+	playSimulator,
+	initializeSimulationGUI
 } from './SimulatorViewActions';
 import SimulatorViewSidebarContent from './SimulatorViewSidebarContent';
 
@@ -74,6 +77,10 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(destroySimulationGUI());
 			dispatch(clearSimulation(true));
 			dispatch(toggleSidebar(false));
+
+			dispatch(initializeSimulator());
+			dispatch(playSimulator());
+			dispatch(initializeSimulationGUI());
 		},
 
 		onNavigateFromSimulation: (ev) => {

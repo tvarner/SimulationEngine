@@ -18,7 +18,7 @@ export default class Node {
 
 	buildBody(radius, position) {
 		if (this.type === "general" || this.type === undefined) {
-			const geometry = new THREE.SphereGeometry(radius, 32, 32);
+			const geometry = new THREE.SphereGeometry(radius, 4, 3);
 			const material = new THREE.MeshBasicMaterial( {color: ColorModel.nodeColors.generalNodeColor, wireframe: true} ); // LAWN GREEN
 			const bodyMesh = new THREE.Mesh( geometry, material );
 
@@ -29,7 +29,7 @@ export default class Node {
 			this.body.position.y = position.y;
 			this.body.position.z = position.z;
 		} else if (this.type === "action") {
-			const geometry = new THREE.SphereGeometry(radius, 32, 32);
+			const geometry = new THREE.SphereGeometry(radius, 4, 3);
 			const material = new THREE.MeshBasicMaterial( {color: ColorModel.nodeColors.actionNodeColor, wireframe: true} ); // ORANGE
 			const bodyMesh = new THREE.Mesh( geometry, material );
 

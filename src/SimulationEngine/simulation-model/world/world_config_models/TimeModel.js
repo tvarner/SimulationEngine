@@ -16,6 +16,6 @@ export default class TimeModel {
 
 	init() { 
 		this.AGENT_UPDATE_FREQUENCY = 0.10;
-		this.AGENT_UPDATE_INTERVAL = 100.00; // ms (minimum value for setTimeout(), setInterval() functions is 4ms as per HTML5)
+		this.AGENT_UPDATE_INTERVAL = 20.00; // ms (minimum value for setTimeout(), setInterval() functions is 4ms as per HTML5)
 	}
 }

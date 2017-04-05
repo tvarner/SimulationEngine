@@ -81,11 +81,7 @@ ExampleTraversalSimulation.prototype = {
 			_.each(mobileAgents, (mobileAgent, i) => {
 				const agentVelocityControl = 'AGENT_' + i.toString() + '_VELOCITY';
 
-				if (mobileAgent.id === "MobileAgent 3") { 
-					this[agentVelocityControl] = 3.0;
-				} else { 
-					this[agentVelocityControl] = 0.0;
-				}
+				this[agentVelocityControl] = 5.0;
 
 				const agentReverseControl = 'AGENT_' + i.toString() + '_REVERSE';
 

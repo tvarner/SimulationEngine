@@ -23,13 +23,12 @@ class SimulationEngine {
 		// if Simulation Engine is already initialized, it must be closed (via closeSimulationeEngine())
 		// before it can be reinitialized. This is so Simulation Engine can preserve its state when a user 
 		// navigates away from the Simulator View.
-		if (!this.simulationEngineInitialized) {
-			// create new view
-			this.view = new View();
-			this.engine.view = this.view;
+	
+		// create new view
+		this.view = new View();
+		this.engine.view = this.view;
 
-			this.simulationEngineInitialized = true;
-		}
+		this.simulationEngineInitialized = true;
 	}
 
 	playSimulationEngine() {
@@ -164,14 +163,14 @@ class SimulationEngine {
 			this.engine.clearSimulation();
 			this.activeSimulation = undefined;
 			this.cleared = true;
-		} else { 
+		} else {
 			console.warn('Simulation Engine must be initialized before clearing simulation');
 		}
 	}
 
 	initializeSimulationGUI() {
 		if (this.simulationEngineInitialized) {
-			if (this.activeSimulation && this.simulationInitialized && this.cleared) {
+			if (this.activeSimulation && this.simulationInitialized) {
 				this.engine.initializeControls(); // <-- for primary user view only
 			} else { 
 				console.warn('Simulation Engine must have an active simulation that is initialized before initializing simulation GUI');
