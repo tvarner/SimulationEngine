@@ -92,7 +92,6 @@ export default {
 	},
 
 	init: function init(view, robot, world, options) {
-debugger;
 		// add imported robot and world to kineval
 		this.robot = robot;
 		this.robot.world = world;
@@ -590,7 +589,7 @@ debugger;
 
 		// create a threejs mesh for link of the robot and add it to scene 
 		for (const x in this.robot.links) {
-			// create threejs mesh for link
+			// create threejs mesh for link from dae file
 			// handle conversion to ROS coordinate convention
 			// KE 2 : create global color constants
 			if (typeof this.robot.links_geom_imported === "undefined") { 

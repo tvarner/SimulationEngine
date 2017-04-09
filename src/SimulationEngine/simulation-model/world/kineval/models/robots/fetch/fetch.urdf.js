@@ -277,14 +277,14 @@ robot.retrieveCollada = function() {
 
 		// KE 1 : parse geometry directory from url
 		// robot.assignFetchModel('./robots/fetch/'+robot.fetch_dae_files[i],geom_index[0]);
-		
+
 		// retrieve dae files in production mode: 
-		// robot.assignFetchModel('./fetch_dae_files/'+robot.fetch_dae_files[i],geom_index[0]);
-		// console.info('assign '+'./fetch_dae_files/'+robot.fetch_dae_files[i]);
+		robot.assignFetchModel('./fetch_dae_files/'+robot.fetch_dae_files[i],geom_index[0]);
+		console.info('assign '+'./fetch_dae_files/'+robot.fetch_dae_files[i]);
 		
-		// retrieve dae files in staging mode:
-		robot.assignFetchModel('./SimulationEngine/simulation-model/world/kineval/models/robots/fetch/'+robot.fetch_dae_files[i],geom_index[0]);
-		console.info('assign '+'./SimulationEngine/simulation-model/world/kineval/models/robots/fetch/'+robot.fetch_dae_files[i]);
+		// retrieve dae files in dev mode:
+		// robot.assignFetchModel('./SimulationEngine/simulation-model/world/kineval/models/robots/fetch/'+robot.fetch_dae_files[i],geom_index[0]);
+		// console.info('assign '+'./SimulationEngine/simulation-model/world/kineval/models/robots/fetch/'+robot.fetch_dae_files[i]);
 	}
 };
 
